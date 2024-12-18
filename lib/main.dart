@@ -1,4 +1,3 @@
-import 'package:cast_in/ui/screens/auth/login/login_screen.dart';
 import 'package:cast_in/services/localization_service.dart';
 import 'package:cast_in/services/storage_service.dart';
 import 'package:cast_in/utils/app_router.dart';

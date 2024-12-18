@@ -4,7 +4,6 @@ import 'package:cast_in/ui/components/form/input_field.dart';
 import 'package:cast_in/ui/components/main_button.dart';
 import 'package:cast_in/ui/screens/auth/login/login_controller.dart';
 import 'package:cast_in/utils/app_router.dart';
-import 'package:cast_in/utils/helpers.dart';
 import 'package:cast_in/utils/style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
@@ -63,7 +62,9 @@ class LoginScreen extends StatelessWidget {
                                     ]),
                                   ),
                                   GestureDetector(
-                                    onTap: () {},
+                                    onTap: () => AppSnackbar.showSuccess(
+                                      message: "Forgot password?",
+                                    ),
                                     child: Padding(
                                       padding: const EdgeInsets.only(top: 10),
                                       child: Text(
