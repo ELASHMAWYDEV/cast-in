@@ -1,3 +1,4 @@
+import 'package:cast_in/ui/common/app_dialog.dart';
 import 'package:cast_in/ui/common/app_snackbar.dart';
 import 'package:cast_in/ui/components/form/input_field.dart';
 import 'package:cast_in/ui/components/main_button.dart';
@@ -115,8 +116,38 @@ class LoginScreen extends StatelessWidget {
                                 style: AppStyle.bodyTextStyle2,
                               ),
                               GestureDetector(
-                                onTap: () => Get.toNamed(AppRouter.SIGNUP),
+                                onTap: () => AppDialog.showDialog(
+                                    content: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      "Signup as",
+                                      textAlign: TextAlign.center,
+                                      style: AppStyle.headingTextStyle2,
+                                    ),
+                                    SizedBox(
+                                      height: 20,
+                                    ),
+                                    MainButton(
+                                      onPressed: () =>
+                                          Get.toNamed(AppRouter.SIGNUP),
+                                      title: "Model",
+                                      fullWidth: true,
+                                      buttonType: ButtonType.outline,
+                                    ),
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                    MainButton(
+                                      onPressed: () =>
+                                          Get.toNamed(AppRouter.SIGNUP),
+                                      title: "Client",
+                                      fullWidth: true,
+                                    )
+                                  ],
+                                )),
                                 child: Text('Sign up',
+                                    textAlign: TextAlign.center,
                                     style: AppStyle.textButtonTextStyle),
                               ),
                             ],
