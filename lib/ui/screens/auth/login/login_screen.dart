@@ -129,8 +129,9 @@ class LoginScreen extends StatelessWidget {
                                       height: 20,
                                     ),
                                     MainButton(
-                                      onPressed: () =>
-                                          Get.toNamed(AppRouter.SIGNUP),
+                                      onPressed: () => Get
+                                        ..back()
+                                        ..toNamed(AppRouter.SIGNUP),
                                       title: "Model",
                                       fullWidth: true,
                                       buttonType: ButtonType.outline,
@@ -139,8 +140,9 @@ class LoginScreen extends StatelessWidget {
                                       height: 10,
                                     ),
                                     MainButton(
-                                      onPressed: () =>
-                                          Get.toNamed(AppRouter.SIGNUP),
+                                      onPressed: () => Get
+                                        ..back()
+                                        ..toNamed(AppRouter.SIGNUP),
                                       title: "Client",
                                       fullWidth: true,
                                     )
