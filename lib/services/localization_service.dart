@@ -16,7 +16,9 @@ class LocalizationService extends GetxService {
 
   final Locale _activeLocale;
 
-  static Future<LocalizationService> init() async {
+  Locale get activeLocale => _activeLocale;
+
+  static LocalizationService init() {
     final String activeLocale = Get.find<StorageService>().activeLocale;
     final Locale locale = SupportedLocales.locales.firstWhere(
       (Locale locale) => locale.languageCode == activeLocale,
