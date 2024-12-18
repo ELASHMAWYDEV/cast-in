@@ -16,19 +16,19 @@ abstract class AppStyle {
 // Text Styles
   static TextStyle headingTextStyle1 = TextStyle(
     fontSize: 24,
-    fontWeight: FontWeight.bold,
+    fontWeight: FontWeight.w600,
     color: primaryTextColor,
   );
 
   static TextStyle headingTextStyle2 = TextStyle(
     fontSize: 20,
-    fontWeight: FontWeight.bold,
+    fontWeight: FontWeight.w600,
     color: primaryTextColor,
   );
 
   static TextStyle headingTextStyle3 = TextStyle(
     fontSize: 16,
-    fontWeight: FontWeight.bold,
+    fontWeight: FontWeight.w600,
     color: primaryTextColor,
   );
 

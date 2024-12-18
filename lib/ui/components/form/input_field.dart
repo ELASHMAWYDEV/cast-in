@@ -26,12 +26,14 @@ class InputField extends StatelessWidget {
       builder: (FormFieldState<dynamic> field) => TextField(
         obscureText: obscureText,
         onChanged: field.didChange,
+        style: AppStyle.bodyTextStyle3.copyWith(fontWeight: FontWeight.w500),
         decoration: InputDecoration(
             errorText: field.errorText,
             labelText: labelText,
             hintText: hintText,
-            floatingLabelAlignment: FloatingLabelAlignment.start,
             labelStyle: AppStyle.headingTextStyle3,
+            hintStyle: AppStyle.bodyTextStyle3.copyWith(color: Colors.grey),
+            floatingLabelAlignment: FloatingLabelAlignment.start,
             floatingLabelBehavior: FloatingLabelBehavior.always),
       ),
     );

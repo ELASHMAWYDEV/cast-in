@@ -2,10 +2,12 @@ import 'package:cast_in/ui/common/app_snackbar.dart';
 import 'package:cast_in/ui/components/form/input_field.dart';
 import 'package:cast_in/ui/components/main_button.dart';
 import 'package:cast_in/ui/screens/auth/login/login_controller.dart';
+import 'package:cast_in/utils/app_router.dart';
 import 'package:cast_in/utils/helpers.dart';
 import 'package:cast_in/utils/style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:get/get.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -26,8 +28,9 @@ class LoginScreen extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(top: 30),
                         child: Text('Cast In',
-                            style: AppStyle.headingTextStyle1
-                                .copyWith(fontSize: 40)),
+                            style: AppStyle.headingTextStyle1.copyWith(
+                              fontSize: 40,
+                            )),
                       ),
                       FormBuilder(
                           key: controller.formKey,
@@ -38,6 +41,12 @@ class LoginScreen extends StatelessWidget {
                                 name: 'email',
                                 labelText: "Email",
                                 hintText: 'myemail@gmail.com',
+                                validator: FormBuilderValidators.compose([
+                                  FormBuilderValidators.required(
+                                      errorText: "Email is required"),
+                                  FormBuilderValidators.email(
+                                      errorText: "Email is not valid"),
+                                ]),
                               ),
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.end,
@@ -47,6 +56,10 @@ class LoginScreen extends StatelessWidget {
                                     labelText: "Password",
                                     hintText: '***********',
                                     obscureText: true,
+                                    validator: FormBuilderValidators.compose([
+                                      FormBuilderValidators.required(
+                                          errorText: "Password is required")
+                                    ]),
                                   ),
                                   GestureDetector(
                                     onTap: () {},
@@ -64,7 +77,7 @@ class LoginScreen extends StatelessWidget {
                                 height: 10,
                               ),
                               MainButton(
-                                onPressed: () {},
+                                onPressed: controller.login,
                                 title: 'Login',
                                 fullWidth: true,
                               ),
@@ -102,8 +115,7 @@ class LoginScreen extends StatelessWidget {
                                 style: AppStyle.bodyTextStyle2,
                               ),
                               GestureDetector(
-                                onTap: () => AppSnackbar.showSuccess(
-                                    message: "Go to signup screen"),
+                                onTap: () => Get.toNamed(AppRouter.SIGNUP),
                                 child: Text('Sign up',
                                     style: AppStyle.textButtonTextStyle),
                               ),
