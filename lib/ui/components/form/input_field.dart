@@ -28,6 +28,9 @@ class InputField extends StatelessWidget {
         onChanged: field.didChange,
         style: AppStyle.bodyTextStyle3.copyWith(fontWeight: FontWeight.w500),
         decoration: InputDecoration(
+            enabledBorder: UnderlineInputBorder(
+              borderSide: BorderSide(color: Colors.grey.withOpacity(0.5)),
+            ),
             errorText: field.errorText,
             labelText: labelText,
             hintText: hintText,

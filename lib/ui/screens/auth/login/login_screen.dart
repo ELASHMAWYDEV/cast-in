@@ -42,10 +42,8 @@ class LoginScreen extends StatelessWidget {
                                 labelText: "Email",
                                 hintText: 'myemail@gmail.com',
                                 validator: FormBuilderValidators.compose([
-                                  FormBuilderValidators.required(
-                                      errorText: "Email is required"),
-                                  FormBuilderValidators.email(
-                                      errorText: "Email is not valid"),
+                                  FormBuilderValidators.required(errorText: "Email is required"),
+                                  FormBuilderValidators.email(errorText: "Email is not valid"),
                                 ]),
                               ),
                               Column(
@@ -56,10 +54,8 @@ class LoginScreen extends StatelessWidget {
                                     labelText: "Password",
                                     hintText: '***********',
                                     obscureText: true,
-                                    validator: FormBuilderValidators.compose([
-                                      FormBuilderValidators.required(
-                                          errorText: "Password is required")
-                                    ]),
+                                    validator: FormBuilderValidators.compose(
+                                        [FormBuilderValidators.required(errorText: "Password is required")]),
                                   ),
                                   GestureDetector(
                                     onTap: () => AppSnackbar.showSuccess(
@@ -88,19 +84,16 @@ class LoginScreen extends StatelessWidget {
                       Column(
                         children: [
                           Padding(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 20.0),
+                            padding: const EdgeInsets.symmetric(horizontal: 20.0),
                             child: RichText(
                               textAlign: TextAlign.center,
                               text: TextSpan(
-                                text:
-                                    'By creating an account you have to agree with our ',
+                                text: 'By creating an account you have to agree with our ',
                                 style: AppStyle.bodyTextStyle3,
                                 children: <TextSpan>[
                                   TextSpan(
                                     text: 'Terms & Conditions',
-                                    style: AppStyle.textButtonTextStyle
-                                        .copyWith(fontSize: 12),
+                                    style: AppStyle.textButtonTextStyle.copyWith(fontSize: 12),
                                   ),
                                 ],
                               ),
@@ -149,9 +142,8 @@ class LoginScreen extends StatelessWidget {
                                     )
                                   ],
                                 )),
-                                child: Text('Sign up',
-                                    textAlign: TextAlign.center,
-                                    style: AppStyle.textButtonTextStyle),
+                                child:
+                                    Text('Sign up', textAlign: TextAlign.center, style: AppStyle.textButtonTextStyle),
                               ),
                             ],
                           ),
