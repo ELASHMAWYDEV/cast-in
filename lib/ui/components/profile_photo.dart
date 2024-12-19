@@ -61,7 +61,7 @@ class ProfilePhotoWidget extends StatelessWidget {
               const SizedBox(height: 16),
 
               // Profile Photo Text
-              Text("Profile Photo", style: AppStyle.bodyTextStyle22),
+              Text("Profile Photo", style: AppStyle.bodyTextStyle2.copyWith(color: AppStyle.secondaryTextColor)),
             ],
           ),
         ),

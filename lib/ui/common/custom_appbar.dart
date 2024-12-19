@@ -1,6 +1,7 @@
 import 'package:cast_in/utils/app_images.dart';
 import 'package:cast_in/utils/style.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
@@ -25,11 +26,9 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       centerTitle: true,
       leading: InkWell(
         onTap: () {
-          Navigator.of(context).pop();
+          Get.back();
         },
-        child: withIcon == true
-            ? Image.asset(AppImages.appBarIcon)
-            : SizedBox.shrink(),
+        child: withIcon == true ? Image.asset(AppImages.appBarIcon) : SizedBox.shrink(),
       ),
       title: Text(title,
           style: AppStyle.headingTextStyle1.copyWith(

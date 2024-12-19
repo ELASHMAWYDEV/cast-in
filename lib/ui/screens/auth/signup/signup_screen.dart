@@ -1,7 +1,7 @@
 import 'package:cast_in/ui/common/custom_appbar.dart';
-import 'package:cast_in/ui/common/custom_form_builder_drop_down.dart';
-import 'package:cast_in/ui/common/custom_title_and_suptitle.dart';
-import 'package:cast_in/ui/components/authentcation/profile_photo.dart';
+import 'package:cast_in/ui/components/form/drop_down._field.dart';
+import 'package:cast_in/ui/screens/auth/components/custom_title_and_suptitle.dart';
+import 'package:cast_in/ui/components/profile_photo.dart';
 import 'package:cast_in/ui/components/form/input_field.dart';
 import 'package:cast_in/ui/components/main_button.dart';
 import 'package:cast_in/utils/app_router.dart';
@@ -76,7 +76,7 @@ class SignupScreen extends StatelessWidget {
                         ]),
                       ),
                       SizedBox(height: 30),
-                      CustomFormBuilderDropdown<String>(
+                      DropDownField(
                         name: 'country',
                         labelText: 'Country',
                         hintText: ' your country',
@@ -89,12 +89,12 @@ class SignupScreen extends StatelessWidget {
                       SizedBox(
                         height: 30,
                       ),
-                      CustomFormBuilderDropdown<String>(
+                      DropDownField(
                         name: 'city',
-                        labelText: 'city',
+                        labelText: 'City',
                         hintText: ' your city',
                         items: [],
-                        validator: FormBuilderValidators.required(errorText: 'city is required'),
+                        validator: FormBuilderValidators.required(errorText: 'City is required'),
                         onChanged: (value) {
                           print(value);
                         },
@@ -105,7 +105,7 @@ class SignupScreen extends StatelessWidget {
                 SizedBox(height: 20),
                 MainButton(
                   onPressed: () {
-                    Get.toNamed(AppRouter.verification);
+                    Get.toNamed(AppRouter.VERIFICATION);
                   },
                   title: 'Sign Up',
                   fullWidth: true,
@@ -135,7 +135,7 @@ class SignupScreen extends StatelessWidget {
                     ),
                     GestureDetector(
                         onTap: () {
-                          Navigator.of(context).pushNamed(AppRouter.verification);
+                          Get.toNamed(AppRouter.LOGIN);
                         },
                         child: Text('Login', textAlign: TextAlign.center, style: AppStyle.textButtonTextStyle)),
                   ],

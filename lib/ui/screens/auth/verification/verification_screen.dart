@@ -1,19 +1,19 @@
 import 'package:cast_in/ui/common/custom_appbar.dart';
-import 'package:cast_in/ui/common/custom_title_and_suptitle.dart';
+import 'package:cast_in/ui/screens/auth/components/custom_title_and_suptitle.dart';
 import 'package:cast_in/ui/components/main_button.dart';
+import 'package:cast_in/ui/screens/auth/verification/verification_controller.dart';
 import 'package:cast_in/utils/app_router.dart';
 
 import 'package:cast_in/utils/style.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/get_core.dart';
 
 import 'package:pinput/pinput.dart';
 
 class VerificationScreen extends StatelessWidget {
   VerificationScreen({super.key});
 
-  final pinController = TextEditingController();
+  final VerificationController controller = Get.put(VerificationController());
 
   @override
   Widget build(BuildContext context) {
@@ -38,14 +38,14 @@ class VerificationScreen extends StatelessWidget {
                     Center(
                       child: Pinput(
                         length: 4,
-                        controller: pinController,
+                        controller: controller.pinController,
                         autofocus: true,
                         onTapOutside: (_) => FocusScope.of(context).unfocus(),
                         onCompleted: (value) {},
                         onSubmitted: (value) {},
                         inputFormatters: [],
                         validator: (value) {
-                          print(value);
+                          return null;
                         },
                         errorTextStyle: const TextStyle(height: 0),
                         defaultPinTheme: PinTheme(
@@ -64,23 +64,30 @@ class VerificationScreen extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 40),
-                    Center(
+                    Obx(
+                      () => Center(
                         child: Text(
-                      '0.09',
-                      style: AppStyle.bodyTextStyle2,
-                    )),
+                          controller.timer.value,
+                          style: AppStyle.bodyTextStyle2,
+                        ),
+                      ),
+                    ),
                     const SizedBox(height: 20),
-                    Center(
+                    GestureDetector(
+                      onTap: controller.resendCode,
+                      child: Center(
                         child: Text(
-                      'Resend code',
-                      style: AppStyle.textStyle,
-                    )),
+                          'Resend code',
+                          style: AppStyle.subTitleStyle2,
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),
               MainButton(
                 onPressed: () {
-                  Get.toNamed(AppRouter.profession);
+                  Get.toNamed(AppRouter.PROFESSION);
                 },
                 title: 'Submit',
                 fullWidth: true,

@@ -8,8 +8,8 @@ abstract class AppRouter {
   // Routes
   static const LOGIN = '/auth/login';
   static const SIGNUP = '/auth/signup';
-  static const verification = '/auth/verification';
-  static const profession = '/auth/profession';
+  static const VERIFICATION = '/auth/verification';
+  static const PROFESSION = '/auth/profession';
 
   static const String initialRoute = LOGIN;
 
@@ -23,11 +23,11 @@ abstract class AppRouter {
           page: () => SignupScreen(),
         ),
         GetPage(
-          name: verification,
+          name: VERIFICATION,
           page: () => VerificationScreen(),
         ),
         GetPage(
-          name: profession,
+          name: PROFESSION,
           page: () => ProfessionScreen(),
         ),
       ];

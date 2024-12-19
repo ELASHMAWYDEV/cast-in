@@ -43,16 +43,11 @@ abstract class AppStyle {
     fontWeight: FontWeight.normal,
     color: primaryTextColor,
   );
-  static TextStyle bodyTextStyle22 = TextStyle(
-    fontSize: 14,
-    fontWeight: FontWeight.normal,
-    color: secondaryTextColor,
-  );
 
   static TextStyle bodyTextStyle3 = TextStyle(
     fontSize: 12,
     fontWeight: FontWeight.normal,
-    color: secondaryTextColor,
+    color: primaryTextColor,
   );
 
   static TextStyle textButtonTextStyle = TextStyle(
@@ -60,12 +55,12 @@ abstract class AppStyle {
     fontWeight: FontWeight.w500,
     color: secondaryTextColor,
   );
-  static TextStyle textStyle1 = TextStyle(
+  static TextStyle subTitleStyle1 = TextStyle(
     fontSize: 14,
     fontWeight: FontWeight.w500,
     color: primaryTextColor,
   );
-  static TextStyle textStyle = TextStyle(
+  static TextStyle subTitleStyle2 = TextStyle(
     fontSize: 16,
     fontWeight: FontWeight.w500,
     color: secondaryColor,

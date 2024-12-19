@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:cast_in/utils/style.dart';
 
-class CustomFormBuilderDropdown<T> extends StatelessWidget {
-  const CustomFormBuilderDropdown({
+class DropDownField<T> extends StatelessWidget {
+  const DropDownField({
     super.key,
     required this.name,
     this.labelText,
