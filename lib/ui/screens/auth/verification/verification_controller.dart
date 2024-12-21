@@ -1,3 +1,4 @@
+import 'package:cast_in/ui/common/app_snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -32,6 +33,6 @@ class VerificationController extends GetxController {
 
   void resendCode() {
     timer.value = '0:09';
-    Get.snackbar('Success', 'Verification code resent', snackPosition: SnackPosition.BOTTOM);
+    AppSnackbar.showSuccess(message: 'Verification code sent again');
   }
 }

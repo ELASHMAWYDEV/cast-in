@@ -20,7 +20,7 @@ class VerificationScreen extends StatelessWidget {
     return Scaffold(
       appBar: CustomAppBar(
         title: 'Cast In',
-        withIcon: true,
+        isBackBtnEnabled: true,
       ),
       body: SafeArea(
         child: Padding(

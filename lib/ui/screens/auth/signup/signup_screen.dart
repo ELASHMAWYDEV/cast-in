@@ -1,39 +1,50 @@
+import 'dart:io';
+
 import 'package:cast_in/ui/common/custom_appbar.dart';
 import 'package:cast_in/ui/components/form/drop_down._field.dart';
 import 'package:cast_in/ui/screens/auth/components/custom_title_and_suptitle.dart';
 import 'package:cast_in/ui/components/profile_photo.dart';
 import 'package:cast_in/ui/components/form/input_field.dart';
 import 'package:cast_in/ui/components/main_button.dart';
+import 'package:cast_in/ui/screens/auth/signup/signup_controller.dart';
 import 'package:cast_in/utils/app_router.dart';
+import 'package:cast_in/utils/helpers.dart';
 
 import 'package:cast_in/utils/style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 
 class SignupScreen extends StatelessWidget {
-  const SignupScreen({super.key});
+  SignupScreen({super.key});
+
+  final SignupController controller = Get.put(SignupController());
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: CustomAppBar(
           title: 'Cast In',
-          withIcon: true,
+          isBackBtnEnabled: true,
         ),
         body: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
-            child: SingleChildScrollView(
+          child: SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 20),
               child: Column(spacing: 15, crossAxisAlignment: CrossAxisAlignment.start, children: [
                 CustomTitleAndSuptitle(title: 'Sign Up', suptitle: 'Create an new account'),
+                SizedBox(height: 20),
                 Center(
                   child: ProfilePhotoWidget(
-                    onTap: () {},
+                    onPickImage: (File image) {
+                      Helpers.appDebugger("Choosed image: $image");
+                    },
                   ),
                 ),
                 FormBuilder(
+                  key: controller.formKey,
                   child: Column(
                     children: [
                       InputField(
@@ -93,7 +104,7 @@ class SignupScreen extends StatelessWidget {
                         name: 'city',
                         labelText: 'City',
                         hintText: ' your city',
-                        items: [],
+                        items: ['Cairo', 'Alexandria'],
                         validator: FormBuilderValidators.required(errorText: 'City is required'),
                         onChanged: (value) {
                           print(value);
@@ -104,12 +115,13 @@ class SignupScreen extends StatelessWidget {
                 ),
                 SizedBox(height: 20),
                 MainButton(
-                  onPressed: () {
-                    Get.toNamed(AppRouter.VERIFICATION);
+                  onPressed: () async {
+                    await controller.signUp();
                   },
                   title: 'Sign Up',
                   fullWidth: true,
                 ),
+                SizedBox(height: 15),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20.0),
                   child: RichText(
@@ -135,7 +147,7 @@ class SignupScreen extends StatelessWidget {
                     ),
                     GestureDetector(
                         onTap: () {
-                          Get.toNamed(AppRouter.LOGIN);
+                          Get.back();
                         },
                         child: Text('Login', textAlign: TextAlign.center, style: AppStyle.textButtonTextStyle)),
                   ],

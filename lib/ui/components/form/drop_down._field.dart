@@ -36,10 +36,10 @@ class DropDownField<T> extends StatelessWidget {
             labelStyle: AppStyle.headingTextStyle3,
             hintStyle: AppStyle.bodyTextStyle3.copyWith(color: Colors.grey),
             floatingLabelBehavior: FloatingLabelBehavior.always,
-            contentPadding: const EdgeInsets.symmetric(vertical: -8),
+            contentPadding: const EdgeInsets.symmetric(vertical: 0),
             enabledBorder: UnderlineInputBorder(
               borderSide: BorderSide(
-                color: Colors.grey.withOpacity(0.5), // Default underline color
+                color: Colors.grey.withValues(alpha: 0.5), // Default underline color
               ),
             ),
             focusedBorder: UnderlineInputBorder(
@@ -50,13 +50,22 @@ class DropDownField<T> extends StatelessWidget {
             ),
           ),
           child: DropdownButtonHideUnderline(
-            child: DropdownButton<T>(
+            child: DropdownButton(
               value: value,
               isExpanded: true,
               hint: Text(
                 hintText ?? '',
                 style: AppStyle.bodyTextStyle3.copyWith(color: Colors.grey),
               ),
+              // itemHeight: 20,
+              selectedItemBuilder: (_) => items
+                  .map(
+                    (item) => Text(
+                      item.toString(),
+                      style: AppStyle.bodyTextStyle3.copyWith(fontWeight: FontWeight.bold),
+                    ),
+                  )
+                  .toList(),
               items: items
                   .map(
                     (item) => DropdownMenuItem<T>(
@@ -72,7 +81,7 @@ class DropDownField<T> extends StatelessWidget {
                 field.didChange(val);
                 if (onChanged != null) onChanged!(val);
               },
-              icon: const Icon(Icons.arrow_drop_down, color: Colors.grey),
+              icon: Icon(Icons.keyboard_arrow_down_rounded, color: AppStyle.primaryTextColor),
             ),
           ),
         );

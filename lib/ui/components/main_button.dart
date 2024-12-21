@@ -22,10 +22,7 @@ class MainButton extends StatelessWidget {
       width: fullWidth ? double.infinity : null,
       decoration: BoxDecoration(
         color: buttonType == ButtonType.primary ? null : Colors.transparent,
-        border: Border.all(
-            color: buttonType == ButtonType.outline
-                ? AppStyle.primaryColor
-                : Colors.transparent),
+        border: Border.all(color: buttonType == ButtonType.outline ? AppStyle.primaryColor : Colors.transparent),
         gradient: buttonType == ButtonType.outline
             ? null
             : LinearGradient(
@@ -40,16 +37,12 @@ class MainButton extends StatelessWidget {
           style: ButtonStyle(
             backgroundColor: WidgetStatePropertyAll(Colors.transparent),
             shadowColor: WidgetStatePropertyAll(Colors.transparent),
-            padding: WidgetStatePropertyAll(
-                EdgeInsets.symmetric(vertical: 12, horizontal: 50)),
-            shape: WidgetStatePropertyAll(RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(50))),
+            padding: WidgetStatePropertyAll(EdgeInsets.symmetric(vertical: 12, horizontal: 50)),
+            shape: WidgetStatePropertyAll(RoundedRectangleBorder(borderRadius: BorderRadius.circular(50))),
           ),
           child: Text(title,
               style: AppStyle.buttonTextStyle.copyWith(
-                  color: buttonType == ButtonType.outline
-                      ? AppStyle.primaryColor
-                      : AppStyle.primaryBgColor))),
+                  color: buttonType == ButtonType.outline ? AppStyle.primaryColor : AppStyle.primaryBgColor))),
     );
   }
 }

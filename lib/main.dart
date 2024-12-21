@@ -1,5 +1,6 @@
 import 'package:cast_in/services/localization_service.dart';
 import 'package:cast_in/services/storage_service.dart';
+import 'package:cast_in/ui/screens/splash/splash_controller.dart';
 import 'package:cast_in/utils/app_router.dart';
 import 'package:cast_in/utils/app_translations.dart';
 import 'package:cast_in/utils/constants.dart';
@@ -44,9 +45,7 @@ class _MyAppState extends State<MyApp> {
       initialRoute: AppRouter.initialRoute,
       theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(
-              seedColor: AppStyle.primaryColor,
-              secondary: AppStyle.secondaryColor,
-              surface: AppStyle.primaryBgColor),
+              seedColor: AppStyle.primaryColor, secondary: AppStyle.secondaryColor, surface: AppStyle.primaryBgColor),
           useMaterial3: true,
           scaffoldBackgroundColor: AppStyle.primaryBgColor,
           fontFamily: AppStyle.primaryFontFamily),

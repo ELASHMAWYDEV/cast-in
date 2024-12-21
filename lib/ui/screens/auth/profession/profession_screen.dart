@@ -16,7 +16,7 @@ class ProfessionScreen extends StatelessWidget {
     return Scaffold(
       appBar: CustomAppBar(
         title: 'Cast In',
-        withIcon: true,
+        isBackBtnEnabled: true,
       ),
       body: SafeArea(
         child: Padding(
@@ -48,12 +48,11 @@ class ProfessionScreen extends StatelessWidget {
                                   vertical: 12,
                                 ),
                                 decoration: BoxDecoration(
-                                  color: AppStyle.secondaryBgColor,
-                                  borderRadius: BorderRadius.circular(25),
-                                  border: controller.selectedProfession == profession
-                                      ? Border.all(color: AppStyle.secondaryColor, width: 2)
-                                      : null,
-                                ),
+                                    color: AppStyle.secondaryBgColor,
+                                    borderRadius: BorderRadius.circular(25),
+                                    border: controller.selectedProfession == profession
+                                        ? Border.all(color: AppStyle.primaryColor, width: 2)
+                                        : Border.all(color: Colors.transparent, width: 2)),
                                 child: Text(profession, style: AppStyle.subTitleStyle1),
                               ),
                             );
