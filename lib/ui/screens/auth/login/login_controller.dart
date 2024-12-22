@@ -1,3 +1,4 @@
+import 'package:cast_in/utils/app_router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:get/get.dart';
@@ -15,5 +16,6 @@ class LoginController extends GetxController {
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
     }
+    Get.toNamed(AppRouter.MAINLAYOUT);
   }
 }
