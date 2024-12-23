@@ -2,6 +2,7 @@ import 'package:cast_in/ui/screens/auth/login/login_screen.dart';
 import 'package:cast_in/ui/screens/auth/profession/profession_screen.dart';
 import 'package:cast_in/ui/screens/auth/signup/signup_screen.dart';
 import 'package:cast_in/ui/screens/auth/verification/verification_screen.dart';
+import 'package:cast_in/ui/screens/messages/messages_screen.dart';
 import 'package:cast_in/ui/screens/splash/splash_screen.dart';
 import 'package:get/get.dart';
 
@@ -12,6 +13,7 @@ abstract class AppRouter {
   static const SIGNUP = '/auth/signup';
   static const VERIFICATION = '/auth/verification';
   static const PROFESSION = '/auth/profession';
+  static const MESSAGES = '/messages';
 
   static const String initialRoute = SPLASH;
 
@@ -35,6 +37,10 @@ abstract class AppRouter {
         GetPage(
           name: PROFESSION,
           page: () => ProfessionScreen(),
+        ),
+        GetPage(
+          name: MESSAGES,
+          page: () => MessagesScreen(),
         ),
       ];
 }

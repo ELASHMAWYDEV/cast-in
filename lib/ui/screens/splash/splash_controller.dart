@@ -8,6 +8,6 @@ class SplashController extends GetxController {
   void onInit() {
     super.onInit();
     // set a timeout
-    Future.delayed(Duration(seconds: 2), () => Get.offAllNamed(AppRouter.LOGIN));
+    Future.delayed(Duration(seconds: 2), () => Get.offAllNamed(AppRouter.MESSAGES));
   }
 }
