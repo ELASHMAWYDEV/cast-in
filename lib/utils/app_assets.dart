@@ -12,4 +12,10 @@ class AppAssets {
   static const filledMessageIcon = '$_baseUri/filled_message_icon.png';
   static const profileIcon = '$_baseUri/profile.png';
   static const filledProfileIcon = '$_baseUri/filled_profile_icon.png';
+  static const notifcationIcon = '$_baseUri/notification.png';
+  static const testImage = '$_baseUri/testImage.png';
+  static const likeIcon = '$_baseUri/likeIcon.png';
+  static const commentIcon = '$_baseUri/commentIcon.png';
+  static const shareIcon = '$_baseUri/shareIcon.png';
+  static const contentImage = '$_baseUri/content_image.png';
 }

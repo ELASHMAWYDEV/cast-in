@@ -11,7 +11,7 @@ import 'package:get/get.dart';
 class MainLayoutScreen extends StatelessWidget {
   MainLayoutScreen({super.key});
 
-  final NavigationController navigationController = Get.put(NavigationController());
+  final MainNavigationController navigationController = Get.put(MainNavigationController());
 
   final _children = [
     const HomeScreen(),
@@ -42,14 +42,13 @@ class MainLayoutScreen extends StatelessWidget {
           ),
           child: BottomNavigationBar(
             elevation: 0,
-            backgroundColor: Colors.white,
+            backgroundColor: AppStyle.primaryBgColor,
             showSelectedLabels: false,
             showUnselectedLabels: false,
             currentIndex: navigationController.selectedIndex.value,
             onTap: (index) => navigationController.updateIndex(index),
             type: BottomNavigationBarType.fixed,
             selectedItemColor: AppStyle.primaryTextColor,
-            unselectedItemColor: Colors.grey,
             items: [
               BottomNavigationBarItem(
                 icon: Image.asset(AppAssets.homeIcon),

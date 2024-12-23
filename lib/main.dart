@@ -1,6 +1,5 @@
 import 'package:cast_in/services/localization_service.dart';
 import 'package:cast_in/services/storage_service.dart';
-import 'package:cast_in/ui/screens/splash/splash_controller.dart';
 import 'package:cast_in/utils/app_router.dart';
 import 'package:cast_in/utils/app_translations.dart';
 import 'package:cast_in/utils/constants.dart';

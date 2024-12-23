@@ -1,4 +1,3 @@
-import 'package:cast_in/utils/app_assets.dart';
 import 'package:cast_in/utils/style.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -32,10 +31,10 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               style: ButtonStyle(backgroundColor: WidgetStatePropertyAll(AppStyle.secondaryBgColor)),
             )
           : SizedBox.shrink(),
-      title: Text(title,
-          style: AppStyle.headingTextStyle1.copyWith(
-            fontSize: 40,
-          )),
+      title: Text(
+        title,
+        style: AppStyle.appBarTextStyle,
+      ),
       backgroundColor: AppStyle.primaryBgColor,
       surfaceTintColor: AppStyle.primaryBgColor,
       actions: trailing,
