@@ -1,5 +1,5 @@
 import 'package:cast_in/ui/screens/home/home_screen.dart';
-import 'package:cast_in/ui/screens/mainLayout/main_layout_controller.dart';
+import 'package:cast_in/ui/screens/main_layout/main_layout_controller.dart';
 import 'package:cast_in/ui/screens/messages/messages_screen.dart';
 import 'package:cast_in/ui/screens/profile/profile_screen.dart';
 import 'package:cast_in/ui/screens/search/search_screen.dart';
@@ -13,27 +13,20 @@ class MainLayoutScreen extends StatelessWidget {
 
   final MainNavigationController navigationController = Get.put(MainNavigationController());
 
-  final _children = [
-    const HomeScreen(),
-    const SearchScreen(),
-    const MessagesScreen(),
-    const ProfileScreen(),
-  ];
-
   @override
   Widget build(BuildContext context) {
     return Obx(() {
       return Scaffold(
         body: IndexedStack(
           index: navigationController.selectedIndex.value,
-          children: _children,
+          children: navigationController.screens,
         ),
         bottomNavigationBar: Container(
           decoration: BoxDecoration(
             color: Colors.white,
             boxShadow: [
               BoxShadow(
-                color: Colors.grey.withOpacity(0.4),
+                color: Colors.grey.withValues(alpha: 0.1),
                 spreadRadius: 1,
                 blurRadius: 10,
                 offset: const Offset(0, -2),
@@ -41,7 +34,7 @@ class MainLayoutScreen extends StatelessWidget {
             ],
           ),
           child: BottomNavigationBar(
-            elevation: 0,
+            elevation: 4,
             backgroundColor: AppStyle.primaryBgColor,
             showSelectedLabels: false,
             showUnselectedLabels: false,
@@ -51,23 +44,23 @@ class MainLayoutScreen extends StatelessWidget {
             selectedItemColor: AppStyle.primaryTextColor,
             items: [
               BottomNavigationBarItem(
-                icon: Image.asset(AppAssets.homeIcon),
-                activeIcon: Image.asset(AppAssets.filledHomeIcon),
+                icon: Image.asset(AppAssets.homeIcon, width: 24),
+                activeIcon: Image.asset(AppAssets.filledHomeIcon, width: 24),
                 label: '',
               ),
               BottomNavigationBarItem(
-                icon: Image.asset(AppAssets.searchIcon),
-                activeIcon: Image.asset(AppAssets.filledSearchIcon),
+                icon: Image.asset(AppAssets.searchIcon, width: 24),
+                activeIcon: Image.asset(AppAssets.filledSearchIcon, width: 24),
                 label: '',
               ),
               BottomNavigationBarItem(
-                icon: Image.asset(AppAssets.messageIcon),
-                activeIcon: Image.asset(AppAssets.filledMessageIcon),
+                icon: Image.asset(AppAssets.messageIcon, width: 24),
+                activeIcon: Image.asset(AppAssets.filledMessageIcon, width: 24),
                 label: '',
               ),
               BottomNavigationBarItem(
-                icon: Image.asset(AppAssets.profileIcon),
-                activeIcon: Image.asset(AppAssets.filledProfileIcon),
+                icon: Image.asset(AppAssets.profileIcon, width: 24),
+                activeIcon: Image.asset(AppAssets.filledProfileIcon, width: 24),
                 label: '',
               ),
             ],
