@@ -65,7 +65,7 @@ class PostDetailsScreen extends StatelessWidget {
               ClipRRect(
                 borderRadius: BorderRadius.circular(8),
                 child: Image.asset(
-                  AppAssets.testImage,
+                  AppAssets.testModelImage6,
                   width: 40,
                   height: 40,
                   fit: BoxFit.cover,

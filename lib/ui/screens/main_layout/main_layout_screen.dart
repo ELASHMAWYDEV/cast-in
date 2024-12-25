@@ -11,7 +11,7 @@ import 'package:get/get.dart';
 class MainLayoutScreen extends StatelessWidget {
   MainLayoutScreen({super.key});
 
-  final MainNavigationController navigationController = Get.put(MainNavigationController());
+  final MainLayoutController navigationController = Get.put(MainLayoutController());
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +54,10 @@ class MainLayoutScreen extends StatelessWidget {
                 label: '',
               ),
               BottomNavigationBarItem(
-                icon: Image.asset(AppAssets.messageIcon, width: 24),
+                icon: Image.asset(
+                  AppAssets.messageIcon,
+                  width: 24,
+                ),
                 activeIcon: Image.asset(AppAssets.filledMessageIcon, width: 24),
                 label: '',
               ),

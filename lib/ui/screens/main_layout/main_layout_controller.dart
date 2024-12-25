@@ -4,7 +4,7 @@ import 'package:cast_in/ui/screens/profile/profile_screen.dart';
 import 'package:cast_in/ui/screens/search/search_screen.dart';
 import 'package:get/get.dart';
 
-class MainNavigationController extends GetxController {
+class MainLayoutController extends GetxController {
   var selectedIndex = 0.obs;
   final screens = [
     const HomeScreen(),

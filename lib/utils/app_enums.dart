@@ -10,7 +10,7 @@ class PostModel {
   final String name;
   final String username;
   final String content;
-  final String? imageUrl;
+  final List<String>? imageUrl;
   final String avatarUrl;
   final int likes;
   final int comments;
@@ -31,7 +31,7 @@ class PostModel {
     String? name,
     String? username,
     String? content,
-    String? imageUrl,
+    List<String>? imageUrl,
     String? avatarUrl,
     int? likes,
     int? comments,
@@ -67,7 +67,7 @@ class PostModel {
       name: map['name'] as String,
       username: map['username'] as String,
       content: map['content'] as String,
-      imageUrl: map['imageUrl'] != null ? map['imageUrl'] as String : null,
+      imageUrl: map['imageUrl'] != null ? map['imageUrl'] as List<String> : null,
       avatarUrl: map['avatarUrl'] as String,
       likes: map['likes'] as int,
       comments: map['comments'] as int,

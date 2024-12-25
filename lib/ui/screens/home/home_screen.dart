@@ -16,7 +16,7 @@ class HomeScreen extends StatelessWidget {
         username: 'Jackie',
         content:
             'Today, we are looking for the perfect model to represent our brand in an upcoming perfume advertisement.',
-        avatarUrl: AppAssets.testImage,
+        avatarUrl: AppAssets.testProfileImage,
         likes: 24,
         comments: 15,
         contentType: PostContentType.text,
@@ -25,8 +25,18 @@ class HomeScreen extends StatelessWidget {
         name: 'Jenny Wilson',
         username: 'Jenny',
         content: '',
-        imageUrl: AppAssets.contentImage,
-        avatarUrl: AppAssets.testImage,
+        imageUrl: [AppAssets.testModelImage1],
+        avatarUrl: AppAssets.testProfileImage,
+        likes: 24,
+        comments: 15,
+        contentType: PostContentType.image,
+      ),
+      PostModel(
+        name: 'Jenny Wilson',
+        username: 'Jenny',
+        content: '',
+        imageUrl: [AppAssets.testModelImage2],
+        avatarUrl: AppAssets.testProfileImage,
         likes: 24,
         comments: 15,
         contentType: PostContentType.image,
@@ -35,7 +45,7 @@ class HomeScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: CustomAppBar(
-        title: 'Welcome',
+        title: 'Home',
         isBackBtnEnabled: false,
         trailing: [
           Padding(
