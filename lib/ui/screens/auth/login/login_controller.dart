@@ -1,3 +1,5 @@
+import 'package:cast_in/utils/app_router.dart';
+import 'package:cast_in/utils/helpers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:get/get.dart';
@@ -12,8 +14,11 @@ class LoginController extends GetxController {
   }
 
   void login() {
-    if (_formKey.currentState!.validate()) {
-      _formKey.currentState!.save();
+    if (_formKey.currentState!.validate(focusOnInvalid: true)) {
+      Helpers.appDebugger("Valid");
+      Get.toNamed(AppRouter.MAINLAYOUT);
+      return _formKey.currentState!.save();
     }
+    Helpers.appDebugger("Invalid");
   }
 }
