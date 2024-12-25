@@ -2,6 +2,7 @@ import 'package:cast_in/ui/screens/auth/login/login_screen.dart';
 import 'package:cast_in/ui/screens/auth/profession/profession_screen.dart';
 import 'package:cast_in/ui/screens/auth/signup/signup_screen.dart';
 import 'package:cast_in/ui/screens/auth/verification/verification_screen.dart';
+import 'package:cast_in/ui/screens/messages/chat_screen.dart';
 import 'package:cast_in/ui/screens/messages/messages_screen.dart';
 import 'package:cast_in/ui/screens/main_layout/main_layout_screen.dart';
 import 'package:cast_in/ui/screens/post_details/post_details_screen.dart';
@@ -18,6 +19,7 @@ abstract class AppRouter {
   static const MESSAGES = '/messages';
   static const MAINLAYOUT = '/mainlayout';
   static const POST_DETAILS = '/post_details';
+  static const CHAT = '/chat';
 
   static const String initialRoute = SPLASH;
 
@@ -53,6 +55,10 @@ abstract class AppRouter {
         GetPage(
           name: POST_DETAILS,
           page: () => PostDetailsScreen(),
+        ),
+        GetPage(
+          name: CHAT,
+          page: () => ChatScreen(),
         ),
       ];
 }

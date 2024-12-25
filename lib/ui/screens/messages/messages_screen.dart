@@ -1,8 +1,9 @@
 import 'package:cast_in/ui/common/custom_appbar.dart';
+import 'package:cast_in/ui/screens/messages/components/message_card.dart';
 import 'package:flutter/material.dart';
 
 class MessagesScreen extends StatelessWidget {
-  MessagesScreen({super.key});
+  const MessagesScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -11,19 +12,12 @@ class MessagesScreen extends StatelessWidget {
         title: "Messages",
       ),
       body: SingleChildScrollView(
-        child: Column(
-          // Create a list of messaging people
-          children: List.generate(
-            10,
-            (int index) => ListTile(
-              leading: CircleAvatar(
-                child: Text("A"),
-              ),
-              title: Text("Person $index"),
-              subtitle: Text("Message $index"),
-              onTap: () {
-                // Navigate to the chat screen
-              },
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20),
+          child: Column(
+            children: List.generate(
+              3,
+              (int index) => MessageCard(),
             ),
           ),
         ),

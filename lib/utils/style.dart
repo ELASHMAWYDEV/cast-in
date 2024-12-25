@@ -10,6 +10,7 @@ abstract class AppStyle {
   static Color secondaryTextColor = const Color.fromRGBO(41, 19, 124, 1); // #29137C
   static Color primaryButtonColor = const Color.fromRGBO(128, 40, 197, 1);
   static Color grey = const Color.fromRGBO(124, 125, 143, 1);
+  static Color darkGrey = const Color.fromRGBO(113, 113, 113, 1);
   static Color more = const Color.fromRGBO(7, 8, 56, 1);
 
   // Font Family

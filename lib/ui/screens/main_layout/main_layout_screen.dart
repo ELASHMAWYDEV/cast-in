@@ -1,8 +1,4 @@
-import 'package:cast_in/ui/screens/home/home_screen.dart';
 import 'package:cast_in/ui/screens/main_layout/main_layout_controller.dart';
-import 'package:cast_in/ui/screens/messages/messages_screen.dart';
-import 'package:cast_in/ui/screens/profile/profile_screen.dart';
-import 'package:cast_in/ui/screens/search/search_screen.dart';
 import 'package:cast_in/utils/app_assets.dart';
 import 'package:cast_in/utils/style.dart';
 import 'package:flutter/material.dart';
