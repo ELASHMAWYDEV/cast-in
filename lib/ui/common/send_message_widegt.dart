@@ -1,4 +1,4 @@
-import 'package:cast_in/ui/screens/messages/chat_controller.dart';
+import 'package:cast_in/ui/screens/messages/chat/chat_controller.dart';
 import 'package:cast_in/utils/style.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

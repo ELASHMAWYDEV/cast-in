@@ -27,8 +27,11 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               onPressed: () {
                 Get.back();
               },
-              icon: Icon(Icons.keyboard_arrow_left_rounded),
+              icon: Icon(
+                Icons.keyboard_arrow_left_rounded,
+              ),
               style: ButtonStyle(backgroundColor: WidgetStatePropertyAll(AppStyle.secondaryBgColor)),
+              tooltip: "Back",
             )
           : SizedBox.shrink(),
       title: Text(
@@ -37,7 +40,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       ),
       backgroundColor: AppStyle.primaryBgColor,
       surfaceTintColor: AppStyle.primaryBgColor,
-      actions: trailing,
+      actions: trailing?.map((element) => Padding(padding: EdgeInsets.only(right: 15), child: element)).toList(),
     );
   }
 }

@@ -25,13 +25,13 @@ class ChatController extends GetxController {
         text: "Hey, I'm Fins, Free now, U?",
         timestamp: DateTime.now().subtract(const Duration(minutes: 5)),
         isMe: true,
-        senderName: 'Belle Benson',
+        senderName: 'You',
       ),
       Message(
         text: "Hi, Good Morning",
         timestamp: DateTime.now().subtract(const Duration(minutes: 2)),
         isMe: false,
-        senderName: 'Samaira',
+        senderName: '',
       ),
     ]);
   }

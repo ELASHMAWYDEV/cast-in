@@ -1,4 +1,5 @@
-import 'package:cast_in/ui/screens/main_layout/main_layout_controller.dart';
+import 'package:cast_in/ui/common/custom_appbar.dart';
+import 'package:cast_in/ui/screens/main_layout/main_controller.dart';
 import 'package:cast_in/utils/app_assets.dart';
 import 'package:cast_in/utils/style.dart';
 import 'package:flutter/material.dart';
@@ -7,7 +8,7 @@ import 'package:get/get.dart';
 class MainLayoutScreen extends StatelessWidget {
   MainLayoutScreen({super.key});
 
-  final MainLayoutController navigationController = Get.put(MainLayoutController());
+  final MainController navigationController = Get.put(MainController());
 
   @override
   Widget build(BuildContext context) {
@@ -15,9 +16,32 @@ class MainLayoutScreen extends StatelessWidget {
       return Scaffold(
         body: IndexedStack(
           index: navigationController.selectedIndex.value,
-          children: navigationController.screens,
+          children: navigationController.screensWithOptions
+              .map((screenWithOptions) => SafeArea(
+                    child: CustomScrollView(
+                      controller: navigationController.scrollController,
+                      slivers: <Widget>[
+                        SliverAppBar(
+                          expandedHeight: 60,
+                          backgroundColor: Colors.transparent,
+                          floating: true,
+                          pinned: false,
+                          automaticallyImplyLeading: false,
+                          centerTitle: true,
+                          flexibleSpace: CustomAppBar(
+                            title: screenWithOptions.title,
+                            isBackBtnEnabled: screenWithOptions.isBackBtnEnabled,
+                            trailing: screenWithOptions.trailing,
+                          ),
+                        ),
+                        SliverToBoxAdapter(child: screenWithOptions.screen),
+                      ],
+                    ),
+                  ))
+              .toList(),
         ),
         bottomNavigationBar: Container(
+          height: 100,
           decoration: BoxDecoration(
             color: Colors.white,
             boxShadow: [

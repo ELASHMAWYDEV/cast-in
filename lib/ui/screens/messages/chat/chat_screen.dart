@@ -1,6 +1,6 @@
 import 'package:cast_in/ui/common/custom_appbar.dart';
 import 'package:cast_in/ui/common/send_message_widegt.dart';
-import 'package:cast_in/ui/screens/messages/components/chat_Bubble.dart';
+import 'package:cast_in/ui/screens/messages/components/chat_bubble.dart';
 import 'package:cast_in/utils/style.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -12,7 +12,7 @@ class ChatScreen extends StatelessWidget {
 
   ChatScreen({super.key});
   String formatDateTime(DateTime dateTime) {
-    return DateFormat('E, d MMM, h:mm a').format(dateTime);
+    return DateFormat('E, d MMM').format(dateTime);
   }
 
   @override

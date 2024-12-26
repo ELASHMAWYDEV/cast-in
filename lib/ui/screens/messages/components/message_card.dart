@@ -9,19 +9,20 @@ class MessageCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        Get.toNamed(AppRouter.CHAT);
-      },
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Container(
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: InkWell(
+        onTap: () {
+          Get.toNamed(AppRouter.CHAT);
+        },
+        overlayColor: WidgetStatePropertyAll(AppStyle.secondaryBgColor.withAlpha(70)),
+        child: Ink(
           decoration: BoxDecoration(
             color: AppStyle.primaryBgColor,
             borderRadius: BorderRadius.circular(20),
             boxShadow: [
               BoxShadow(
-                color: AppStyle.grey.withValues(alpha: .2),
+                color: AppStyle.grey.withValues(alpha: 0.2),
                 blurRadius: 8,
                 offset: const Offset(0, 4),
               ),
