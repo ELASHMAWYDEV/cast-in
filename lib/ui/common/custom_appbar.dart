@@ -1,4 +1,3 @@
-import 'package:cast_in/utils/app_assets.dart';
 import 'package:cast_in/utils/style.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -28,17 +27,20 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               onPressed: () {
                 Get.back();
               },
-              icon: Icon(Icons.keyboard_arrow_left_rounded),
+              icon: Icon(
+                Icons.keyboard_arrow_left_rounded,
+              ),
               style: ButtonStyle(backgroundColor: WidgetStatePropertyAll(AppStyle.secondaryBgColor)),
+              tooltip: "Back",
             )
           : SizedBox.shrink(),
-      title: Text(title,
-          style: AppStyle.headingTextStyle1.copyWith(
-            fontSize: 40,
-          )),
+      title: Text(
+        title,
+        style: AppStyle.appBarTextStyle,
+      ),
       backgroundColor: AppStyle.primaryBgColor,
       surfaceTintColor: AppStyle.primaryBgColor,
-      actions: trailing,
+      actions: trailing?.map((element) => Padding(padding: EdgeInsets.only(right: 15), child: element)).toList(),
     );
   }
 }

@@ -7,11 +7,13 @@ class MainButton extends StatelessWidget {
   const MainButton(
       {super.key,
       required this.onPressed,
+      this.onLongPress,
       required this.title,
       this.fullWidth = false,
       this.buttonType = ButtonType.primary});
 
   final VoidCallback onPressed;
+  final VoidCallback? onLongPress;
   final String title;
   final bool fullWidth;
   final ButtonType buttonType;
@@ -34,6 +36,7 @@ class MainButton extends StatelessWidget {
       ),
       child: ElevatedButton(
           onPressed: onPressed,
+          onLongPress: onLongPress,
           style: ButtonStyle(
             backgroundColor: WidgetStatePropertyAll(Colors.transparent),
             shadowColor: WidgetStatePropertyAll(Colors.transparent),

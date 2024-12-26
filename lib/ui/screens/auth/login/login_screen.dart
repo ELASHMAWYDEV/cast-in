@@ -76,6 +76,8 @@ class LoginScreen extends StatelessWidget {
                               ),
                               MainButton(
                                 onPressed: controller.login,
+                                onLongPress: () =>
+                                    Get.toNamed(AppRouter.MAINLAYOUT), // @TODO: remove this - For testing purpose
                                 title: 'Login',
                                 fullWidth: true,
                               ),

@@ -7,15 +7,12 @@ import 'package:cast_in/ui/components/profile_photo.dart';
 import 'package:cast_in/ui/components/form/input_field.dart';
 import 'package:cast_in/ui/components/main_button.dart';
 import 'package:cast_in/ui/screens/auth/signup/signup_controller.dart';
-import 'package:cast_in/utils/app_router.dart';
 import 'package:cast_in/utils/helpers.dart';
-
 import 'package:cast_in/utils/style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:get/get.dart';
-import 'package:image_picker/image_picker.dart';
 
 class SignupScreen extends StatelessWidget {
   SignupScreen({super.key});

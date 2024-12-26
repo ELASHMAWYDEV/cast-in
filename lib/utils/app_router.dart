@@ -2,6 +2,9 @@ import 'package:cast_in/ui/screens/auth/login/login_screen.dart';
 import 'package:cast_in/ui/screens/auth/profession/profession_screen.dart';
 import 'package:cast_in/ui/screens/auth/signup/signup_screen.dart';
 import 'package:cast_in/ui/screens/auth/verification/verification_screen.dart';
+import 'package:cast_in/ui/screens/main_layout/main_screen.dart';
+import 'package:cast_in/ui/screens/notifications/notifications_screen.dart';
+import 'package:cast_in/ui/screens/post_details/post_details_screen.dart';
 import 'package:cast_in/ui/screens/splash/splash_screen.dart';
 import 'package:get/get.dart';
 
@@ -12,6 +15,9 @@ abstract class AppRouter {
   static const SIGNUP = '/auth/signup';
   static const VERIFICATION = '/auth/verification';
   static const PROFESSION = '/auth/profession';
+  static const MAINLAYOUT = '/main';
+  static const POST_DETAILS = '/main/post_details';
+  static const NOTIFICATIONS = '/main/notifications';
 
   static const String initialRoute = SPLASH;
 
@@ -35,6 +41,18 @@ abstract class AppRouter {
         GetPage(
           name: PROFESSION,
           page: () => ProfessionScreen(),
+        ),
+        GetPage(
+          name: MAINLAYOUT,
+          page: () => MainLayoutScreen(),
+        ),
+        GetPage(
+          name: POST_DETAILS,
+          page: () => PostDetailsScreen(),
+        ),
+        GetPage(
+          name: NOTIFICATIONS,
+          page: () => NotificationScreen(),
         ),
       ];
 }
