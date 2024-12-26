@@ -5,6 +5,7 @@ import 'package:cast_in/ui/screens/auth/verification/verification_screen.dart';
 import 'package:cast_in/ui/screens/main_layout/main_screen.dart';
 import 'package:cast_in/ui/screens/notifications/notifications_screen.dart';
 import 'package:cast_in/ui/screens/post_details/post_details_screen.dart';
+import 'package:cast_in/ui/screens/settings/settings_screen.dart';
 import 'package:cast_in/ui/screens/splash/splash_screen.dart';
 import 'package:cast_in/ui/screens/messages/chat/chat_screen.dart';
 import 'package:cast_in/ui/screens/messages/messages/messages_screen.dart';
@@ -20,8 +21,9 @@ abstract class AppRouter {
   static const MAINLAYOUT = '/main';
   static const POST_DETAILS = '/main/post-details';
   static const NOTIFICATIONS = '/main/notifications';
-  static const MESSAGES = '/main/messages';
   static const CHAT = '/main/messages/chat';
+  static const SETTINGS = '/main/profile/settings';
+  
 
   static const String initialRoute = SPLASH;
 
@@ -47,10 +49,6 @@ abstract class AppRouter {
           page: () => ProfessionScreen(),
         ),
         GetPage(
-          name: MESSAGES,
-          page: () => MessagesScreen(),
-        ),
-        GetPage(
           name: MAINLAYOUT,
           page: () => MainLayoutScreen(),
         ),
@@ -65,6 +63,10 @@ abstract class AppRouter {
         GetPage(
           name: NOTIFICATIONS,
           page: () => NotificationScreen(),
+        ),
+        GetPage(
+          name: SETTINGS,
+          page: () => SettingsScreen(),
         ),
       ];
 }
