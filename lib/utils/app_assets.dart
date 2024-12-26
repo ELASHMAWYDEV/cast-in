@@ -12,7 +12,7 @@ class AppAssets {
   static const filledMessageIcon = '$_baseUri/filled-message-icon.png';
   static const profileIcon = '$_baseUri/profile-icon.png';
   static const filledProfileIcon = '$_baseUri/filled-profile-icon.png';
-  static const notifcationIcon = '$_baseUri/notification-icon.png';
+  static const notificationsIcon = '$_baseUri/notifications-icon.png';
   static const testModelImage1 = '$_baseUri/test-model-photo-1.jpg';
   static const testModelImage2 = '$_baseUri/test-model-photo-2.jpg';
   static const testModelImage3 = '$_baseUri/test-model-photo-3.jpg';

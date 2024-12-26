@@ -110,12 +110,12 @@ class PostDetailsScreen extends StatelessWidget {
       right: 0,
       child: Container(
         width: double.infinity,
-        height: 70,
+        height: 80,
         decoration: BoxDecoration(
           color: AppStyle.grey.withValues(alpha: 0.3),
         ),
         child: Padding(
-          padding: const EdgeInsets.all(15.0),
+          padding: const EdgeInsets.all(20.0),
           child: Row(
             children: [
               Expanded(

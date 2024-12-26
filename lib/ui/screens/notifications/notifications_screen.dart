@@ -7,7 +7,10 @@ class NotificationScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(title: "Notifications", isBackBtnEnabled: true),
+      appBar: CustomAppBar(
+        title: "Notifications",
+        isBackBtnEnabled: true,
+      ),
       body: Center(
         child: Text("Notifications screen not ready yet"),
       ),

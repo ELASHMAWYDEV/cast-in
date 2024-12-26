@@ -6,7 +6,7 @@ class MessagesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Text("Messages Screen"),
+      child: Text("Messages screen not ready yet"),
     );
   }
 }
