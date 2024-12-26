@@ -1,6 +1,9 @@
+import 'package:cast_in/utils/style.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class ChatBubble extends StatelessWidget {
+  final String sender;
   final String text;
   final DateTime time;
   final bool isMe;
@@ -10,29 +13,62 @@ class ChatBubble extends StatelessWidget {
     required this.text,
     required this.time,
     required this.isMe,
+    required this.sender,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.symmetric(vertical: 4),
-      padding: const EdgeInsets.all(12),
-      decoration: BoxDecoration(
-        color: isMe ? Colors.black : Colors.purple,
-        borderRadius: BorderRadius.circular(16),
-      ),
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
       child: Column(
         crossAxisAlignment: isMe ? CrossAxisAlignment.end : CrossAxisAlignment.start,
         children: [
-          Text(
-            text,
-            style: const TextStyle(color: Colors.white),
+          Padding(
+            padding: const EdgeInsets.only(bottom: 8.0),
+            child: Text(
+              sender,
+              style: AppStyle.bodyTextStyle1.copyWith(
+                fontSize: 13,
+              ),
+            ),
           ),
-          const SizedBox(height: 4),
-          Text(
-            "${time.hour}:${time.minute.toString().padLeft(2, '0')}",
-            style: const TextStyle(color: Colors.white70, fontSize: 10),
+          Container(
+            constraints: BoxConstraints(
+              maxWidth: MediaQuery.of(context).size.width * 0.7,
+            ),
+            decoration: BoxDecoration(
+                color: isMe ? AppStyle.primaryTextColor : AppStyle.secondaryTextColor,
+                borderRadius: isMe
+                    ? BorderRadius.only(
+                        topLeft: Radius.circular(10), bottomRight: Radius.circular(10), bottomLeft: Radius.circular(10))
+                    : BorderRadius.only(
+                        topRight: Radius.circular(10),
+                        bottomRight: Radius.circular(10),
+                        bottomLeft: Radius.circular(10))),
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  text,
+                  style: AppStyle.subTitleStyle1.copyWith(
+                    color: AppStyle.primaryBgColor,
+                  ),
+                ),
+              ],
+            ),
           ),
+          isMe
+              ? Padding(
+                  padding: const EdgeInsets.only(top: 4),
+                  child: Text(
+                    'Sent',
+                    style: AppStyle.bodyTextStyle3.copyWith(
+                      color: AppStyle.more,
+                    ),
+                  ),
+                )
+              : SizedBox.shrink()
         ],
       ),
     );

@@ -1,9 +1,13 @@
+import 'package:cast_in/ui/screens/messages/chat_controller.dart';
 import 'package:cast_in/utils/style.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class SendMessageWidegt extends StatelessWidget {
   final bool withAddIcon;
   SendMessageWidegt({super.key, required this.withAddIcon});
+
+  final TextEditingController _controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -31,6 +35,7 @@ class SendMessageWidegt extends StatelessWidget {
                   : SizedBox.shrink(),
               Expanded(
                 child: TextField(
+                  controller: _controller,
                   decoration: InputDecoration(
                     hintText: 'Message...',
                     hintStyle: AppStyle.bodyTextStyle2.copyWith(
@@ -54,9 +59,17 @@ class SendMessageWidegt extends StatelessWidget {
                 child: Center(
                     child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 10),
-                  child: Text(
-                    'send',
-                    style: TextStyle(color: AppStyle.primaryBgColor),
+                  child: GestureDetector(
+                    onTap: () {
+                      if (_controller.text.isNotEmpty) {
+                        Get.find<ChatController>().sendMessage(_controller.text);
+                        _controller.clear();
+                      }
+                    },
+                    child: Text(
+                      'send',
+                      style: TextStyle(color: AppStyle.primaryBgColor),
+                    ),
                   ),
                 )),
               ),
