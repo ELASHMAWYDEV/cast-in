@@ -1,4 +1,5 @@
 import 'package:cast_in/ui/common/custom_appbar.dart';
+import 'package:cast_in/ui/common/send_message_widegt.dart';
 import 'package:cast_in/ui/components/post/post_card.dart';
 import 'package:cast_in/ui/screens/post_details/post_details_controller.dart';
 import 'package:cast_in/utils/app_assets.dart';
@@ -47,7 +48,9 @@ class PostDetailsScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              _buildCommentInput(),
+              SendMessageWidegt(
+                withAddIcon: false,
+              ),
             ],
           ),
         ),
@@ -99,59 +102,6 @@ class PostDetailsScreen extends StatelessWidget {
             color: AppStyle.grey.withValues(alpha: 0.3),
           ),
         ],
-      ),
-    );
-  }
-
-  Widget _buildCommentInput() {
-    return Positioned(
-      bottom: 0,
-      left: 0,
-      right: 0,
-      child: Container(
-        width: double.infinity,
-        height: 80,
-        decoration: BoxDecoration(
-          color: AppStyle.grey.withValues(alpha: 0.3),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: Row(
-            children: [
-              Expanded(
-                child: TextField(
-                  decoration: InputDecoration(
-                    hintText: 'Message...',
-                    hintStyle: AppStyle.bodyTextStyle2.copyWith(
-                      color: AppStyle.grey,
-                    ),
-                    filled: true,
-                    fillColor: AppStyle.primaryBgColor,
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(20),
-                      borderSide: BorderSide.none,
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(width: 8),
-              Container(
-                decoration: BoxDecoration(
-                  color: AppStyle.secondaryTextColor,
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: Center(
-                    child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                  child: Text(
-                    'send',
-                    style: TextStyle(color: AppStyle.primaryBgColor),
-                  ),
-                )),
-              ),
-            ],
-          ),
-        ),
       ),
     );
   }
