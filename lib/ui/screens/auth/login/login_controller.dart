@@ -8,10 +8,6 @@ class LoginController extends GetxController {
   final GlobalKey<FormBuilderState> _formKey = GlobalKey<FormBuilderState>();
   get formKey => _formKey;
 
-  @override
-  void onInit() {
-    super.onInit();
-  }
 
   void login() {
     if (_formKey.currentState!.validate(focusOnInvalid: true)) {

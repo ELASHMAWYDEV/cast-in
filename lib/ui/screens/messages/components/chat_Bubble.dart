@@ -1,6 +1,5 @@
 import 'package:cast_in/utils/style.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
 class ChatBubble extends StatelessWidget {
   final String sender;

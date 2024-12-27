@@ -8,7 +8,6 @@ import 'package:cast_in/ui/screens/post_details/post_details_screen.dart';
 import 'package:cast_in/ui/screens/settings/settings_screen.dart';
 import 'package:cast_in/ui/screens/splash/splash_screen.dart';
 import 'package:cast_in/ui/screens/messages/chat/chat_screen.dart';
-import 'package:cast_in/ui/screens/messages/messages/messages_screen.dart';
 import 'package:get/get.dart';
 
 abstract class AppRouter {
@@ -23,7 +22,6 @@ abstract class AppRouter {
   static const NOTIFICATIONS = '/main/notifications';
   static const CHAT = '/main/messages/chat';
   static const SETTINGS = '/main/profile/settings';
-  
 
   static const String initialRoute = SPLASH;
 

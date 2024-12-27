@@ -2,7 +2,6 @@ import 'package:cast_in/ui/screens/explore/explore_screen.dart';
 import 'package:cast_in/ui/screens/home/home_screen.dart';
 import 'package:cast_in/ui/screens/messages/messages/messages_screen.dart';
 import 'package:cast_in/ui/screens/profile/profile/profile_screen.dart';
-import 'package:cast_in/ui/screens/search/search_screen.dart';
 import 'package:cast_in/ui/screens/settings/settings_screen.dart';
 import 'package:cast_in/utils/app_assets.dart';
 import 'package:cast_in/utils/app_router.dart';
