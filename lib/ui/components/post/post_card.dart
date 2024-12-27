@@ -108,7 +108,7 @@ class PostCard extends StatelessWidget {
                 ClipRRect(
                   borderRadius: BorderRadius.circular(8),
                   child: ConstrainedBox(
-                    constraints: BoxConstraints(maxHeight: 300),
+                    constraints: BoxConstraints(maxHeight: 300, minHeight: 300),
                     child: Image.asset(
                       post.imageUrl![0],
                       width: double.infinity,
@@ -116,24 +116,6 @@ class PostCard extends StatelessWidget {
                     ),
                   ),
                 ),
-                // Padding(
-                //   padding: const EdgeInsets.only(bottom: 16.0),
-                //   child: Row(
-                //     mainAxisAlignment: MainAxisAlignment.center,
-                //     children: List.generate(
-                //       6,
-                //       (index) => Container(
-                //         margin: const EdgeInsets.symmetric(horizontal: 4),
-                //         width: 8,
-                //         height: 8,
-                //         decoration: BoxDecoration(
-                //           shape: BoxShape.circle,
-                //           color: index == 4 ? AppStyle.primaryColor : Colors.white.withValues(alpha: 0.8),
-                //         ),
-                //       ),
-                //     ),
-                //   ),
-                // ),
               ],
             ),
           ],

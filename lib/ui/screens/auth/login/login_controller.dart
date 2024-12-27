@@ -19,7 +19,7 @@ class LoginController extends GetxController {
           email: values['email'],
           password: values['password'],
         );
-        Get.toNamed(AppRouter.MAINLAYOUT);
+        Get.offAndToNamed(AppRouter.MAINLAYOUT);
       } catch (e) {
         Helpers.appDebugger("Login failed", error: e);
         AppSnackbar.showError(message: "Login failed. Please check your credentials and try again.");

@@ -1,4 +1,4 @@
-import 'package:cast_in/ui/screens/main_layout/main_controller.dart';
+import 'package:cast_in/ui/screens/main/main_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
