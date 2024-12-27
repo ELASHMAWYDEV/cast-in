@@ -1,4 +1,3 @@
-import 'package:cast_in/ui/common/custom_appbar.dart';
 import 'package:flutter/material.dart';
 
 class SettingsScreen extends StatelessWidget {
@@ -6,14 +5,6 @@ class SettingsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: CustomAppBar(
-        title: "Settings",
-        isBackBtnEnabled: true,
-      ),
-      body: Center(
-        child: Text("Settings screen not ready yet"),
-      ),
-    );
+    return Padding(padding: EdgeInsets.all(2));
   }
 }

@@ -1,9 +1,7 @@
-import 'package:cast_in/ui/common/custom_appbar.dart';
 import 'package:cast_in/ui/components/post/post_card.dart';
 import 'package:cast_in/ui/screens/main_layout/main_controller.dart';
 import 'package:cast_in/utils/app_assets.dart';
 import 'package:cast_in/utils/app_enums.dart';
-import 'package:cast_in/utils/app_router.dart';
 import 'package:cast_in/utils/style.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

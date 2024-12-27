@@ -40,7 +40,18 @@ class MainController extends GetxController {
     ]),
     ScreenOptions(title: "Explore", screenIndex: 1, screen: ExploreScreen(), isBackBtnEnabled: false),
     ScreenOptions(title: "Messages", screenIndex: 2, screen: MessagesScreen(), isBackBtnEnabled: false),
-    ScreenOptions(title: "Profile", screenIndex: 3, screen: ProfileScreen(), isBackBtnEnabled: false),
+    ScreenOptions(title: "Profile Page", screenIndex: 3, screen: ProfileScreen(), isBackBtnEnabled: false, trailing: [
+      IconButton(
+        onPressed: () => Get.toNamed(AppRouter.SETTINGS),
+        tooltip: "Settings",
+        style: ButtonStyle(backgroundColor: WidgetStatePropertyAll(AppStyle.secondaryBgColor)),
+        icon: Image.asset(
+          AppAssets.setting,
+          width: 24,
+          height: 24,
+        ),
+      ),
+    ]),
     ScreenOptions(
       title: "Settings",
       screenIndex: 4,

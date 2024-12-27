@@ -24,4 +24,9 @@ class AppAssets {
   static const filledLikeIcon = '$_baseUri/filled-like-icon.png';
   static const commentIcon = '$_baseUri/comment-icon.png';
   static const shareIcon = '$_baseUri/share-icon.png';
+  static const edit = '$_baseUri/edit.png';
+  static const setting = '$_baseUri/setting.png';
+  static const myProfileImage = '$_baseUri/my_profile_image.png';
+  static const backgroundImage = '$_baseUri/background_image.png';
+  static const location = '$_baseUri/location.png';
 }
