@@ -1,7 +1,7 @@
 import 'package:cast_in/ui/common/custom_appbar.dart';
 import 'package:cast_in/ui/screens/auth/components/custom_title_and_suptitle.dart';
 import 'package:cast_in/ui/components/main_button.dart';
-import 'package:cast_in/ui/screens/auth/verification/verification_controller.dart';
+import 'package:cast_in/ui/screens/auth/verification/otp_controller.dart';
 import 'package:cast_in/utils/app_router.dart';
 
 import 'package:cast_in/utils/style.dart';
@@ -10,10 +10,10 @@ import 'package:get/get.dart';
 
 import 'package:pinput/pinput.dart';
 
-class VerificationScreen extends StatelessWidget {
-  VerificationScreen({super.key});
+class OtpScreen extends StatelessWidget {
+  OtpScreen({super.key});
 
-  final VerificationController controller = Get.put(VerificationController());
+  final OtpController controller = Get.put(OtpController());
 
   @override
   Widget build(BuildContext context) {

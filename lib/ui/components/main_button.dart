@@ -3,29 +3,55 @@ import 'package:flutter/material.dart';
 
 enum ButtonType { primary, outline }
 
-class MainButton extends StatelessWidget {
-  const MainButton(
-      {super.key,
-      required this.onPressed,
-      this.onLongPress,
-      required this.title,
-      this.fullWidth = false,
-      this.buttonType = ButtonType.primary});
+class MainButton extends StatefulWidget {
+  const MainButton({
+    super.key,
+    required this.onPressed,
+    this.onLongPress,
+    required this.title,
+    this.fullWidth = false,
+    this.buttonType = ButtonType.primary,
+  });
 
-  final VoidCallback onPressed;
+  final Function() onPressed;
   final VoidCallback? onLongPress;
   final String title;
   final bool fullWidth;
   final ButtonType buttonType;
 
   @override
+  State<MainButton> createState() => _MainButtonState();
+}
+
+class _MainButtonState extends State<MainButton> {
+  bool _isLoading = false;
+
+  Future<void> _handlePress() async {
+    if (_isLoading) return;
+
+    setState(() {
+      _isLoading = true;
+    });
+
+    try {
+      await widget.onPressed();
+    } finally {
+      if (mounted) {
+        setState(() {
+          _isLoading = false;
+        });
+      }
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Container(
-      width: fullWidth ? double.infinity : null,
+      width: widget.fullWidth ? double.infinity : null,
       decoration: BoxDecoration(
-        color: buttonType == ButtonType.primary ? null : Colors.transparent,
-        border: Border.all(color: buttonType == ButtonType.outline ? AppStyle.primaryColor : Colors.transparent),
-        gradient: buttonType == ButtonType.outline
+        color: widget.buttonType == ButtonType.primary ? null : Colors.transparent,
+        border: Border.all(color: widget.buttonType == ButtonType.outline ? AppStyle.primaryColor : Colors.transparent),
+        gradient: widget.buttonType == ButtonType.outline
             ? null
             : LinearGradient(
                 colors: [AppStyle.primaryColor, AppStyle.secondaryColor],
@@ -35,17 +61,28 @@ class MainButton extends StatelessWidget {
         borderRadius: BorderRadius.circular(50),
       ),
       child: ElevatedButton(
-          onPressed: onPressed,
-          onLongPress: onLongPress,
+          onPressed: _handlePress,
+          onLongPress: widget.onLongPress,
           style: ButtonStyle(
-            backgroundColor: WidgetStatePropertyAll(Colors.transparent),
-            shadowColor: WidgetStatePropertyAll(Colors.transparent),
-            padding: WidgetStatePropertyAll(EdgeInsets.symmetric(vertical: 12, horizontal: 50)),
+            backgroundColor: const WidgetStatePropertyAll(Colors.transparent),
+            shadowColor: const WidgetStatePropertyAll(Colors.transparent),
+            padding: const WidgetStatePropertyAll(EdgeInsets.symmetric(vertical: 12, horizontal: 50)),
             shape: WidgetStatePropertyAll(RoundedRectangleBorder(borderRadius: BorderRadius.circular(50))),
           ),
-          child: Text(title,
-              style: AppStyle.buttonTextStyle.copyWith(
-                  color: buttonType == ButtonType.outline ? AppStyle.primaryColor : AppStyle.primaryBgColor))),
+          child: _isLoading
+              ? SizedBox(
+                  height: 20,
+                  width: 20,
+                  child: CircularProgressIndicator(
+                    strokeWidth: 2,
+                    valueColor: AlwaysStoppedAnimation<Color>(
+                        widget.buttonType == ButtonType.outline ? AppStyle.primaryColor : AppStyle.primaryBgColor),
+                  ),
+                )
+              : Text(widget.title,
+                  style: AppStyle.buttonTextStyle.copyWith(
+                      color:
+                          widget.buttonType == ButtonType.outline ? AppStyle.primaryColor : AppStyle.primaryBgColor))),
     );
   }
 }

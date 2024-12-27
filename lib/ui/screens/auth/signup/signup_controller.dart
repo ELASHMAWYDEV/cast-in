@@ -12,6 +12,6 @@ class SignupController extends GetxController {
       _formKey.currentState!.save();
     }
 
-    Get.toNamed(AppRouter.VERIFICATION);
+    Get.toNamed(AppRouter.OTP);
   }
 }

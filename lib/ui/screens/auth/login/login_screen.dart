@@ -58,9 +58,7 @@ class LoginScreen extends StatelessWidget {
                                         [FormBuilderValidators.required(errorText: "Password is required")]),
                                   ),
                                   GestureDetector(
-                                    onTap: () => AppSnackbar.showSuccess(
-                                      message: "Forgot password?",
-                                    ),
+                                    onTap: () => Get.toNamed(AppRouter.FORGOT_PASSWORD),
                                     child: Padding(
                                       padding: const EdgeInsets.only(top: 10),
                                       child: Text(
