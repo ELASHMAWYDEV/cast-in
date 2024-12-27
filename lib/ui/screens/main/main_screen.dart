@@ -1,12 +1,12 @@
 import 'package:cast_in/ui/common/custom_appbar.dart';
-import 'package:cast_in/ui/screens/main_layout/main_controller.dart';
+import 'package:cast_in/ui/screens/main/main_controller.dart';
 import 'package:cast_in/utils/app_assets.dart';
 import 'package:cast_in/utils/style.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class MainLayoutScreen extends StatelessWidget {
-  MainLayoutScreen({super.key});
+class MainScreen extends StatelessWidget {
+  MainScreen({super.key});
 
   final MainController navigationController = Get.put(MainController());
 
@@ -18,25 +18,37 @@ class MainLayoutScreen extends StatelessWidget {
                 index: navigationController.selectedIndex,
                 children: navigationController.screensWithOptions
                     .map((screenWithOptions) => SafeArea(
-                          child: CustomScrollView(
-                            controller: navigationController.scrollController,
-                            slivers: <Widget>[
-                              SliverAppBar(
-                                expandedHeight: 60,
-                                backgroundColor: Colors.transparent,
-                                floating: true,
-                                pinned: false,
-                                automaticallyImplyLeading: false,
-                                centerTitle: true,
-                                flexibleSpace: CustomAppBar(
-                                  title: screenWithOptions.title,
-                                  isBackBtnEnabled: screenWithOptions.isBackBtnEnabled,
-                                  trailing: screenWithOptions.trailing,
+                          child: Builder(builder: (context) {
+                            Widget scrollView = CustomScrollView(
+                              controller: navigationController.scrollController,
+                              slivers: <Widget>[
+                                SliverAppBar(
+                                  expandedHeight: 60,
+                                  backgroundColor: Colors.transparent,
+                                  floating: true,
+                                  pinned: false,
+                                  automaticallyImplyLeading: false,
+                                  centerTitle: true,
+                                  flexibleSpace: CustomAppBar(
+                                    title: screenWithOptions.title,
+                                    isBackBtnEnabled: screenWithOptions.isBackBtnEnabled,
+                                    trailing: screenWithOptions.trailing,
+                                  ),
                                 ),
-                              ),
-                              SliverToBoxAdapter(child: screenWithOptions.screen),
-                            ],
-                          ),
+                                SliverToBoxAdapter(child: screenWithOptions.screen),
+                              ],
+                            );
+
+                            return screenWithOptions.onRefresh != null
+                                ? RefreshIndicator(
+                                    onRefresh: screenWithOptions.onRefresh!,
+                                    color: AppStyle.secondaryColor,
+                                    displacement: 50,
+                                    backgroundColor: AppStyle.primaryBgColor,
+                                    child: scrollView,
+                                  )
+                                : scrollView;
+                          }),
                         ))
                     .toList(),
               ),

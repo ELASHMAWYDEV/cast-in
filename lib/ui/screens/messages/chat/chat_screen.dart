@@ -34,32 +34,37 @@ class ChatScreen extends StatelessWidget {
                     decelerationRate: ScrollDecelerationRate.fast,
                   ),
                 ),
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 16.0),
-                      child: Text(
-                        formatDateTime(chatController.dateTime.value),
-                        style: AppStyle.bodyTextStyle3,
+                child: ConstrainedBox(
+                  constraints: BoxConstraints(
+                    minHeight: Get.height * 0.8,
+                  ),
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 16.0),
+                        child: Text(
+                          formatDateTime(chatController.dateTime.value),
+                          style: AppStyle.bodyTextStyle3,
+                        ),
                       ),
-                    ),
-                    Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: chatController.messages
-                          .map(
-                            (message) => Align(
-                              alignment: message.isMe ? Alignment.centerRight : Alignment.centerLeft,
-                              child: ChatBubble(
-                                sender: message.senderName,
-                                text: message.text,
-                                time: message.timestamp,
-                                isMe: message.isMe,
+                      Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: chatController.messages
+                            .map(
+                              (message) => Align(
+                                alignment: message.isMe ? Alignment.centerRight : Alignment.centerLeft,
+                                child: ChatBubble(
+                                  sender: message.senderName,
+                                  text: message.text,
+                                  time: message.timestamp,
+                                  isMe: message.isMe,
+                                ),
                               ),
-                            ),
-                          )
-                          .toList(),
-                    ),
-                  ],
+                            )
+                            .toList(),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
