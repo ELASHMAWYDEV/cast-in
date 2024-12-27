@@ -33,26 +33,27 @@ class PostDetailsScreen extends StatelessWidget {
           title: 'Details',
           isBackBtnEnabled: true,
         ),
-        body: Expanded(
-          child: Stack(
-            children: [
-              SingleChildScrollView(
+        body: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Expanded(
+              child: SingleChildScrollView(
                 padding: EdgeInsets.only(left: 10, right: 10, top: 20, bottom: 150),
                 child: Column(
                   children: [
                     PostCard(post: controller.post!, isBox: false),
                     Divider(
-                      color: AppStyle.grey.withValues(alpha: 0.3),
+                      color: AppStyle.grey.withValues(alpha: 0.1),
                     ),
                     ...comments.map((comment) => _buildCommentsSection(comment)),
                   ],
                 ),
               ),
-              SendMessageWidegt(
-                withAddIcon: false,
-              ),
-            ],
-          ),
+            ),
+            SendMessageWidegt(
+              withAddIcon: false,
+            ),
+          ],
         ),
       );
     });
@@ -62,6 +63,7 @@ class PostDetailsScreen extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         children: [
           Row(
             children: [

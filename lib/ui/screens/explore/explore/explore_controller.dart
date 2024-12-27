@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 
-class HomeController extends GetxController {
+class ExploreController extends GetxController {
   bool isLoading = false;
 
   @override

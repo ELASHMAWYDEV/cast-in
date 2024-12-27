@@ -29,4 +29,5 @@ class AppAssets {
   static const myProfileImage = '$_baseUri/my_profile_image.png';
   static const backgroundImage = '$_baseUri/background_image.png';
   static const location = '$_baseUri/location.png';
+  static const filterIcon = '$_baseUri/filter-icon.png';
 }

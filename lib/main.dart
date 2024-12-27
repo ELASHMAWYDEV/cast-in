@@ -1,11 +1,13 @@
 import 'package:cast_in/services/localization_service.dart';
 import 'package:cast_in/services/storage_service.dart';
+import 'package:cast_in/services/supabase_service.dart';
 import 'package:cast_in/utils/app_router.dart';
 import 'package:cast_in/utils/app_translations.dart';
 import 'package:cast_in/utils/constants.dart';
 import 'package:cast_in/utils/style.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -16,6 +18,7 @@ void main() async {
 Future<void> initServices() async {
   await Get.putAsync(() => StorageService.init(), permanent: true);
   Get.put(LocalizationService.init(), permanent: true);
+  await Get.putAsync(() => SupabaseService.init(), permanent: true);
 }
 
 class MyApp extends StatefulWidget {

@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:cast_in/ui/common/custom_appbar.dart';
-import 'package:cast_in/ui/components/form/drop_down._field.dart';
+import 'package:cast_in/ui/components/form/drop_down_field.dart';
 import 'package:cast_in/ui/screens/auth/components/custom_title_and_suptitle.dart';
 import 'package:cast_in/ui/components/profile_photo.dart';
 import 'package:cast_in/ui/components/form/input_field.dart';

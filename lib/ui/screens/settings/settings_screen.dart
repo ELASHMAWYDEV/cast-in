@@ -5,6 +5,8 @@ class SettingsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(padding: EdgeInsets.all(2));
+    return Center(
+      child: Text("Settings screen not ready yet"),
+    );
   }
 }

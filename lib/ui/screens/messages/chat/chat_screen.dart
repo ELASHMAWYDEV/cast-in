@@ -11,50 +11,69 @@ class ChatScreen extends StatelessWidget {
   final ChatController chatController = Get.put(ChatController());
 
   ChatScreen({super.key});
+
   String formatDateTime(DateTime dateTime) {
     return DateFormat('E, d MMM').format(dateTime);
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: CustomAppBar(
-        title: ('Samaira'),
-        isBackBtnEnabled: true,
-      ),
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 16.0),
-            child: Obx(() => Text(
-                  formatDateTime(chatController.dateTime.value),
-                  style: AppStyle.bodyTextStyle3,
-                )),
-          ),
-          Expanded(
-            child: Obx(
-              () => ListView.builder(
-                padding: const EdgeInsets.all(12),
-                itemCount: chatController.messages.length,
-                itemBuilder: (context, index) {
-                  final message = chatController.messages[index];
-                  return Align(
-                    alignment: message.isMe ? Alignment.centerRight : Alignment.centerLeft,
-                    child: ChatBubble(
-                      sender: message.senderName,
-                      text: message.text,
-                      time: message.timestamp,
-                      isMe: message.isMe,
-                    ),
-                  );
-                },
+    return GetBuilder<ChatController>(builder: (context) {
+      return Scaffold(
+        appBar: CustomAppBar(
+          title: ('Samaira'),
+          isBackBtnEnabled: true,
+        ),
+        body: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Expanded(
+              child: SingleChildScrollView(
+                physics: const ScrollPhysics(
+                  parent: BouncingScrollPhysics(
+                    decelerationRate: ScrollDecelerationRate.fast,
+                  ),
+                ),
+                child: ConstrainedBox(
+                  constraints: BoxConstraints(
+                    minHeight: Get.height * 0.8,
+                  ),
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 16.0),
+                        child: Text(
+                          formatDateTime(chatController.dateTime.value),
+                          style: AppStyle.bodyTextStyle3,
+                        ),
+                      ),
+                      Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: chatController.messages
+                            .map(
+                              (message) => Align(
+                                alignment: message.isMe ? Alignment.centerRight : Alignment.centerLeft,
+                                child: ChatBubble(
+                                  sender: message.senderName,
+                                  text: message.text,
+                                  time: message.timestamp,
+                                  isMe: message.isMe,
+                                ),
+                              ),
+                            )
+                            .toList(),
+                      ),
+                    ],
+                  ),
+                ),
               ),
             ),
-          ),
-          // Input Section
-          SendMessageWidegt(withAddIcon: true),
-        ],
-      ),
-    );
+            SendMessageWidegt(
+              withAddIcon: true,
+            )
+          ],
+        ),
+      );
+    });
   }
 }

@@ -22,7 +22,7 @@ class MessageCard extends StatelessWidget {
             borderRadius: BorderRadius.circular(20),
             boxShadow: [
               BoxShadow(
-                color: AppStyle.grey.withValues(alpha: 0.2),
+                color: AppStyle.grey.withValues(alpha: 0.1),
                 blurRadius: 8,
                 offset: const Offset(0, 4),
               ),

@@ -1,3 +1,4 @@
+import 'package:cast_in/ui/screens/main/main_controller.dart';
 import 'package:cast_in/utils/style.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -25,7 +26,16 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       leading: isBackBtnEnabled
           ? IconButton(
               onPressed: () {
-                Get.back();
+                if (Get.isRegistered<MainController>()) {
+                  final controller = Get.find<MainController>();
+                  if (controller.selectedIndex > 3) {
+                    controller.goToScreen(controller.selectedMainIndex);
+                  } else {
+                    Get.back();
+                  }
+                } else {
+                  Get.back();
+                }
               },
               icon: Icon(
                 Icons.keyboard_arrow_left_rounded,

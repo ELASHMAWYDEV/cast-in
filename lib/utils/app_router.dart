@@ -1,29 +1,29 @@
+import 'package:cast_in/ui/screens/auth/forgot_password/forgot_password_screen.dart';
 import 'package:cast_in/ui/screens/auth/login/login_screen.dart';
 import 'package:cast_in/ui/screens/auth/profession/profession_screen.dart';
 import 'package:cast_in/ui/screens/auth/signup/signup_screen.dart';
-import 'package:cast_in/ui/screens/auth/verification/verification_screen.dart';
-import 'package:cast_in/ui/screens/main_layout/main_screen.dart';
+import 'package:cast_in/ui/screens/auth/verification/otp_screen.dart';
+import 'package:cast_in/ui/screens/explore/explore/explore_screen.dart';
+import 'package:cast_in/ui/screens/main/main_screen.dart';
 import 'package:cast_in/ui/screens/notifications/notifications_screen.dart';
 import 'package:cast_in/ui/screens/post_details/post_details_screen.dart';
-import 'package:cast_in/ui/screens/settings/settings_screen.dart';
 import 'package:cast_in/ui/screens/splash/splash_screen.dart';
 import 'package:cast_in/ui/screens/messages/chat/chat_screen.dart';
-import 'package:cast_in/ui/screens/messages/messages/messages_screen.dart';
 import 'package:get/get.dart';
 
 abstract class AppRouter {
   // Routes
   static const SPLASH = '/splash';
   static const LOGIN = '/auth/login';
+  static const FORGOT_PASSWORD = '/auth/forgot-password';
   static const SIGNUP = '/auth/signup';
-  static const VERIFICATION = '/auth/verification';
+  static const OTP = '/auth/otp';
   static const PROFESSION = '/auth/profession';
   static const MAINLAYOUT = '/main';
   static const POST_DETAILS = '/main/post-details';
   static const NOTIFICATIONS = '/main/notifications';
   static const CHAT = '/main/messages/chat';
-  static const SETTINGS = '/main/profile/settings';
-  
+  static const EXPLORE = '/main/explore';
 
   static const String initialRoute = SPLASH;
 
@@ -41,17 +41,18 @@ abstract class AppRouter {
           page: () => SignupScreen(),
         ),
         GetPage(
-          name: VERIFICATION,
-          page: () => VerificationScreen(),
+          name: FORGOT_PASSWORD,
+          page: () => ForgotPasswordScreen(),
+        ),
+        GetPage(
+          name: OTP,
+          page: () => OtpScreen(),
         ),
         GetPage(
           name: PROFESSION,
           page: () => ProfessionScreen(),
         ),
-        GetPage(
-          name: MAINLAYOUT,
-          page: () => MainLayoutScreen(),
-        ),
+        GetPage(name: MAINLAYOUT, page: () => MainScreen()),
         GetPage(
           name: POST_DETAILS,
           page: () => PostDetailsScreen(),
@@ -62,11 +63,11 @@ abstract class AppRouter {
         ),
         GetPage(
           name: NOTIFICATIONS,
-          page: () => NotificationScreen(),
+          page: () => NotificationsScreen(),
         ),
         GetPage(
-          name: SETTINGS,
-          page: () => SettingsScreen(),
+          name: EXPLORE,
+          page: () => ExploreScreen(),
         ),
       ];
 }
