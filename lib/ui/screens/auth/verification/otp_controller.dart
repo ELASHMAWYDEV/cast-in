@@ -2,7 +2,7 @@ import 'package:cast_in/ui/common/app_snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class VerificationController extends GetxController {
+class OtpController extends GetxController {
   final pinController = TextEditingController();
   RxBool isLoading = false.obs;
   RxString timer = '0:09'.obs;
