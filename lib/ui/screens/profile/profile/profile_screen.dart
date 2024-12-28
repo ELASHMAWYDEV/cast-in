@@ -7,7 +7,6 @@ import 'package:cast_in/utils/app_enums.dart';
 import 'package:cast_in/utils/style.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 
 class ProfileScreen extends StatelessWidget {
   ProfileScreen({super.key});
@@ -72,35 +71,45 @@ class ProfileScreen extends StatelessWidget {
                         ),
                       ),
                       Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Text(
-                              "834",
-                              style: AppStyle.headingTextStyle3,
-                            ),
-                            SizedBox(height: 7),
-                            Text(
-                              "Followers",
-                              style: AppStyle.bodyTextStyle3,
-                            ),
-                          ],
+                        child: InkWell(
+                          onTap: () {
+                            Get.find<MainController>().goToScreen(MainRouter.FOLLOWERSANDFOLLOWING);
+                          },
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Text(
+                                "834",
+                                style: AppStyle.headingTextStyle3,
+                              ),
+                              SizedBox(height: 7),
+                              Text(
+                                "Followers",
+                                style: AppStyle.bodyTextStyle3,
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                       Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Text(
-                              "162",
-                              style: AppStyle.headingTextStyle3,
-                            ),
-                            SizedBox(height: 7),
-                            Text(
-                              "Following",
-                              style: AppStyle.bodyTextStyle3,
-                            ),
-                          ],
+                        child: InkWell(
+                          onTap: () {
+                            Get.find<MainController>().goToScreen(MainRouter.FOLLOWERSANDFOLLOWING);
+                          },
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Text(
+                                "162",
+                                style: AppStyle.headingTextStyle3,
+                              ),
+                              SizedBox(height: 7),
+                              Text(
+                                "Following",
+                                style: AppStyle.bodyTextStyle3,
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ],

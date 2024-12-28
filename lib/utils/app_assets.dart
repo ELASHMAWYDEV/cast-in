@@ -36,4 +36,5 @@ class AppAssets {
   static const helpIcon = '$_baseUri/help_icon.png';
   static const logoutIcon = '$_baseUri/logout_icon.png';
   static const privacyIcon = '$_baseUri/privacy_icon.png';
+  static const srchIcon = '$_baseUri/srch icon.png';
 }

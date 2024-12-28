@@ -7,6 +7,7 @@ import 'package:cast_in/ui/screens/messages/messages/messages_controller.dart';
 import 'package:cast_in/ui/screens/messages/messages/messages_screen.dart';
 import 'package:cast_in/ui/screens/notifications/notifications_screen.dart';
 import 'package:cast_in/ui/screens/profile/edit_profile/edit_profile_screen.dart';
+import 'package:cast_in/ui/screens/profile/followers_following/followers_following_screen.dart';
 import 'package:cast_in/ui/screens/profile/profile/profile_screen.dart';
 import 'package:cast_in/ui/screens/profile/add_new_post/add_new_post_screen.dart';
 import 'package:cast_in/ui/screens/settings/settings_screen.dart';
@@ -26,6 +27,7 @@ abstract class MainRouter {
   static const NOTIFICATIONS = 6;
   static const ADDNEWPOST = 7;
   static const EDITPROFILE = 8;
+  static const FOLLOWERSANDFOLLOWING = 9;
 }
 
 class MainController extends GetxController {
@@ -98,6 +100,7 @@ class MainController extends GetxController {
     ScreenOptions(title: "Notifications", screenIndex: 6, screen: NotificationsScreen(), isBackBtnEnabled: true),
     ScreenOptions(title: "Add New Post", screenIndex: 7, screen: AddNewPostScreen(), isBackBtnEnabled: true),
     ScreenOptions(title: "Edit Profile", screenIndex: 8, screen: EditProfileScreen(), isBackBtnEnabled: true),
+    ScreenOptions(title: "peter packer", screenIndex: 9, screen: FollowersFollowingScreen(), isBackBtnEnabled: true),
   ];
 
   void goToScreen(int index) {
