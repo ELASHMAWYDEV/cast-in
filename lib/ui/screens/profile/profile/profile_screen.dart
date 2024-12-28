@@ -1,9 +1,13 @@
 import 'package:cast_in/ui/components/main_button.dart';
 import 'package:cast_in/ui/components/post/post_card.dart';
+import 'package:cast_in/ui/screens/main/main_controller.dart';
+import 'package:cast_in/ui/screens/profile/profile/components/profile_and_background_photos.dart';
 import 'package:cast_in/utils/app_assets.dart';
 import 'package:cast_in/utils/app_enums.dart';
 import 'package:cast_in/utils/style.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 
 class ProfileScreen extends StatelessWidget {
   ProfileScreen({super.key});
@@ -39,39 +43,7 @@ class ProfileScreen extends StatelessWidget {
         child: Column(
           children: [
             /////// profile photo and background photo
-            Stack(clipBehavior: Clip.none, children: [
-              Image.asset(
-                AppAssets.backgroundImage,
-                width: double.infinity,
-                fit: BoxFit.cover,
-              ),
-              Positioned(
-                bottom: -35,
-                left: 20,
-                child: Container(
-                  decoration: BoxDecoration(shape: BoxShape.circle),
-                  child: Image.asset(
-                    AppAssets.myProfileImage,
-                    fit: BoxFit.cover,
-                  ),
-                ),
-              ),
-              Positioned(
-                right: 20,
-                bottom: -30,
-                child: Container(
-                  padding: const EdgeInsets.all(15),
-                  decoration: const BoxDecoration(
-                    color: Colors.white,
-                    shape: BoxShape.circle,
-                  ),
-                  child: Image.asset(
-                    AppAssets.edit,
-                  ),
-                ),
-              ),
-            ]),
-
+            ProfileAndBackgroundPhotos(),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 20, vertical: 40),
               child: Column(
@@ -168,9 +140,14 @@ class ProfileScreen extends StatelessWidget {
                         style: AppStyle.subTitleStyle1.copyWith(fontSize: 20),
                       ),
                       Spacer(),
-                      Text(
-                        "Add Post",
-                        style: AppStyle.textButtonTextStyle.copyWith(fontSize: 20),
+                      InkWell(
+                        onTap: () {
+                          Get.find<MainController>().goToScreen(MainRouter.ADDNEWPOST);
+                        },
+                        child: Text(
+                          "Add Post",
+                          style: AppStyle.textButtonTextStyle.copyWith(fontSize: 20),
+                        ),
                       ),
                     ],
                   ),
@@ -190,7 +167,9 @@ class ProfileScreen extends StatelessWidget {
                     height: 20,
                   ),
                   MainButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Get.find<MainController>().goToScreen(MainRouter.EDITPROFILE);
+                    },
                     title: 'Edit Profile',
                     fullWidth: true,
                   ),

@@ -30,4 +30,10 @@ class AppAssets {
   static const backgroundImage = '$_baseUri/background_image.png';
   static const location = '$_baseUri/location.png';
   static const filterIcon = '$_baseUri/filter-icon.png';
+  static const changePasswordIcon = '$_baseUri/change_password_icon.png';
+  static const changePhoneIcon = '$_baseUri/change_phone_icon.png';
+  static const deleteAccountIcon = '$_baseUri/delete_account_icon.png';
+  static const helpIcon = '$_baseUri/help_icon.png';
+  static const logoutIcon = '$_baseUri/logout_icon.png';
+  static const privacyIcon = '$_baseUri/privacy_icon.png';
 }
