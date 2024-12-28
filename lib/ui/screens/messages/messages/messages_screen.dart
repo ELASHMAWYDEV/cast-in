@@ -16,6 +16,7 @@ class MessagesScreen extends StatelessWidget {
           child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20),
         child: Skeletonizer(
+          ignoreContainers: true,
           enabled: controller.isLoading,
           child: Column(
             children: List.generate(

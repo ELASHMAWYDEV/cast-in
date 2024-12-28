@@ -6,6 +6,7 @@ import 'package:cast_in/ui/screens/home/home_screen.dart';
 import 'package:cast_in/ui/screens/messages/messages/messages_controller.dart';
 import 'package:cast_in/ui/screens/messages/messages/messages_screen.dart';
 import 'package:cast_in/ui/screens/notifications/notifications_screen.dart';
+import 'package:cast_in/ui/screens/profile/profile/profile_controller.dart';
 import 'package:cast_in/ui/screens/profile/profile/profile_screen.dart';
 import 'package:cast_in/ui/screens/settings/settings_screen.dart';
 import 'package:cast_in/utils/app_assets.dart';
@@ -74,7 +75,13 @@ class MainController extends GetxController {
         screen: MessagesScreen(),
         isBackBtnEnabled: false,
         onRefresh: () async => await Get.find<MessagesController>().fetchMessages()),
-    ScreenOptions(title: "Profile", screenIndex: 3, screen: ProfileScreen(), isBackBtnEnabled: false),
+    ScreenOptions(
+      title: "Profile",
+      screenIndex: 3,
+      screen: ProfileScreen(),
+      isBackBtnEnabled: false,
+      onRefresh: () async => await Get.find<ProfileController>().fetchProfile(),
+    ),
     ScreenOptions(
       title: "Settings",
       screenIndex: 4,
