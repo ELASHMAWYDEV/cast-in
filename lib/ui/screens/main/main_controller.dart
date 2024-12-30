@@ -6,12 +6,14 @@ import 'package:cast_in/ui/screens/home/home_screen.dart';
 import 'package:cast_in/ui/screens/messages/messages/messages_controller.dart';
 import 'package:cast_in/ui/screens/messages/messages/messages_screen.dart';
 import 'package:cast_in/ui/screens/notifications/notifications_screen.dart';
-import 'package:cast_in/ui/screens/profile/profile/profile_controller.dart';
+import 'package:cast_in/ui/screens/profile/edit_profile/edit_profile_screen.dart';
+import 'package:cast_in/ui/screens/profile/followers_following/followers_following_screen.dart';
 import 'package:cast_in/ui/screens/profile/profile/profile_screen.dart';
+import 'package:cast_in/ui/screens/profile/add_new_post/add_new_post_screen.dart';
+
 import 'package:cast_in/ui/screens/profile/view_profile/view_profile_screen.dart';
 import 'package:cast_in/ui/screens/settings/settings_screen.dart';
 import 'package:cast_in/utils/app_assets.dart';
-import 'package:cast_in/utils/app_router.dart';
 import 'package:cast_in/utils/style.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -25,6 +27,9 @@ abstract class MainRouter {
   static const SETTINGS = 4;
   static const FILTER = 5;
   static const NOTIFICATIONS = 6;
+  static const ADDNEWPOST = 7;
+  static const EDITPROFILE = 8;
+  static const FOLLOWERSANDFOLLOWING = 9;
   static const VIEW_PROFILE = 7;
 }
 
@@ -77,19 +82,28 @@ class MainController extends GetxController {
         screen: MessagesScreen(),
         isBackBtnEnabled: false,
         onRefresh: () async => await Get.find<MessagesController>().fetchMessages()),
-    ScreenOptions(
-      title: "Profile",
-      screenIndex: 3,
-      screen: ProfileScreen(),
-      isBackBtnEnabled: false,
-    ),
+    ScreenOptions(title: "Profile", screenIndex: 3, screen: ProfileScreen(), isBackBtnEnabled: false, trailing: [
+      IconButton(
+        onPressed: () => Get.find<MainController>().goToScreen(MainRouter.SETTINGS),
+        tooltip: "settings",
+        icon: Image.asset(
+          AppAssets.settingIcon,
+          width: 24,
+          height: 24,
+        ),
+      ),
+    ]),
     ScreenOptions(
       title: "Settings",
       screenIndex: 4,
+      isBackBtnEnabled: true,
       screen: SettingsScreen(),
     ),
     ScreenOptions(title: "Filter", screenIndex: 5, screen: FilterScreen(), isBackBtnEnabled: true),
     ScreenOptions(title: "Notifications", screenIndex: 6, screen: NotificationsScreen(), isBackBtnEnabled: true),
+    ScreenOptions(title: "Add New Post", screenIndex: 7, screen: AddNewPostScreen(), isBackBtnEnabled: true),
+    ScreenOptions(title: "Edit Profile", screenIndex: 8, screen: EditProfileScreen(), isBackBtnEnabled: true),
+    ScreenOptions(title: "peter packer", screenIndex: 9, screen: FollowersFollowingScreen(), isBackBtnEnabled: true),
     ScreenOptions(title: "Profile Page", screenIndex: 7, screen: ViewProfileScreen(), isBackBtnEnabled: true),
   ];
 

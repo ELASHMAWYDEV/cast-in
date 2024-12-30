@@ -1,5 +1,4 @@
 import 'package:cast_in/ui/common/app_dialog.dart';
-import 'package:cast_in/ui/common/app_snackbar.dart';
 import 'package:cast_in/ui/components/form/input_field.dart';
 import 'package:cast_in/ui/components/main_button.dart';
 import 'package:cast_in/ui/screens/auth/login/login_controller.dart';

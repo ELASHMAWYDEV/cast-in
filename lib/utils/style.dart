@@ -5,13 +5,16 @@ abstract class AppStyle {
   static Color primaryColor = const Color.fromRGBO(128, 40, 197, 1); // #8028C5
   static Color secondaryColor = const Color.fromRGBO(29, 16, 114, 1); // #1D1072
   static Color primaryBgColor = const Color.fromRGBO(255, 255, 255, 1); // #FFFFFF
-  static Color secondaryBgColor = const Color.fromRGBO(238, 238, 238, 1); // #EEEEEE
+  static Color secondaryBgColor = const Color.fromRGBO(238, 238, 238, 1);
+  static Color lightGrey = const Color.fromRGBO(221, 221, 221, 1); // #EEEEEE
   static Color primaryTextColor = const Color.fromRGBO(0, 0, 0, 1); // #000000
   static Color secondaryTextColor = const Color.fromRGBO(41, 19, 124, 1); // #29137C
   static Color primaryButtonColor = const Color.fromRGBO(128, 40, 197, 1);
   static Color grey = const Color.fromRGBO(124, 125, 143, 1);
   static Color darkGrey = const Color.fromRGBO(113, 113, 113, 1);
   static Color more = const Color.fromRGBO(7, 8, 56, 1);
+  static Color minBlack = const Color.fromRGBO(56, 54, 53, 1);
+  static Color grey2 = const Color.fromRGBO(164, 164, 164, 1);
 
   // Font Family
   static String primaryFontFamily = 'Poppins';
