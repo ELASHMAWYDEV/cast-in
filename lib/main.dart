@@ -7,7 +7,6 @@ import 'package:cast_in/utils/constants.dart';
 import 'package:cast_in/utils/style.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

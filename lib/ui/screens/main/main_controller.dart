@@ -87,7 +87,7 @@ class MainController extends GetxController {
         onPressed: () => Get.find<MainController>().goToScreen(MainRouter.SETTINGS),
         tooltip: "settings",
         icon: Image.asset(
-          AppAssets.setting,
+          AppAssets.settingIcon,
           width: 24,
           height: 24,
         ),

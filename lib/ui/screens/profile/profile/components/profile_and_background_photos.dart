@@ -2,7 +2,8 @@ import 'package:cast_in/utils/app_assets.dart';
 import 'package:flutter/material.dart';
 
 class ProfileAndBackgroundPhotos extends StatelessWidget {
-  const ProfileAndBackgroundPhotos({super.key});
+  final bool editScreen;
+  const ProfileAndBackgroundPhotos({super.key, required this.editScreen});
 
   @override
   Widget build(BuildContext context) {
@@ -23,20 +24,35 @@ class ProfileAndBackgroundPhotos extends StatelessWidget {
           ),
         ),
       ),
-      Positioned(
-        right: 20,
-        bottom: -30,
-        child: Container(
-          padding: const EdgeInsets.all(15),
-          decoration: const BoxDecoration(
-            color: Colors.white,
-            shape: BoxShape.circle,
-          ),
-          child: Image.asset(
-            AppAssets.edit,
-          ),
-        ),
-      ),
+      editScreen == false
+          ? Positioned(
+              right: 20,
+              bottom: -30,
+              child: Container(
+                padding: const EdgeInsets.all(15),
+                decoration: const BoxDecoration(
+                  color: Colors.white,
+                  shape: BoxShape.circle,
+                ),
+                child: Image.asset(
+                  AppAssets.editIcon,
+                ),
+              ),
+            )
+          : Positioned(
+              right: 20,
+              top: 10,
+              child: Container(
+                padding: const EdgeInsets.all(5),
+                decoration: const BoxDecoration(
+                  color: Colors.white,
+                  shape: BoxShape.circle,
+                ),
+                child: Image.asset(
+                  AppAssets.editIcon,
+                ),
+              ),
+            ),
     ]);
   }
 }

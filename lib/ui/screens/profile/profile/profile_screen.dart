@@ -42,7 +42,9 @@ class ProfileScreen extends StatelessWidget {
         child: Column(
           children: [
             /////// profile photo and background photo
-            ProfileAndBackgroundPhotos(),
+            ProfileAndBackgroundPhotos(
+              editScreen: false,
+            ),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 20, vertical: 40),
               child: Column(
@@ -120,7 +122,7 @@ class ProfileScreen extends StatelessWidget {
                   ///////location
                   Row(
                     children: [
-                      Image.asset(AppAssets.location),
+                      Image.asset(AppAssets.locationIcon),
                       SizedBox(
                         width: 10,
                       ),

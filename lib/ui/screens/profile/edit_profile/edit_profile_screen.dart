@@ -17,7 +17,9 @@ class EditProfileScreen extends StatelessWidget {
         child: Column(
           children: [
             /////// profile photo and background photo
-            ProfileAndBackgroundPhotos(),
+            ProfileAndBackgroundPhotos(
+              editScreen: true,
+            ),
             SizedBox(height: 20),
             Padding(
               padding: EdgeInsets.symmetric(

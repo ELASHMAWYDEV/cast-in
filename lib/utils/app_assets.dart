@@ -24,11 +24,11 @@ class AppAssets {
   static const filledLikeIcon = '$_baseUri/filled-like-icon.png';
   static const commentIcon = '$_baseUri/comment-icon.png';
   static const shareIcon = '$_baseUri/share-icon.png';
-  static const edit = '$_baseUri/edit.png';
-  static const setting = '$_baseUri/setting.png';
+  static const editIcon = '$_baseUri/edit-icon.png';
+  static const settingIcon = '$_baseUri/setting-icon.png';
   static const myProfileImage = '$_baseUri/my_profile_image.png';
   static const backgroundImage = '$_baseUri/background_image.png';
-  static const location = '$_baseUri/location.png';
+  static const locationIcon = '$_baseUri/location-icon.png';
   static const filterIcon = '$_baseUri/filter-icon.png';
   static const changePasswordIcon = '$_baseUri/change_password_icon.png';
   static const changePhoneIcon = '$_baseUri/change_phone_icon.png';
@@ -36,5 +36,5 @@ class AppAssets {
   static const helpIcon = '$_baseUri/help_icon.png';
   static const logoutIcon = '$_baseUri/logout_icon.png';
   static const privacyIcon = '$_baseUri/privacy_icon.png';
-  static const srchIcon = '$_baseUri/srch icon.png';
+  static const srchIcon = '$_baseUri/srch-icon.png';
 }
