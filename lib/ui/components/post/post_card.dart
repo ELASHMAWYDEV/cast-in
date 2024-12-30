@@ -1,3 +1,4 @@
+import 'package:cast_in/ui/screens/main/main_controller.dart';
 import 'package:cast_in/utils/app_assets.dart';
 import 'package:cast_in/utils/app_enums.dart';
 import 'package:cast_in/utils/app_router.dart';
@@ -17,35 +18,31 @@ class PostCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        Get.toNamed(AppRouter.POST_DETAILS, arguments: post);
-      },
-      child: Container(
-        padding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
-        decoration: BoxDecoration(
-          border: isBox == true ? Border.all(color: AppStyle.grey.withValues(alpha: 0.1)) : null,
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(12),
-          boxShadow: [
-            BoxShadow(
-              color: isBox == true ? Colors.grey.withValues(alpha: 0.1) : Colors.white,
-              spreadRadius: 1,
-              blurRadius: 10,
-              offset: isBox == true ? const Offset(0, 2) : Offset(0, 0),
-            ),
-          ],
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            _buildPostHeader(),
-            const SizedBox(height: 15),
-            _buildPostContent(),
-            const SizedBox(height: 20),
-            _buildPostActions(),
-          ],
-        ),
+    return Container(
+      padding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+      decoration: BoxDecoration(
+        border: isBox == true ? Border.all(color: AppStyle.grey.withValues(alpha: 0.1)) : null,
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(12),
+        boxShadow: [
+          BoxShadow(
+            color: isBox == true ? Colors.grey.withValues(alpha: 0.1) : Colors.white,
+            spreadRadius: 1,
+            blurRadius: 10,
+            offset: isBox == true ? const Offset(0, 2) : Offset(0, 0),
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _buildPostHeader(),
+          const SizedBox(height: 15),
+          GestureDetector(
+              onTap: () => Get.toNamed(AppRouter.POST_DETAILS, arguments: post), child: _buildPostContent()),
+          const SizedBox(height: 20),
+          _buildPostActions(),
+        ],
       ),
     );
   }
@@ -53,28 +50,37 @@ class PostCard extends StatelessWidget {
   Widget _buildPostHeader() {
     return Row(
       children: [
-        ClipRRect(
-          borderRadius: BorderRadius.circular(8),
-          child: Image.asset(
-            post.avatarUrl,
-            width: 40,
-            height: 40,
-            fit: BoxFit.cover,
+        GestureDetector(
+          onTap: () {
+            Get.find<MainController>().goToScreen(MainRouter.VIEW_PROFILE);
+          },
+          child: Row(
+            children: [
+              ClipRRect(
+                borderRadius: BorderRadius.circular(8),
+                child: Image.asset(
+                  post.avatarUrl,
+                  width: 40,
+                  height: 40,
+                  fit: BoxFit.cover,
+                ),
+              ),
+              const SizedBox(width: 12),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    post.name,
+                    style: AppStyle.buttonTextStyle.copyWith(color: AppStyle.primaryTextColor),
+                  ),
+                  Text(
+                    '@${post.username}',
+                    style: AppStyle.bodyTextStyle2.copyWith(color: AppStyle.grey),
+                  ),
+                ],
+              ),
+            ],
           ),
-        ),
-        const SizedBox(width: 12),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              post.name,
-              style: AppStyle.buttonTextStyle.copyWith(color: AppStyle.primaryTextColor),
-            ),
-            Text(
-              '@${post.username}',
-              style: AppStyle.bodyTextStyle2.copyWith(color: AppStyle.grey),
-            ),
-          ],
         ),
         const Spacer(),
         Icon(Icons.more_vert, color: AppStyle.more),

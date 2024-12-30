@@ -6,7 +6,9 @@ import 'package:cast_in/ui/screens/home/home_screen.dart';
 import 'package:cast_in/ui/screens/messages/messages/messages_controller.dart';
 import 'package:cast_in/ui/screens/messages/messages/messages_screen.dart';
 import 'package:cast_in/ui/screens/notifications/notifications_screen.dart';
+import 'package:cast_in/ui/screens/profile/profile/profile_controller.dart';
 import 'package:cast_in/ui/screens/profile/profile/profile_screen.dart';
+import 'package:cast_in/ui/screens/profile/view_profile/view_profile_screen.dart';
 import 'package:cast_in/ui/screens/settings/settings_screen.dart';
 import 'package:cast_in/utils/app_assets.dart';
 import 'package:cast_in/utils/app_router.dart';
@@ -23,6 +25,7 @@ abstract class MainRouter {
   static const SETTINGS = 4;
   static const FILTER = 5;
   static const NOTIFICATIONS = 6;
+  static const VIEW_PROFILE = 7;
 }
 
 class MainController extends GetxController {
@@ -74,7 +77,12 @@ class MainController extends GetxController {
         screen: MessagesScreen(),
         isBackBtnEnabled: false,
         onRefresh: () async => await Get.find<MessagesController>().fetchMessages()),
-    ScreenOptions(title: "Profile", screenIndex: 3, screen: ProfileScreen(), isBackBtnEnabled: false),
+    ScreenOptions(
+      title: "Profile",
+      screenIndex: 3,
+      screen: ProfileScreen(),
+      isBackBtnEnabled: false,
+    ),
     ScreenOptions(
       title: "Settings",
       screenIndex: 4,
@@ -82,6 +90,7 @@ class MainController extends GetxController {
     ),
     ScreenOptions(title: "Filter", screenIndex: 5, screen: FilterScreen(), isBackBtnEnabled: true),
     ScreenOptions(title: "Notifications", screenIndex: 6, screen: NotificationsScreen(), isBackBtnEnabled: true),
+    ScreenOptions(title: "Profile Page", screenIndex: 7, screen: ViewProfileScreen(), isBackBtnEnabled: true),
   ];
 
   void goToScreen(int index) {
