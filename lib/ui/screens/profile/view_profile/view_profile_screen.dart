@@ -1,4 +1,6 @@
+import 'package:cast_in/ui/common/custom_appbar.dart';
 import 'package:cast_in/ui/components/main_button.dart';
+import 'package:cast_in/utils/style.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:cast_in/utils/app_assets.dart';
@@ -13,20 +15,34 @@ class ViewProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<ViewProfileController>(
-      builder: (_) => Skeletonizer(
-        enabled: controller.isLoading,
-        ignoreContainers: true,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            _buildHeader(),
-            _buildStats(),
-            _buildLocation(),
-            _buildActionButtons(),
-            _buildBio(),
-            _buildPhotosSection(),
-            const SizedBox(height: 20),
-          ],
+      builder: (_) => Scaffold(
+        appBar: CustomAppBar(
+          title: "View Profile",
+          isBackBtnEnabled: true,
+        ),
+        body: Skeletonizer(
+          enabled: controller.isLoading,
+          ignoreContainers: true,
+          child: RefreshIndicator(
+            onRefresh: () async => await controller.fetchProfile(),
+            color: AppStyle.secondaryColor,
+            displacement: 50,
+            backgroundColor: AppStyle.primaryBgColor,
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _buildHeader(),
+                  _buildStats(),
+                  _buildLocation(),
+                  _buildActionButtons(),
+                  _buildBio(),
+                  _buildPhotosSection(),
+                  const SizedBox(height: 20),
+                ],
+              ),
+            ),
+          ),
         ),
       ),
     );

@@ -71,7 +71,9 @@ class SettingsScreen extends StatelessWidget {
               SettingItem(
                 title: 'Logout',
                 icon: AppAssets.logoutIcon,
-                onTap: () {},
+                onTap: () {
+                  // Get.find<AuthController>().logout();
+                },
               ),
               SettingItem(
                 title: 'Delete Account',

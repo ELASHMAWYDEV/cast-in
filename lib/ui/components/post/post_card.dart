@@ -52,7 +52,7 @@ class PostCard extends StatelessWidget {
       children: [
         GestureDetector(
           onTap: () {
-            Get.find<MainController>().goToScreen(MainRouter.VIEW_PROFILE);
+            Get.toNamed(AppRouter.VIEW_PROFILE);
           },
           child: Row(
             children: [

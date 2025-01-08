@@ -7,6 +7,7 @@ import 'package:cast_in/ui/screens/explore/explore/explore_screen.dart';
 import 'package:cast_in/ui/screens/main/main_screen.dart';
 import 'package:cast_in/ui/screens/notifications/notifications_screen.dart';
 import 'package:cast_in/ui/screens/post_details/post_details_screen.dart';
+import 'package:cast_in/ui/screens/profile/view_profile/view_profile_screen.dart';
 import 'package:cast_in/ui/screens/splash/splash_screen.dart';
 import 'package:cast_in/ui/screens/messages/chat/chat_screen.dart';
 import 'package:get/get.dart';
@@ -23,7 +24,7 @@ abstract class AppRouter {
   static const POST_DETAILS = '/main/post-details';
   static const NOTIFICATIONS = '/main/notifications';
   static const CHAT = '/main/messages/chat';
-  static const EXPLORE = '/main/explore';
+  static const VIEW_PROFILE = '/main/view-profile';
 
   static const String initialRoute = SPLASH;
 
@@ -66,8 +67,8 @@ abstract class AppRouter {
           page: () => NotificationsScreen(),
         ),
         GetPage(
-          name: EXPLORE,
-          page: () => ExploreScreen(),
+          name: VIEW_PROFILE,
+          page: () => ViewProfileScreen(),
         ),
       ];
 }
