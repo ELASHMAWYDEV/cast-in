@@ -1,5 +1,7 @@
+import 'package:cast_in/ui/screens/main/main_controller.dart';
 import 'package:cast_in/utils/app_assets.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class ProfileAndBackgroundPhotos extends StatelessWidget {
   final bool editScreen;
@@ -28,14 +30,17 @@ class ProfileAndBackgroundPhotos extends StatelessWidget {
           ? Positioned(
               right: 20,
               bottom: -30,
-              child: Container(
-                padding: const EdgeInsets.all(15),
-                decoration: const BoxDecoration(
-                  color: Colors.white,
-                  shape: BoxShape.circle,
-                ),
-                child: Image.asset(
-                  AppAssets.editIcon,
+              child: GestureDetector(
+                onTap: () => Get.find<MainController>().goToScreen(MainRouter.EDIT_PROFILE),
+                child: Container(
+                  padding: const EdgeInsets.all(15),
+                  decoration: const BoxDecoration(
+                    color: Colors.white,
+                    shape: BoxShape.circle,
+                  ),
+                  child: Image.asset(
+                    AppAssets.editIcon,
+                  ),
                 ),
               ),
             )

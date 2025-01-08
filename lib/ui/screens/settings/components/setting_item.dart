@@ -16,24 +16,28 @@ class SettingItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: onTap,
-      child: Row(children: [
-        Container(
-          height: 45,
-          width: 46,
-          decoration: BoxDecoration(color: AppStyle.lightGrey, borderRadius: BorderRadius.circular(7)),
-          child: Image.asset(icon),
-        ),
-        SizedBox(width: 15),
-        Text(
-          title,
-          style: AppStyle.subTitleStyle1,
-        ),
-        Spacer(),
-        Icon(
-          Icons.arrow_forward_ios,
-          size: 15,
-        )
-      ]),
+      borderRadius: BorderRadius.circular(7),
+      child: Padding(
+        padding: const EdgeInsets.only(right: 6.0),
+        child: Row(children: [
+          Container(
+            height: 45,
+            width: 45,
+            decoration: BoxDecoration(color: AppStyle.lightGrey, borderRadius: BorderRadius.circular(7)),
+            child: Image.asset(icon),
+          ),
+          SizedBox(width: 15),
+          Text(
+            title,
+            style: AppStyle.subTitleStyle1,
+          ),
+          Spacer(),
+          Icon(
+            Icons.arrow_forward_ios,
+            size: 15,
+          )
+        ]),
+      ),
     );
   }
 }
