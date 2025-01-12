@@ -28,6 +28,12 @@ class ProfileController extends GetxController {
     ),
   ];
 
+  @override
+  void onInit() {
+    super.onInit();
+    fetchProfileData();
+  }
+
   Future<void> fetchProfileData() async {
     isLoading = true;
     update();

@@ -155,7 +155,9 @@ class ProfileScreen extends StatelessWidget {
                             controller.posts.length,
                             (index) => Padding(
                               padding: EdgeInsets.only(bottom: index < controller.posts.length - 1 ? 15 : 0),
-                              child: PostCard(post: controller.posts[index], isBox: true),
+                              child: PostCard(
+                                post: controller.posts[index],
+                              ),
                             ),
                           ),
                         ),

@@ -69,7 +69,6 @@ class HomeScreen extends StatelessWidget {
                 itemBuilder: (context, index) => InkWell(
                   child: PostCard(
                     post: posts[index],
-                    isBox: true,
                   ),
                 ),
               ),

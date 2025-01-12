@@ -8,9 +8,13 @@ class SendMessageWidegt extends StatelessWidget {
   SendMessageWidegt({super.key, required this.withAddIcon});
 
   final TextEditingController _controller = TextEditingController();
+  final FocusNode commentFocusNode = FocusNode();
 
   @override
   Widget build(BuildContext context) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      commentFocusNode.requestFocus();
+    });
     return Container(
       width: double.infinity,
       height: 80,
@@ -31,6 +35,7 @@ class SendMessageWidegt extends StatelessWidget {
                 : SizedBox.shrink(),
             Expanded(
                 child: TextField(
+              focusNode: commentFocusNode,
               controller: _controller,
               decoration: InputDecoration(
                 hintText: 'Message...',

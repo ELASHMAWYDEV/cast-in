@@ -10,6 +10,7 @@ import 'package:cast_in/ui/screens/post_details/post_details_screen.dart';
 import 'package:cast_in/ui/screens/profile/view_profile/view_profile_screen.dart';
 import 'package:cast_in/ui/screens/splash/splash_screen.dart';
 import 'package:cast_in/ui/screens/messages/chat/chat_screen.dart';
+import 'package:cast_in/utils/app_enums.dart';
 import 'package:get/get.dart';
 
 abstract class AppRouter {

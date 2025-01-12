@@ -3,6 +3,7 @@ import 'package:cast_in/ui/common/send_message_widegt.dart';
 import 'package:cast_in/ui/components/post/post_card.dart';
 import 'package:cast_in/ui/screens/post_details/post_details_controller.dart';
 import 'package:cast_in/utils/app_assets.dart';
+import 'package:cast_in/utils/app_router.dart';
 import 'package:cast_in/utils/style.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -41,7 +42,7 @@ class PostDetailsScreen extends StatelessWidget {
                 padding: EdgeInsets.only(left: 10, right: 10, top: 20, bottom: 150),
                 child: Column(
                   children: [
-                    PostCard(post: controller.post!, isBox: false),
+                    PostCard(post: controller.post!),
                     Divider(
                       color: AppStyle.grey.withValues(alpha: 0.1),
                     ),
@@ -65,37 +66,42 @@ class PostDetailsScreen extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Row(
-            children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(8),
-                child: Image.asset(
-                  AppAssets.testModelImage6,
-                  width: 40,
-                  height: 40,
-                  fit: BoxFit.cover,
+          GestureDetector(
+            onTap: () {
+              Get.toNamed(AppRouter.VIEW_PROFILE);
+            },
+            child: Row(
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(8),
+                  child: Image.asset(
+                    AppAssets.testModelImage1,
+                    width: 40,
+                    height: 40,
+                    fit: BoxFit.cover,
+                  ),
                 ),
-              ),
-              const SizedBox(width: 12),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    comment['name'].toString(),
-                    style: AppStyle.buttonTextStyle.copyWith(
-                      fontSize: 14,
-                      color: AppStyle.primaryTextColor,
+                const SizedBox(width: 12),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      comment['name'].toString(),
+                      style: AppStyle.buttonTextStyle.copyWith(
+                        fontSize: 14,
+                        color: AppStyle.primaryTextColor,
+                      ),
                     ),
-                  ),
-                  Text(
-                    comment['message'].toString(),
-                    style: AppStyle.bodyTextStyle2.copyWith(
-                      color: AppStyle.grey,
+                    Text(
+                      comment['message'].toString(),
+                      style: AppStyle.bodyTextStyle2.copyWith(
+                        color: AppStyle.grey,
+                      ),
                     ),
-                  ),
-                ],
-              ),
-            ],
+                  ],
+                ),
+              ],
+            ),
           ),
           SizedBox(
             height: 3,

@@ -1,4 +1,3 @@
-import 'package:cast_in/ui/screens/main/main_controller.dart';
 import 'package:cast_in/utils/app_assets.dart';
 import 'package:cast_in/utils/app_enums.dart';
 import 'package:cast_in/utils/app_router.dart';
@@ -8,42 +7,23 @@ import 'package:get/get.dart';
 
 class PostCard extends StatelessWidget {
   final PostModel post;
-  final bool isBox;
 
   const PostCard({
     super.key,
     required this.post,
-    required this.isBox,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
-      decoration: BoxDecoration(
-        border: isBox == true ? Border.all(color: AppStyle.grey.withValues(alpha: 0.1)) : null,
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(12),
-        boxShadow: [
-          BoxShadow(
-            color: isBox == true ? Colors.grey.withValues(alpha: 0.1) : Colors.white,
-            spreadRadius: 1,
-            blurRadius: 10,
-            offset: isBox == true ? const Offset(0, 2) : Offset(0, 0),
-          ),
-        ],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          _buildPostHeader(),
-          const SizedBox(height: 15),
-          GestureDetector(
-              onTap: () => Get.toNamed(AppRouter.POST_DETAILS, arguments: post), child: _buildPostContent()),
-          const SizedBox(height: 20),
-          _buildPostActions(),
-        ],
-      ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _buildPostHeader(),
+        const SizedBox(height: 15),
+        GestureDetector(onTap: () => Get.toNamed(AppRouter.POST_DETAILS, arguments: post), child: _buildPostContent()),
+        const SizedBox(height: 20),
+        _buildPostActions(),
+      ],
     );
   }
 
@@ -141,12 +121,19 @@ class PostCard extends StatelessWidget {
           const SizedBox(width: 6),
           Text('${post.likes}'),
           const SizedBox(width: 16),
-          Image.asset(
-            AppAssets.commentIcon,
-            width: 22,
+          GestureDetector(
+            onTap: () => Get.toNamed(AppRouter.POST_DETAILS, arguments: post),
+            child: Row(
+              children: [
+                Image.asset(
+                  AppAssets.commentIcon,
+                  width: 22,
+                ),
+                const SizedBox(width: 6),
+                Text('${post.comments}'),
+              ],
+            ),
           ),
-          const SizedBox(width: 6),
-          Text('${post.comments}'),
           const SizedBox(
             width: 16,
           ),

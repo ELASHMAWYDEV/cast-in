@@ -93,7 +93,6 @@ class ExploreScreen extends StatelessWidget {
                           avatarUrl: AppAssets.testProfileImage,
                           contentType: PostContentType.text,
                         ),
-                        isBox: true,
                       ),
                       const SizedBox(height: 12),
                     ],
