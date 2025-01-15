@@ -1,3 +1,4 @@
+import 'package:cast_in/ui/components/post/image_controller.dart';
 import 'package:cast_in/utils/app_assets.dart';
 import 'package:cast_in/utils/app_enums.dart';
 import 'package:cast_in/utils/app_router.dart';
@@ -8,10 +9,12 @@ import 'package:get/get.dart';
 class PostCard extends StatelessWidget {
   final PostModel post;
 
-  const PostCard({
+  PostCard({
     super.key,
     required this.post,
   });
+
+  final ImageController imageController = Get.put(ImageController());
 
   @override
   Widget build(BuildContext context) {
@@ -76,36 +79,46 @@ class PostCard extends StatelessWidget {
           style: AppStyle.bodyTextStyle2.copyWith(color: AppStyle.grey),
         );
       case PostContentType.image:
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            if (post.content.isNotEmpty)
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 12.0),
-                child: Text(
-                  post.content,
-                  style: AppStyle.bodyTextStyle2.copyWith(color: AppStyle.grey),
-                ),
-              ),
-            const SizedBox(height: 8),
-            Stack(
-              alignment: Alignment.bottomCenter,
-              children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(8),
-                  child: ConstrainedBox(
-                    constraints: BoxConstraints(maxHeight: 300, minHeight: 300),
-                    child: Image.asset(
-                      post.imageUrl![0],
-                      width: double.infinity,
-                      fit: BoxFit.cover,
-                    ),
+        imageController.loadImageAndCalculateRatio(post.imageUrl![0]);
+        return Obx(() {
+          if (imageController.matchingRatio.value == null) {
+            return Center(
+                child: CircularProgressIndicator(
+              color: AppStyle.primaryColor,
+            ));
+          }
+          final matchingRatio = imageController.matchingRatio.value!;
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              if (post.content.isNotEmpty)
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                  child: Text(
+                    post.content,
+                    style: AppStyle.bodyTextStyle2.copyWith(color: AppStyle.grey),
                   ),
                 ),
-              ],
-            ),
-          ],
-        );
+              const SizedBox(height: 8),
+              Stack(
+                alignment: Alignment.bottomCenter,
+                children: [
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(8),
+                    child: AspectRatio(
+                      aspectRatio: matchingRatio.width / matchingRatio.height,
+                      child: Image.asset(
+                        post.imageUrl![0],
+                        width: double.infinity,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          );
+        });
     }
   }
 

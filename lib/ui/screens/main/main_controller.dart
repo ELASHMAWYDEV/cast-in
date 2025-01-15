@@ -1,5 +1,6 @@
 import 'package:cast_in/ui/screens/explore/explore/explore_controller.dart';
 import 'package:cast_in/ui/screens/explore/explore/explore_screen.dart';
+import 'package:cast_in/ui/screens/explore/filter/filter_result_screen.dart';
 import 'package:cast_in/ui/screens/explore/filter/filter_screen.dart';
 import 'package:cast_in/ui/screens/home/home_controller.dart';
 import 'package:cast_in/ui/screens/home/home_screen.dart';
@@ -11,8 +12,6 @@ import 'package:cast_in/ui/screens/profile/followers_following/followers_followi
 import 'package:cast_in/ui/screens/profile/profile/profile_controller.dart';
 import 'package:cast_in/ui/screens/profile/profile/profile_screen.dart';
 import 'package:cast_in/ui/screens/profile/add_new_post/add_new_post_screen.dart';
-
-import 'package:cast_in/ui/screens/profile/view_profile/view_profile_screen.dart';
 import 'package:cast_in/ui/screens/settings/settings_screen.dart';
 import 'package:cast_in/utils/app_assets.dart';
 import 'package:cast_in/utils/style.dart';
@@ -32,6 +31,7 @@ abstract class MainRouter {
   static const EDIT_PROFILE = 8;
   static const FOLLOWERSANDFOLLOWING = 9;
   static const VIEW_PROFILE = 10;
+  static const FILTER_RESULT = 11;
 }
 
 class MainController extends GetxController {
@@ -111,6 +111,7 @@ class MainController extends GetxController {
     ScreenOptions(title: "Add New Post", screenIndex: 7, screen: AddNewPostScreen(), isBackBtnEnabled: true),
     ScreenOptions(title: "Edit Profile", screenIndex: 8, screen: EditProfileScreen(), isBackBtnEnabled: true),
     ScreenOptions(title: "peter packer", screenIndex: 9, screen: FollowersFollowingScreen(), isBackBtnEnabled: true),
+    ScreenOptions(title: "Models Found", screenIndex: 11, screen: FilterResultScreen(), isBackBtnEnabled: true),
   ];
 
   void goToScreen(int index) {

@@ -69,7 +69,14 @@ abstract class AppRouter {
         ),
         GetPage(
           name: VIEW_PROFILE,
-          page: () => ViewProfileScreen(),
+          page: () {
+            final args = Get.arguments;
+            if (args is PostModel) {
+              return ViewProfileScreen(post: args);
+            } else {
+              throw ArgumentError("Invalid or missing PostModel argument for ViewProfileScreen");
+            }
+          },
         ),
       ];
 }

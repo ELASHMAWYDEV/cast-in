@@ -49,22 +49,28 @@ class ExploreScreen extends StatelessWidget {
                 style: AppStyle.headingTextStyle2,
               ),
               const SizedBox(height: 16),
-              Skeletonizer(
-                enabled: controller.isLoading,
-                child: GridView.count(
-                  shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
-                  crossAxisCount: 3,
-                  crossAxisSpacing: 10,
-                  mainAxisSpacing: 10,
-                  children: [
-                    _buildModelImage(AppAssets.testModelImage1),
-                    _buildModelImage(AppAssets.testModelImage2),
-                    _buildModelImage(AppAssets.testModelImage3),
-                    _buildModelImage(AppAssets.testModelImage4),
-                    _buildModelImage(AppAssets.testModelImage5),
-                    _buildModelImage(AppAssets.testModelImage6),
-                  ],
+              SizedBox(
+                height: MediaQuery.of(context).size.height * .2,
+                child: Skeletonizer(
+                  enabled: controller.isLoading,
+                  child: PageView.builder(
+                    controller: controller.pageController,
+                    itemCount: 6,
+                    itemBuilder: (context, index) {
+                      final images = [
+                        AppAssets.testModelImage1,
+                        AppAssets.testModelImage2,
+                        AppAssets.testModelImage2,
+                        AppAssets.testModelImage2,
+                        AppAssets.testModelImage2,
+                        AppAssets.testModelImage2,
+                      ];
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                        child: _buildModelImage(images[index]),
+                      );
+                    },
+                  ),
                 ),
               ),
               const SizedBox(height: 24),

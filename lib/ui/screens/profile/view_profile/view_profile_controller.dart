@@ -1,3 +1,4 @@
+import 'package:cast_in/utils/app_enums.dart';
 import 'package:get/get.dart';
 import 'package:cast_in/utils/app_assets.dart';
 
@@ -19,6 +20,28 @@ class ViewProfileController extends GetxController {
     AppAssets.testModelImage4,
     AppAssets.testModelImage5,
     AppAssets.testModelImage6,
+  ];
+  List<PostModel> posts = [
+    PostModel(
+      name: 'Jackie',
+      username: 'Jackie',
+      content:
+          'Today, we are looking for the perfect model to represent our brand in an upcoming perfume advertisement.',
+      avatarUrl: AppAssets.testProfileImage,
+      likes: 24,
+      comments: 15,
+      contentType: PostContentType.text,
+    ),
+    PostModel(
+      name: 'Jackie',
+      username: 'Jackie',
+      content:
+          'Today, we are looking for the perfect model to represent our brand in an upcoming perfume advertisement.',
+      avatarUrl: AppAssets.testProfileImage,
+      likes: 24,
+      comments: 15,
+      contentType: PostContentType.text,
+    ),
   ];
 
   Future<void> fetchProfile() async {

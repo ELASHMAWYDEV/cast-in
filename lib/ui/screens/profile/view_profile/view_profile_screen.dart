@@ -1,5 +1,7 @@
 import 'package:cast_in/ui/common/custom_appbar.dart';
 import 'package:cast_in/ui/components/main_button.dart';
+import 'package:cast_in/utils/app_enums.dart';
+import 'package:cast_in/utils/app_router.dart';
 
 import 'package:cast_in/utils/style.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +11,8 @@ import 'package:skeletonizer/skeletonizer.dart';
 import 'view_profile_controller.dart';
 
 class ViewProfileScreen extends StatelessWidget {
-  ViewProfileScreen({super.key});
+  final PostModel post;
+  ViewProfileScreen({super.key, required this.post});
 
   final ViewProfileController controller = Get.put(ViewProfileController());
 
@@ -204,7 +207,7 @@ class ViewProfileScreen extends StatelessWidget {
               return ClipRRect(
                 borderRadius: BorderRadius.circular(10),
                 child: GestureDetector(
-                  //onTap: () => Get.toNamed(AppRouter.POST_DETAILS, arguments:post ),
+                  onTap: () => Get.toNamed(AppRouter.POST_DETAILS, arguments: controller.posts[index]),
                   child: Image.asset(
                     controller.photos[index],
                     fit: BoxFit.cover,
