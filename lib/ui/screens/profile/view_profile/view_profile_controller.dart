@@ -23,6 +23,7 @@ class ViewProfileController extends GetxController {
   ];
   List<PostModel> posts = [
     PostModel(
+      id: '1',
       name: 'Jackie',
       username: 'Jackie',
       content:
@@ -33,6 +34,7 @@ class ViewProfileController extends GetxController {
       contentType: PostContentType.text,
     ),
     PostModel(
+      id: '2',
       name: 'Jackie',
       username: 'Jackie',
       content:

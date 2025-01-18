@@ -17,6 +17,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final List<PostModel> posts = [
       PostModel(
+        id: '1',
         name: 'Jackie',
         username: 'Jackie',
         content:
@@ -27,6 +28,7 @@ class HomeScreen extends StatelessWidget {
         contentType: PostContentType.text,
       ),
       PostModel(
+        id: '2',
         name: 'Jenny Wilson',
         username: 'Jenny',
         content: '',
@@ -37,6 +39,7 @@ class HomeScreen extends StatelessWidget {
         contentType: PostContentType.image,
       ),
       PostModel(
+        id: '3',
         name: 'Jenny Wilson',
         username: 'Jenny',
         content: '',
@@ -50,13 +53,16 @@ class HomeScreen extends StatelessWidget {
 
     return GetBuilder<HomeController>(builder: (_) {
       return Padding(
-        padding: const EdgeInsets.all(20.0),
+        padding: const EdgeInsets.symmetric(vertical: 20.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              'Adds',
-              style: AppStyle.subTitleStyle1.copyWith(fontSize: 20),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              child: Text(
+                'Adds',
+                style: AppStyle.subTitleStyle1.copyWith(fontSize: 20),
+              ),
             ),
             SizedBox(height: 16),
             Skeletonizer(
@@ -65,9 +71,10 @@ class HomeScreen extends StatelessWidget {
                 shrinkWrap: true,
                 controller: Get.find<MainController>().scrollController,
                 itemCount: posts.length,
-                separatorBuilder: (context, index) => const SizedBox(height: 16),
+                separatorBuilder: (context, index) => const SizedBox(height: 25),
                 itemBuilder: (context, index) => InkWell(
                   child: PostCard(
+                    isOpenModalEnabled: false,
                     post: posts[index],
                   ),
                 ),

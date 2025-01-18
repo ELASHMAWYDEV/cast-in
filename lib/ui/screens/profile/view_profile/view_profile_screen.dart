@@ -1,6 +1,5 @@
 import 'package:cast_in/ui/common/custom_appbar.dart';
 import 'package:cast_in/ui/components/main_button.dart';
-import 'package:cast_in/utils/app_enums.dart';
 import 'package:cast_in/utils/app_router.dart';
 
 import 'package:cast_in/utils/style.dart';
@@ -11,8 +10,7 @@ import 'package:skeletonizer/skeletonizer.dart';
 import 'view_profile_controller.dart';
 
 class ViewProfileScreen extends StatelessWidget {
-  final PostModel post;
-  ViewProfileScreen({super.key, required this.post});
+  ViewProfileScreen({super.key});
 
   final ViewProfileController controller = Get.put(ViewProfileController());
 

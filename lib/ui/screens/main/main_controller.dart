@@ -1,7 +1,7 @@
 import 'package:cast_in/ui/screens/explore/explore/explore_controller.dart';
 import 'package:cast_in/ui/screens/explore/explore/explore_screen.dart';
-import 'package:cast_in/ui/screens/explore/filter/filter_result_screen.dart';
 import 'package:cast_in/ui/screens/explore/filter/filter_screen.dart';
+import 'package:cast_in/ui/screens/explore/models_filter/models_filter_screen.dart';
 import 'package:cast_in/ui/screens/home/home_controller.dart';
 import 'package:cast_in/ui/screens/home/home_screen.dart';
 import 'package:cast_in/ui/screens/messages/messages/messages_controller.dart';
@@ -30,8 +30,7 @@ abstract class MainRouter {
   static const ADDNEWPOST = 7;
   static const EDIT_PROFILE = 8;
   static const FOLLOWERSANDFOLLOWING = 9;
-  static const VIEW_PROFILE = 10;
-  static const FILTER_RESULT = 11;
+  static const MODELS_FILTER = 10;
 }
 
 class MainController extends GetxController {
@@ -43,7 +42,7 @@ class MainController extends GetxController {
   final List<ScreenOptions> screensWithOptions = [
     ScreenOptions(
       title: "Home",
-      screenIndex: 0,
+      screenIndex: MainRouter.HOME,
       screen: HomeScreen(),
       isBackBtnEnabled: false,
       trailing: [
@@ -62,7 +61,7 @@ class MainController extends GetxController {
     ),
     ScreenOptions(
         title: "Explore",
-        screenIndex: 1,
+        screenIndex: MainRouter.EXPLORE,
         screen: ExploreScreen(),
         isBackBtnEnabled: false,
         trailing: [
@@ -79,13 +78,13 @@ class MainController extends GetxController {
         onRefresh: () async => await Get.find<ExploreController>().fetchPosts()),
     ScreenOptions(
         title: "Messages",
-        screenIndex: 2,
+        screenIndex: MainRouter.MESSAGES,
         screen: MessagesScreen(),
         isBackBtnEnabled: false,
         onRefresh: () async => await Get.find<MessagesController>().fetchMessages()),
     ScreenOptions(
         title: "Profile",
-        screenIndex: 3,
+        screenIndex: MainRouter.PROFILE,
         screen: ProfileScreen(),
         isBackBtnEnabled: false,
         onRefresh: () async => await Get.find<ProfileController>().fetchProfileData(),
@@ -102,25 +101,47 @@ class MainController extends GetxController {
         ]),
     ScreenOptions(
       title: "Settings",
-      screenIndex: 4,
+      screenIndex: MainRouter.SETTINGS,
       isBackBtnEnabled: true,
       screen: SettingsScreen(),
     ),
-    ScreenOptions(title: "Filter", screenIndex: 5, screen: FilterScreen(), isBackBtnEnabled: true),
-    ScreenOptions(title: "Notifications", screenIndex: 6, screen: NotificationsScreen(), isBackBtnEnabled: true),
-    ScreenOptions(title: "Add New Post", screenIndex: 7, screen: AddNewPostScreen(), isBackBtnEnabled: true),
-    ScreenOptions(title: "Edit Profile", screenIndex: 8, screen: EditProfileScreen(), isBackBtnEnabled: true),
-    ScreenOptions(title: "peter packer", screenIndex: 9, screen: FollowersFollowingScreen(), isBackBtnEnabled: true),
-    ScreenOptions(title: "Models Found", screenIndex: 11, screen: FilterResultScreen(), isBackBtnEnabled: true),
+    ScreenOptions(title: "Filter", screenIndex: MainRouter.FILTER, screen: FilterScreen(), isBackBtnEnabled: true),
+    ScreenOptions(
+        title: "Notifications",
+        screenIndex: MainRouter.NOTIFICATIONS,
+        screen: NotificationsScreen(),
+        isBackBtnEnabled: true),
+    ScreenOptions(
+        title: "Add New Post", screenIndex: MainRouter.ADDNEWPOST, screen: AddNewPostScreen(), isBackBtnEnabled: true),
+    ScreenOptions(
+        title: "Edit Profile",
+        screenIndex: MainRouter.EDIT_PROFILE,
+        screen: EditProfileScreen(),
+        isBackBtnEnabled: true),
+    ScreenOptions(
+        title: "peter packer",
+        screenIndex: MainRouter.FOLLOWERSANDFOLLOWING,
+        screen: FollowersFollowingScreen(),
+        isBackBtnEnabled: true),
+    ScreenOptions(
+        title: "Models Found",
+        screenIndex: MainRouter.MODELS_FILTER,
+        screen: ModelsFilterScreen(),
+        isBackBtnEnabled: true),
   ];
 
   void goToScreen(int index) {
+    // Keep track of previous screen index for nested navigation
     if (index > 3) {
-      selectedMainIndex = selectedIndex;
+      // For nested screens, maintain the current main tab
+      selectedMainIndex = selectedMainIndex;
     } else {
+      // For main tabs, update both indices
       selectedMainIndex = index;
     }
     selectedIndex = index;
+
+    print("selectedIndex: $selectedIndex, selectedMainIndex: $selectedMainIndex");
     update();
   }
 }

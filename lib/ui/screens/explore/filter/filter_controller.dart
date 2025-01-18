@@ -1,4 +1,5 @@
 import 'package:cast_in/ui/screens/explore/explore/explore_controller.dart';
+import 'package:cast_in/ui/screens/main/main_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
@@ -50,6 +51,8 @@ class FilterController extends GetxController {
   }
 
   void applyFilters() {
+    return Get.find<MainController>().goToScreen(MainRouter.MODELS_FILTER);
+
     if (formKey.currentState?.saveAndValidate() ?? false) {
       final filterData = {
         'age_range': {
@@ -63,9 +66,6 @@ class FilterController extends GetxController {
       };
 
       // Go back to Explore screen
-      //Get.find<MainController>().goToScreen(MainRouter.EXPLORE);
-      // Load posts with filter data
-      Get.find<ExploreController>().fetchPosts();
     }
   }
 

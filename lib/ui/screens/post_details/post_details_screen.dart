@@ -39,7 +39,7 @@ class PostDetailsScreen extends StatelessWidget {
           children: [
             Expanded(
               child: SingleChildScrollView(
-                padding: EdgeInsets.only(left: 10, right: 10, top: 20, bottom: 150),
+                padding: EdgeInsets.only(left: 0, right: 0, top: 20, bottom: 150),
                 child: Column(
                   children: [
                     PostCard(post: controller.post!),
