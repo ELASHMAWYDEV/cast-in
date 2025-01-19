@@ -2,7 +2,9 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:cast_in/utils/style.dart';
 
 class AddNewPostController extends GetxController {
   final TextEditingController textController = TextEditingController();
@@ -37,10 +39,54 @@ class AddNewPostController extends GetxController {
     }
   }
 
+  Future<void> cropImage(int index) async {
+    final file = selectedImages[index];
+    final croppedFile = await ImageCropper().cropImage(
+      sourcePath: file.path,
+      aspectRatioPresets: [
+        CropAspectRatioPreset.square,
+        CropAspectRatioPreset.ratio3x2,
+        CropAspectRatioPreset.original,
+        CropAspectRatioPreset.ratio4x3,
+        CropAspectRatioPreset.ratio16x9
+      ],
+      uiSettings: [
+        AndroidUiSettings(
+          toolbarTitle: 'Edit Image',
+          toolbarColor: AppStyle.primaryColor,
+          toolbarWidgetColor: Colors.white,
+          initAspectRatio: CropAspectRatioPreset.original,
+          lockAspectRatio: false,
+          hideBottomControls: false,
+        ),
+        IOSUiSettings(
+          title: 'Edit Image',
+          doneButtonTitle: 'Done',
+          cancelButtonTitle: 'Cancel',
+          aspectRatioLockEnabled: false,
+        ),
+      ],
+    );
+
+    if (croppedFile != null) {
+      selectedImages[index] = File(croppedFile.path);
+      selectedImages.refresh();
+    }
+  }
+
   void removeImage(int index) {
     if (index >= 0 && index < selectedImages.length) {
       selectedImages.removeAt(index);
     }
+  }
+
+  void toggleLike(int index) {
+    // Implement like functionality
+    Get.snackbar(
+      'Liked',
+      'Image marked as favorite',
+      snackPosition: SnackPosition.BOTTOM,
+    );
   }
 
   @override

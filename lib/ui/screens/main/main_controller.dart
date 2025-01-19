@@ -13,6 +13,7 @@ import 'package:cast_in/ui/screens/profile/profile/profile_controller.dart';
 import 'package:cast_in/ui/screens/profile/profile/profile_screen.dart';
 import 'package:cast_in/ui/screens/profile/add_new_post/add_new_post_screen.dart';
 import 'package:cast_in/ui/screens/settings/settings_screen.dart';
+import 'package:cast_in/ui/screens/profile/update_bio/update_bio_screen.dart';
 import 'package:cast_in/utils/app_assets.dart';
 import 'package:cast_in/utils/style.dart';
 import 'package:flutter/material.dart';
@@ -31,6 +32,7 @@ abstract class MainRouter {
   static const EDIT_PROFILE = 8;
   static const FOLLOWERSANDFOLLOWING = 9;
   static const MODELS_FILTER = 10;
+  static const UPDATE_BIO = 11;
 }
 
 class MainController extends GetxController {
@@ -128,6 +130,8 @@ class MainController extends GetxController {
         screenIndex: MainRouter.MODELS_FILTER,
         screen: ModelsFilterScreen(),
         isBackBtnEnabled: true),
+    ScreenOptions(
+        title: "Update Bio", screenIndex: MainRouter.UPDATE_BIO, screen: UpdateBioScreen(), isBackBtnEnabled: true),
   ];
 
   void goToScreen(int index) {
@@ -140,8 +144,6 @@ class MainController extends GetxController {
       selectedMainIndex = index;
     }
     selectedIndex = index;
-
-    print("selectedIndex: $selectedIndex, selectedMainIndex: $selectedMainIndex");
     update();
   }
 }

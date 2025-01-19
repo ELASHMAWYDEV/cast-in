@@ -170,10 +170,7 @@ class ViewProfileScreen extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Text(
         controller.bio,
-        style: const TextStyle(
-          fontSize: 14,
-          height: 1.4,
-        ),
+        style: AppStyle.bodyTextStyle3.copyWith(color: AppStyle.grey),
       ),
     );
   }

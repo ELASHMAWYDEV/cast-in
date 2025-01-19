@@ -164,24 +164,71 @@ class _ExploreScreenState extends State<ExploreScreen> with SingleTickerProvider
                   shrinkWrap: true,
                   physics: NeverScrollableScrollPhysics(),
                   itemCount: 5,
-                  itemBuilder: (context, index) => Column(
-                    children: [
-                      PostCard(
-                        post: PostModel(
-                          id: '1',
-                          name: 'Jackie',
-                          username: 'Jackie',
-                          content:
-                              'Today, we are looking for the perfect model to represent our brand in an upcoming perfume advertisement.',
-                          likes: 24,
-                          comments: 15,
-                          avatarUrl: AppAssets.testProfileImage,
-                          contentType: PostContentType.text,
-                        ),
+                  itemBuilder: (context, index) {
+                    final posts = [
+                      PostModel(
+                        id: '1',
+                        name: 'Jackie Chan',
+                        username: 'jackiechan',
+                        content:
+                            'Looking for a charismatic male model aged 25-35 for our upcoming martial arts equipment campaign. Must have experience in action poses and martial arts.',
+                        likes: 245,
+                        comments: 89,
+                        avatarUrl: AppAssets.testProfileImage,
+                        contentType: PostContentType.text,
                       ),
-                      const SizedBox(height: 12),
-                    ],
-                  ),
+                      PostModel(
+                        id: '2',
+                        name: 'Victoria Secret',
+                        username: 'victoriasecret',
+                        content:
+                            'Casting call for our Spring 2024 runway show! Seeking female models 5\'9" and above. Previous runway experience required.',
+                        likes: 1893,
+                        comments: 432,
+                        avatarUrl: AppAssets.testModelImage1,
+                        contentType: PostContentType.text,
+                      ),
+                      PostModel(
+                        id: '3',
+                        name: 'Nike Sports',
+                        username: 'nikesports',
+                        content:
+                            'Athletes wanted! Seeking fitness models for our new performance wear line. Must be able to demonstrate dynamic movements.',
+                        likes: 892,
+                        comments: 156,
+                        avatarUrl: AppAssets.testModelImage2,
+                        contentType: PostContentType.text,
+                      ),
+                      PostModel(
+                        id: '4',
+                        name: 'Vogue Italia',
+                        username: 'vogueitalia',
+                        content:
+                            'Editorial models needed for our September issue. Unique and striking features preferred. Send your portfolio today!',
+                        likes: 2341,
+                        comments: 567,
+                        avatarUrl: AppAssets.testModelImage3,
+                        contentType: PostContentType.text,
+                      ),
+                      PostModel(
+                        id: '5',
+                        name: 'L\'Oreal Paris',
+                        username: 'lorealparis',
+                        content:
+                            'Seeking diverse models of all ages for our new skincare campaign. Natural beauty and confidence are key!',
+                        likes: 1567,
+                        comments: 298,
+                        avatarUrl: AppAssets.testModelImage4,
+                        contentType: PostContentType.text,
+                      ),
+                    ];
+                    return Column(
+                      children: [
+                        PostCard(post: posts[index]),
+                        const SizedBox(height: 12),
+                      ],
+                    );
+                  },
                 ),
               ),
             ],

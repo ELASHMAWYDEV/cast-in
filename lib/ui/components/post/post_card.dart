@@ -21,6 +21,9 @@ class PostCard extends StatelessWidget {
 
   final ImageController imageController = Get.put(ImageController());
   final PhotoViewScaleStateController _scaleStateController = PhotoViewScaleStateController();
+  late final RxBool isLiked = RxBool(false);
+  late final RxInt likesCount = RxInt(post.likes);
+  late final RxInt commentsCount = RxInt(post.comments);
 
   void _showImageDialog(BuildContext context, String imageUrl) {
     showDialog(
@@ -238,44 +241,56 @@ class PostCard extends StatelessWidget {
   Widget _buildPostActions() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20.0),
-      child: Row(
-        children: [
-          Image.asset(
-            AppAssets.filledLikeIcon,
-            width: 22,
-          ),
-          const SizedBox(width: 6),
-          Text('${post.likes}'),
-          const SizedBox(width: 16),
-          GestureDetector(
-            onTap: () => Get.toNamed(AppRouter.POST_DETAILS, arguments: post),
-            child: Row(
-              children: [
-                Image.asset(
-                  AppAssets.commentIcon,
+      child: Obx(() => Row(
+            children: [
+              GestureDetector(
+                onTap: () {
+                  // TODO: Implement actual like functionality with your backend
+                  if (isLiked.value == true) {
+                    likesCount.value = likesCount.value - 1;
+                    isLiked.value = false;
+                  } else {
+                    likesCount.value = likesCount.value + 1;
+                    isLiked.value = true;
+                  }
+                },
+                child: Image.asset(
+                  isLiked.value == true ? AppAssets.filledLikeIcon : AppAssets.likeIcon,
                   width: 22,
                 ),
-                const SizedBox(width: 6),
-                Text('${post.comments}'),
-              ],
-            ),
-          ),
-          const SizedBox(width: 16),
-          GestureDetector(
-            onTap: () {
-              Get.bottomSheet(
-                ShareModal(post: post),
-                isScrollControlled: true,
-                backgroundColor: Colors.transparent,
-              );
-            },
-            child: Image.asset(
-              AppAssets.shareIcon,
-              width: 22,
-            ),
-          ),
-        ],
-      ),
+              ),
+              const SizedBox(width: 6),
+              Text('${likesCount.value}'),
+              const SizedBox(width: 16),
+              GestureDetector(
+                onTap: () => Get.toNamed(AppRouter.POST_DETAILS, arguments: post),
+                child: Row(
+                  children: [
+                    Image.asset(
+                      AppAssets.commentIcon,
+                      width: 22,
+                    ),
+                    const SizedBox(width: 6),
+                    Text('${post.comments}'),
+                  ],
+                ),
+              ),
+              const SizedBox(width: 16),
+              GestureDetector(
+                onTap: () {
+                  Get.bottomSheet(
+                    ShareModal(post: post),
+                    isScrollControlled: true,
+                    backgroundColor: Colors.transparent,
+                  );
+                },
+                child: Image.asset(
+                  AppAssets.shareIcon,
+                  width: 22,
+                ),
+              ),
+            ],
+          )),
     );
   }
 }

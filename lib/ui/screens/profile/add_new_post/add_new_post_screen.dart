@@ -113,29 +113,84 @@ class AddNewPostScreen extends StatelessWidget {
                         children: [
                           ClipRRect(
                             borderRadius: BorderRadius.circular(8),
-                            child: Image.file(
-                              controller.selectedImages[index],
-                              fit: BoxFit.cover,
-                              width: double.infinity,
-                              height: double.infinity,
+                            child: GestureDetector(
+                              onTap: () {
+                                showDialog(
+                                  context: context,
+                                  builder: (context) => Dialog(
+                                    backgroundColor: Colors.transparent,
+                                    child: Stack(
+                                      children: [
+                                        InteractiveViewer(
+                                          panEnabled: true,
+                                          minScale: 0.5,
+                                          maxScale: 4,
+                                          child: ClipRRect(
+                                            borderRadius: BorderRadius.circular(8),
+                                            child: Image.file(
+                                              controller.selectedImages[index],
+                                              fit: BoxFit.contain,
+                                            ),
+                                          ),
+                                        ),
+                                        Positioned(
+                                          top: 8,
+                                          right: 8,
+                                          child: IconButton(
+                                            icon: const Icon(Icons.close, color: Colors.white),
+                                            onPressed: () => Navigator.pop(context),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                );
+                              },
+                              child: Image.file(
+                                controller.selectedImages[index],
+                                fit: BoxFit.cover,
+                                width: double.infinity,
+                                height: double.infinity,
+                              ),
+                            ),
+                          ),
+                          Positioned(
+                            top: 4,
+                            left: 4,
+                            child: Container(
+                              decoration: BoxDecoration(
+                                color: Colors.black.withAlpha(50),
+                                shape: BoxShape.circle,
+                              ),
+                              child: IconButton(
+                                padding: const EdgeInsets.all(4),
+                                constraints: const BoxConstraints(),
+                                icon: const Icon(
+                                  Icons.edit,
+                                  size: 16,
+                                  color: Colors.white,
+                                ),
+                                onPressed: () => controller.cropImage(index),
+                              ),
                             ),
                           ),
                           Positioned(
                             top: 4,
                             right: 4,
-                            child: InkWell(
-                              onTap: () => controller.removeImage(index),
-                              child: Container(
+                            child: Container(
+                              decoration: BoxDecoration(
+                                color: Colors.black.withAlpha(50),
+                                shape: BoxShape.circle,
+                              ),
+                              child: IconButton(
                                 padding: const EdgeInsets.all(4),
-                                decoration: BoxDecoration(
-                                  color: Colors.black.withOpacity(0.5),
-                                  shape: BoxShape.circle,
-                                ),
-                                child: const Icon(
+                                constraints: const BoxConstraints(),
+                                icon: const Icon(
                                   Icons.close,
                                   size: 16,
                                   color: Colors.white,
                                 ),
+                                onPressed: () => controller.removeImage(index),
                               ),
                             ),
                           ),
