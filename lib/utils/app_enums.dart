@@ -7,6 +7,7 @@ enum PostContentType {
 }
 
 class PostModel {
+  final String id;
   final String name;
   final String username;
   final String content;
@@ -17,6 +18,7 @@ class PostModel {
   final PostContentType contentType;
 
   PostModel({
+    required this.id,
     required this.name,
     required this.username,
     required this.content,
@@ -38,6 +40,7 @@ class PostModel {
     PostContentType? contentType,
   }) {
     return PostModel(
+      id: id,
       name: name ?? this.name,
       username: username ?? this.username,
       content: content ?? this.content,
@@ -64,6 +67,7 @@ class PostModel {
 
   factory PostModel.fromMap(Map<String, dynamic> map) {
     return PostModel(
+      id: map['id'] as String,
       name: map['name'] as String,
       username: map['username'] as String,
       content: map['content'] as String,

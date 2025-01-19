@@ -3,7 +3,6 @@ import 'package:cast_in/ui/screens/auth/login/login_screen.dart';
 import 'package:cast_in/ui/screens/auth/profession/profession_screen.dart';
 import 'package:cast_in/ui/screens/auth/signup/signup_screen.dart';
 import 'package:cast_in/ui/screens/auth/verification/otp_screen.dart';
-import 'package:cast_in/ui/screens/explore/explore/explore_screen.dart';
 import 'package:cast_in/ui/screens/main/main_screen.dart';
 import 'package:cast_in/ui/screens/notifications/notifications_screen.dart';
 import 'package:cast_in/ui/screens/post_details/post_details_screen.dart';

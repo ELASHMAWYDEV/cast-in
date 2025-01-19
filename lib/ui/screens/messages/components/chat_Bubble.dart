@@ -63,7 +63,7 @@ class ChatBubble extends StatelessWidget {
                   child: Text(
                     'Sent',
                     style: AppStyle.bodyTextStyle3.copyWith(
-                      color: AppStyle.more,
+                      color: AppStyle.primaryTextColor,
                     ),
                   ),
                 )
