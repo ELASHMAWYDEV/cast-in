@@ -1,5 +1,6 @@
 import 'package:cast_in/ui/components/post/image_controller.dart';
 import 'package:cast_in/ui/components/post/share_modal.dart';
+import 'package:cast_in/ui/components/post/comments_modal.dart';
 import 'package:cast_in/utils/app_assets.dart';
 import 'package:cast_in/utils/app_enums.dart';
 import 'package:cast_in/utils/app_router.dart';
@@ -67,7 +68,7 @@ class PostCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             _buildPostHeader(),
-            const SizedBox(height: 20),
+            const SizedBox(height: 10),
             GestureDetector(
                 onTap: () => Get.toNamed(AppRouter.POST_DETAILS, arguments: post), child: _buildPostContent()),
             const SizedBox(height: 20),
@@ -78,13 +79,9 @@ class PostCard extends StatelessWidget {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Stack(
-              children: [
-                GestureDetector(
-                    onTap: () => Get.toNamed(AppRouter.POST_DETAILS, arguments: post), child: _buildPostContent()),
-                _buildPostHeader(),
-              ],
-            ),
+            _buildPostHeader(),
+            GestureDetector(
+                onTap: () => Get.toNamed(AppRouter.POST_DETAILS, arguments: post), child: _buildPostContent()),
             const SizedBox(height: 20),
             _buildPostActions(),
           ],
@@ -93,75 +90,78 @@ class PostCard extends StatelessWidget {
   }
 
   Widget _buildPostHeader() {
-    final Color nameColor =
-        post.contentType == PostContentType.text ? AppStyle.primaryTextColor : AppStyle.primaryBgColor;
-    final Color usernameColor = post.contentType == PostContentType.text ? AppStyle.grey : AppStyle.primaryBgColor;
-
-    return Hero(
-      tag: 'profile_image_${post.id}',
-      child: Padding(
-        padding: const EdgeInsets.fromLTRB(20, 25, 20, 0),
-        child: Row(
-          children: [
-            GestureDetector(
-              onTap: () {
-                Get.toNamed(AppRouter.VIEW_PROFILE, arguments: post);
-              },
-              child: Row(
-                children: [
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(post.contentType == PostContentType.text ? 8 : 50),
-                    child: Image.asset(
-                      post.avatarUrl,
-                      width: 40,
-                      height: 40,
-                      fit: BoxFit.cover,
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(20, 0, 20, 10),
+      child: Row(
+        children: [
+          GestureDetector(
+            onTap: () {
+              Get.toNamed(AppRouter.VIEW_PROFILE, arguments: post);
+            },
+            child: Row(
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(post.contentType == PostContentType.text ? 8 : 50),
+                  child: Image.asset(
+                    post.avatarUrl,
+                    width: 40,
+                    height: 40,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+                const SizedBox(width: 12),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      post.name,
+                      style: AppStyle.buttonTextStyle.copyWith(color: AppStyle.primaryTextColor),
                     ),
-                  ),
-                  const SizedBox(width: 12),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        post.name,
-                        style: AppStyle.buttonTextStyle.copyWith(color: nameColor).copyWith(
-                            shadows: post.contentType == PostContentType.image
-                                ? [
-                                    Shadow(
-                                      color: Colors.black.withAlpha(50),
-                                      offset: const Offset(1, 1),
-                                      blurRadius: 2,
-                                    ),
-                                  ]
-                                : null),
-                      ),
-                      Text(
-                        '@${post.username}',
-                        style: AppStyle.bodyTextStyle2.copyWith(color: usernameColor).copyWith(
-                            shadows: post.contentType == PostContentType.image
-                                ? [
-                                    Shadow(
-                                      color: Colors.black.withAlpha(50),
-                                      offset: const Offset(1, 1),
-                                      blurRadius: 2,
-                                    ),
-                                  ]
-                                : null),
-                      ),
-                    ],
-                  ),
-                ],
+                    Text(
+                      '@${post.username}',
+                      style: AppStyle.bodyTextStyle2.copyWith(color: AppStyle.grey),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+          const Spacer(),
+          PopupMenuButton(
+            icon: Icon(Icons.more_vert, color: AppStyle.primaryTextColor),
+            color: AppStyle.primaryBgColor,
+            itemBuilder: (context) => [
+              PopupMenuItem(
+                value: 'report',
+                child: Row(
+                  children: [
+                    Icon(Icons.flag_outlined, size: 20),
+                    const SizedBox(width: 8),
+                    Text('Report'),
+                  ],
+                ),
               ),
-            ),
-            const Spacer(),
-            IconButton(
-              onPressed: () {},
-              icon: Icon(Icons.more_vert,
-                  color:
-                      post.contentType == PostContentType.text ? AppStyle.primaryTextColor : AppStyle.primaryBgColor),
-            ),
-          ],
-        ),
+              PopupMenuItem(
+                value: 'save',
+                child: Row(
+                  children: [
+                    Icon(Icons.bookmark_border, size: 20),
+                    const SizedBox(width: 8),
+                    Text('Save'),
+                  ],
+                ),
+              ),
+            ],
+            onSelected: (value) {
+              // Handle menu item selection
+              if (value == 'report') {
+                // Handle report
+              } else if (value == 'save') {
+                // Handle save
+              }
+            },
+          ),
+        ],
       ),
     );
   }
@@ -182,15 +182,6 @@ class PostCard extends StatelessWidget {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              if (post.content.isNotEmpty)
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 12.0),
-                  child: Text(
-                    post.content,
-                    style: AppStyle.bodyTextStyle2.copyWith(color: AppStyle.grey),
-                  ),
-                ),
-              const SizedBox(height: 8),
               Skeletonizer(
                 enabled: imageController.matchingRatio.value == null ||
                     (imageController.matchingRatio.value?.width == 0 ||
@@ -232,6 +223,15 @@ class PostCard extends StatelessWidget {
                         ),
                       ),
               ),
+              const SizedBox(height: 12),
+              if (post.content.isNotEmpty)
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                  child: Text(
+                    post.content,
+                    style: AppStyle.bodyTextStyle2,
+                  ),
+                ),
             ],
           );
         });
@@ -263,7 +263,13 @@ class PostCard extends StatelessWidget {
               Text('${likesCount.value}'),
               const SizedBox(width: 16),
               GestureDetector(
-                onTap: () => Get.toNamed(AppRouter.POST_DETAILS, arguments: post),
+                onTap: () {
+                  Get.bottomSheet(
+                    CommentsModal(post: post),
+                    isScrollControlled: true,
+                    backgroundColor: Colors.transparent,
+                  );
+                },
                 child: Row(
                   children: [
                     Image.asset(

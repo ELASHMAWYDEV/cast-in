@@ -1,7 +1,10 @@
+import 'package:cast_in/services/supabase_service.dart';
 import 'package:cast_in/ui/screens/settings/components/setting_item.dart';
 import 'package:cast_in/utils/app_assets.dart';
+import 'package:cast_in/utils/app_router.dart';
 import 'package:cast_in/utils/style.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
@@ -72,7 +75,8 @@ class SettingsScreen extends StatelessWidget {
                 title: 'Logout',
                 icon: AppAssets.logoutIcon,
                 onTap: () {
-                  // Get.find<AuthController>().logout();
+                  Get.find<SupabaseService>().signOut();
+                  Get.offAllNamed(AppRouter.LOGIN);
                 },
               ),
               SettingItem(
@@ -88,6 +92,6 @@ class SettingsScreen extends StatelessWidget {
   }
 
   Widget _buildHeaderText(String title) {
-    return Text(title, style: AppStyle.subTitleStyle1);
+    return Text(title, style: AppStyle.subTitleStyle1.copyWith(fontWeight: FontWeight.w600, fontSize: 18));
   }
 }

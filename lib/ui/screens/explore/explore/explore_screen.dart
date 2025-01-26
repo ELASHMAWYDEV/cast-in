@@ -122,13 +122,31 @@ class _ExploreScreenState extends State<ExploreScreen> with SingleTickerProvider
               ),
               const SizedBox(height: 24),
               // Models Section
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                child: Text(
-                  'Models',
-                  style: AppStyle.headingTextStyle2,
-                ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    child: Text(
+                      'Models',
+                      style: AppStyle.headingTextStyle2,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(right: 16.0),
+                    child: TextButton(
+                      onPressed: () => Get.toNamed(
+                        AppRouter.EXPLORE_VIEW_ALL,
+                        arguments: {'showPhotoPosts': true},
+                      ),
+                      child: Text(
+                        'view all',
+                      ),
+                    ),
+                  ),
+                ],
               ),
+
               const SizedBox(height: 16),
               Skeletonizer(
                 enabled: controller.isLoading,
@@ -150,12 +168,27 @@ class _ExploreScreenState extends State<ExploreScreen> with SingleTickerProvider
               ),
               const SizedBox(height: 24),
               // Adds Section
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                child: Text(
-                  'Adds',
-                  style: AppStyle.headingTextStyle2,
-                ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    child: Text(
+                      'Adds',
+                      style: AppStyle.headingTextStyle2,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(right: 16.0),
+                    child: TextButton(
+                      onPressed: () => Get.toNamed(
+                        AppRouter.EXPLORE_VIEW_ALL,
+                        arguments: {'showPhotoPosts': false},
+                      ),
+                      child: Text('view all'),
+                    ),
+                  ),
+                ],
               ),
               const SizedBox(height: 16),
               Skeletonizer(
@@ -225,7 +258,7 @@ class _ExploreScreenState extends State<ExploreScreen> with SingleTickerProvider
                     return Column(
                       children: [
                         PostCard(post: posts[index]),
-                        const SizedBox(height: 12),
+                        const SizedBox(height: 30),
                       ],
                     );
                   },

@@ -3,6 +3,7 @@ class AppAssets {
 
   static const _baseUri = 'assets/images';
 
+  static const logo = '$_baseUri/castin-logo.png';
   static const splashImage = '$_baseUri/app-splash.png';
   static const homeIcon = '$_baseUri/home-icon.png';
   static const filledHomeIcon = '$_baseUri/filled-home-icon.png';

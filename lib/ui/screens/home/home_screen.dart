@@ -57,13 +57,6 @@ class HomeScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20.0),
-              child: Text(
-                'Adds',
-                style: AppStyle.subTitleStyle1.copyWith(fontSize: 20),
-              ),
-            ),
             SizedBox(height: 16),
             Skeletonizer(
               enabled: controller.isLoading,

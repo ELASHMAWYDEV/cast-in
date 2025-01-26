@@ -166,7 +166,7 @@ class ProfileScreen extends StatelessWidget {
       shrinkWrap: true,
       physics: NeverScrollableScrollPhysics(),
       itemCount: controller.posts.length,
-      separatorBuilder: (context, index) => SizedBox(height: 15),
+      separatorBuilder: (context, index) => SizedBox(height: 30),
       itemBuilder: (context, index) => PostCard(
         isOpenModalEnabled: false,
         post: controller.posts[index],

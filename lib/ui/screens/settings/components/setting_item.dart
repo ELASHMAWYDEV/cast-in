@@ -24,7 +24,15 @@ class SettingItem extends StatelessWidget {
             height: 45,
             width: 45,
             decoration: BoxDecoration(color: AppStyle.lightGrey, borderRadius: BorderRadius.circular(7)),
-            child: Image.asset(icon),
+            child: Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: Image.asset(
+                icon,
+                width: 20,
+                height: 20,
+                fit: BoxFit.contain,
+              ),
+            ),
           ),
           SizedBox(width: 15),
           Text(

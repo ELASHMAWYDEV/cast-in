@@ -2,6 +2,7 @@ import 'package:cast_in/ui/common/app_dialog.dart';
 import 'package:cast_in/ui/components/form/input_field.dart';
 import 'package:cast_in/ui/components/main_button.dart';
 import 'package:cast_in/ui/screens/auth/login/login_controller.dart';
+import 'package:cast_in/utils/app_assets.dart';
 import 'package:cast_in/utils/app_router.dart';
 import 'package:cast_in/utils/style.dart';
 import 'package:flutter/material.dart';
@@ -26,11 +27,15 @@ class LoginScreen extends StatelessWidget {
                     children: [
                       Padding(
                         padding: const EdgeInsets.only(top: 30),
-                        child: Text('Cast In',
-                            style: AppStyle.headingTextStyle1.copyWith(
-                              fontSize: 40,
-                            )),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(20),
+                          child: Image.asset(
+                            AppAssets.logo,
+                            height: 120,
+                          ),
+                        ),
                       ),
+                      Spacer(),
                       FormBuilder(
                           key: controller.formKey,
                           child: Column(
@@ -80,6 +85,7 @@ class LoginScreen extends StatelessWidget {
                               ),
                             ],
                           )),
+                      Spacer(),
                       Column(
                         children: [
                           Padding(

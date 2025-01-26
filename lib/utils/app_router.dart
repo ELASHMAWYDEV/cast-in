@@ -3,6 +3,7 @@ import 'package:cast_in/ui/screens/auth/login/login_screen.dart';
 import 'package:cast_in/ui/screens/auth/profession/profession_screen.dart';
 import 'package:cast_in/ui/screens/auth/signup/signup_screen.dart';
 import 'package:cast_in/ui/screens/auth/verification/otp_screen.dart';
+import 'package:cast_in/ui/screens/explore/view_all/explore_view_all_screen.dart';
 import 'package:cast_in/ui/screens/main/main_screen.dart';
 import 'package:cast_in/ui/screens/notifications/notifications_screen.dart';
 import 'package:cast_in/ui/screens/post_details/post_details_screen.dart';
@@ -24,6 +25,7 @@ abstract class AppRouter {
   static const NOTIFICATIONS = '/main/notifications';
   static const CHAT = '/main/messages/chat';
   static const VIEW_PROFILE = '/main/view-profile';
+  static const EXPLORE_VIEW_ALL = '/main/explore/view-all';
 
   static const String initialRoute = SPLASH;
 
@@ -68,6 +70,12 @@ abstract class AppRouter {
         GetPage(
           name: VIEW_PROFILE,
           page: () => ViewProfileScreen(),
+        ),
+        GetPage(
+          name: EXPLORE_VIEW_ALL,
+          page: () => ExploreViewAllScreen(
+            showPhotoPosts: Get.arguments['showPhotoPosts'] ?? false,
+          ),
         ),
       ];
 }
