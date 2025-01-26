@@ -1,4 +1,8 @@
+import 'package:cast_in/utils/app_router.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 
 class NotificationItem extends StatelessWidget {
   final String profileImage;
@@ -34,6 +38,10 @@ class NotificationItem extends StatelessWidget {
                     style: const TextStyle(color: Colors.black, fontSize: 16),
                     children: [
                       TextSpan(
+                        recognizer: TapGestureRecognizer()
+                          ..onTap = () {
+                            Get.toNamed(AppRouter.VIEW_PROFILE);
+                          },
                         text: username,
                         style: const TextStyle(fontWeight: FontWeight.bold),
                       ),

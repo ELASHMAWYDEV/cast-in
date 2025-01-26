@@ -12,7 +12,6 @@ abstract class AppStyle {
   static Color primaryButtonColor = const Color.fromRGBO(128, 40, 197, 1);
   static Color grey = const Color.fromRGBO(124, 125, 143, 1);
   static Color darkGrey = const Color.fromRGBO(113, 113, 113, 1);
-  static Color more = const Color.fromRGBO(7, 8, 56, 1);
   static Color minBlack = const Color.fromRGBO(56, 54, 53, 1);
   static Color grey2 = const Color.fromRGBO(164, 164, 164, 1);
 

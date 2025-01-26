@@ -51,6 +51,8 @@ class FilterController extends GetxController {
   }
 
   void applyFilters() {
+    return Get.find<MainController>().goToScreen(MainRouter.MODELS_FILTER);
+
     if (formKey.currentState?.saveAndValidate() ?? false) {
       final filterData = {
         'age_range': {
@@ -64,9 +66,6 @@ class FilterController extends GetxController {
       };
 
       // Go back to Explore screen
-      Get.find<MainController>().goToScreen(MainRouter.EXPLORE);
-      // Load posts with filter data
-      Get.find<ExploreController>().fetchPosts();
     }
   }
 
