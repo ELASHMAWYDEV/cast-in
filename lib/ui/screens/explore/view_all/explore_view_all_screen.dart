@@ -1,3 +1,4 @@
+import 'package:cast_in/models/post_model.dart';
 import 'package:cast_in/ui/common/custom_appbar.dart';
 import 'package:cast_in/ui/components/post/post_card.dart';
 import 'package:cast_in/ui/screens/explore/view_all/explore_view_all_controller.dart';

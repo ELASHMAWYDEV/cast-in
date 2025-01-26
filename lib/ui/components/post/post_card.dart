@@ -1,3 +1,4 @@
+import 'package:cast_in/models/post_model.dart';
 import 'package:cast_in/ui/components/post/image_controller.dart';
 import 'package:cast_in/ui/components/post/share_modal.dart';
 import 'package:cast_in/ui/components/post/comments_modal.dart';

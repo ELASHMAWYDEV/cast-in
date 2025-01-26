@@ -1,3 +1,4 @@
+import 'package:cast_in/models/post_model.dart';
 import 'package:cast_in/ui/components/post/post_card.dart';
 import 'package:cast_in/ui/screens/home/home_controller.dart';
 import 'package:cast_in/ui/screens/main/main_controller.dart';

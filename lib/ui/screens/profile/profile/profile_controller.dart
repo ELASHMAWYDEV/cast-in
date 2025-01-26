@@ -1,3 +1,4 @@
+import 'package:cast_in/models/post_model.dart';
 import 'package:cast_in/utils/app_assets.dart';
 import 'package:cast_in/utils/app_enums.dart';
 import 'package:get/get.dart';
