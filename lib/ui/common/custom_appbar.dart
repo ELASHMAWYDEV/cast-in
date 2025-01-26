@@ -7,12 +7,14 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
   final bool isBackBtnEnabled;
   final List<Widget>? trailing;
+  final Widget? leading;
 
   const CustomAppBar({
     super.key,
     required this.title,
     this.isBackBtnEnabled = false,
     this.trailing,
+    this.leading,
   });
 
   @override
@@ -23,27 +25,28 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       centerTitle: true,
       leadingWidth: 80,
-      leading: isBackBtnEnabled
-          ? IconButton(
-              onPressed: () {
-                if (Get.isRegistered<MainController>()) {
-                  final controller = Get.find<MainController>();
-                  if (controller.selectedIndex > 3) {
-                    controller.goToScreen(controller.selectedMainIndex);
-                  } else {
-                    Get.back();
-                  }
-                } else {
-                  Get.back();
-                }
-              },
-              icon: Icon(
-                Icons.keyboard_arrow_left_rounded,
-              ),
-              style: ButtonStyle(backgroundColor: WidgetStatePropertyAll(AppStyle.secondaryBgColor)),
-              tooltip: "Back",
-            )
-          : SizedBox.shrink(),
+      leading: leading ??
+          (isBackBtnEnabled
+              ? IconButton(
+                  onPressed: () {
+                    if (Get.isRegistered<MainController>()) {
+                      final controller = Get.find<MainController>();
+                      if (controller.selectedIndex > 3) {
+                        controller.goToScreen(controller.selectedMainIndex);
+                      } else {
+                        Get.back();
+                      }
+                    } else {
+                      Get.back();
+                    }
+                  },
+                  icon: Icon(
+                    Icons.keyboard_arrow_left_rounded,
+                  ),
+                  style: ButtonStyle(backgroundColor: WidgetStatePropertyAll(AppStyle.secondaryBgColor)),
+                  tooltip: "Back",
+                )
+              : SizedBox.shrink()),
       title: Text(
         title,
         style: AppStyle.appBarTextStyle,

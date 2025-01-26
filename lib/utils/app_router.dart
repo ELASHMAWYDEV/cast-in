@@ -11,6 +11,8 @@ import 'package:cast_in/ui/screens/profile/view_profile/view_profile_screen.dart
 import 'package:cast_in/ui/screens/splash/splash_screen.dart';
 import 'package:cast_in/ui/screens/messages/chat/chat_screen.dart';
 import 'package:get/get.dart';
+import 'package:cast_in/ui/screens/admin/statistics/statistics_screen.dart';
+import 'package:cast_in/ui/screens/admin/user_management/user_management_screen.dart';
 
 abstract class AppRouter {
   // Routes
@@ -26,6 +28,8 @@ abstract class AppRouter {
   static const CHAT = '/main/messages/chat';
   static const VIEW_PROFILE = '/main/view-profile';
   static const EXPLORE_VIEW_ALL = '/main/explore/view-all';
+  static const ADMIN_STATISTICS = '/admin/statistics';
+  static const ADMIN_USER_MANAGEMENT = '/admin/user-management';
 
   static const String initialRoute = SPLASH;
 
@@ -76,6 +80,14 @@ abstract class AppRouter {
           page: () => ExploreViewAllScreen(
             showPhotoPosts: Get.arguments['showPhotoPosts'] ?? false,
           ),
+        ),
+        GetPage(
+          name: ADMIN_STATISTICS,
+          page: () => StatisticsScreen(),
+        ),
+        GetPage(
+          name: ADMIN_USER_MANAGEMENT,
+          page: () => UserManagementScreen(),
         ),
       ];
 }

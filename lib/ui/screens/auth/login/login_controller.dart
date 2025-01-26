@@ -19,7 +19,13 @@ class LoginController extends GetxController {
           email: values['email'],
           password: values['password'],
         );
-        Get.offAndToNamed(AppRouter.MAINLAYOUT);
+
+        // Check if the user is admin
+        if (values['email'] == 'admin@gmail.com') {
+          Get.offAllNamed(AppRouter.ADMIN_STATISTICS);
+        } else {
+          Get.offAllNamed(AppRouter.MAINLAYOUT);
+        }
       } catch (e) {
         Helpers.appDebugger("Login failed", error: e);
         AppSnackbar.showError(message: "Login failed. Please check your credentials and try again.");

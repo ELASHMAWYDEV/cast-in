@@ -1,4 +1,3 @@
-import 'package:cast_in/ui/screens/explore/explore/explore_controller.dart';
 import 'package:cast_in/ui/screens/main/main_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -53,20 +52,20 @@ class FilterController extends GetxController {
   void applyFilters() {
     return Get.find<MainController>().goToScreen(MainRouter.MODELS_FILTER);
 
-    if (formKey.currentState?.saveAndValidate() ?? false) {
-      final filterData = {
-        'age_range': {
-          'min': ageRange.start.round(),
-          'max': ageRange.end.round(),
-        },
-        'height': height.round(),
-        'gender': selectedGender,
-        'country': selectedCountry,
-        'city': selectedCity,
-      };
+    // if (formKey.currentState?.saveAndValidate() ?? false) {
+    //   final filterData = {
+    //     'age_range': {
+    //       'min': ageRange.start.round(),
+    //       'max': ageRange.end.round(),
+    //     },
+    //     'height': height.round(),
+    //     'gender': selectedGender,
+    //     'country': selectedCountry,
+    //     'city': selectedCity,
+    //   };
 
-      // Go back to Explore screen
-    }
+    //   // Go back to Explore screen
+    // }
   }
 
   @override

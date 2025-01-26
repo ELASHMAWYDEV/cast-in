@@ -27,11 +27,13 @@ class LoginScreen extends StatelessWidget {
                     children: [
                       Padding(
                         padding: const EdgeInsets.only(top: 30),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(20),
-                          child: Image.asset(
-                            AppAssets.logo,
-                            height: 120,
+                        child: GestureDetector(
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(20),
+                            child: Image.asset(
+                              AppAssets.logo,
+                              height: 120,
+                            ),
                           ),
                         ),
                       ),
