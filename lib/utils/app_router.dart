@@ -1,3 +1,4 @@
+import 'package:cast_in/ui/screens/admin/reports/reports_screen.dart';
 import 'package:cast_in/ui/screens/auth/forgot_password/forgot_password_screen.dart';
 import 'package:cast_in/ui/screens/auth/login/login_screen.dart';
 import 'package:cast_in/ui/screens/auth/profession/profession_screen.dart';
@@ -30,6 +31,7 @@ abstract class AppRouter {
   static const EXPLORE_VIEW_ALL = '/main/explore/view-all';
   static const ADMIN_STATISTICS = '/admin/statistics';
   static const ADMIN_USER_MANAGEMENT = '/admin/user-management';
+  static const ADMIN_REPORTS = '/admin/reports';
 
   static const String initialRoute = SPLASH;
 
@@ -88,6 +90,10 @@ abstract class AppRouter {
         GetPage(
           name: ADMIN_USER_MANAGEMENT,
           page: () => UserManagementScreen(),
+        ),
+        GetPage(
+          name: ADMIN_REPORTS,
+          page: () => ReportsScreen(),
         ),
       ];
 }

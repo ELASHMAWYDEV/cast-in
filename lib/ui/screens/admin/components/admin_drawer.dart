@@ -48,6 +48,11 @@ class AdminDrawer extends StatelessWidget {
             title: 'User Management',
             route: AppRouter.ADMIN_USER_MANAGEMENT,
           ),
+          _buildDrawerItem(
+            icon: Icons.report_problem_outlined,
+            title: 'Reports',
+            route: AppRouter.ADMIN_REPORTS,
+          ),
           const Spacer(),
           Divider(color: AppStyle.grey.withAlpha(10)),
           Padding(
