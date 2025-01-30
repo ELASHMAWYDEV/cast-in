@@ -326,7 +326,7 @@ class StatisticsScreen extends StatelessWidget {
                   horizontalInterval: 20,
                   getDrawingHorizontalLine: (value) {
                     return FlLine(
-                      color: AppStyle.grey.withOpacity(0.1),
+                      color: AppStyle.grey.withValues(alpha: 0.1),
                       strokeWidth: 1,
                     );
                   },

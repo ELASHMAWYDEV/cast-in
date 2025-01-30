@@ -84,38 +84,45 @@ class SignupScreen extends StatelessWidget {
                         ]),
                       ),
                       SizedBox(height: 30),
-                      DropDownField(
-                        name: 'country',
-                        labelText: 'Country',
-                        hintText: ' your country',
-                        items: ['USA', 'UK', 'Canada', 'Dubai', 'India', 'Indonesia'],
-                        validator: FormBuilderValidators.required(errorText: 'Country is required'),
-                        onChanged: (value) {
-                          print(value);
-                        },
-                      ),
-                      SizedBox(
-                        height: 30,
-                      ),
-                      DropDownField(
-                        name: 'city',
-                        labelText: 'City',
-                        hintText: ' your city',
-                        items: ['Cairo', 'Alexandria'],
-                        validator: FormBuilderValidators.required(errorText: 'City is required'),
-                        onChanged: (value) {
-                          print(value);
-                        },
-                      ),
+                      Obx(() => DropDownField(
+                            name: 'country',
+                            labelText: 'Country',
+                            hintText: 'Select your country',
+                            value: controller.selectedCountry.value.isEmpty ? null : controller.selectedCountry.value,
+                            items: ['USA', 'UK', 'Canada', 'Dubai', 'India', 'Indonesia'],
+                            validator: FormBuilderValidators.required(errorText: 'Country is required'),
+                            onChanged: (value) {
+                              if (value != null) {
+                                controller.selectedCountry.value = value.toString();
+                                print('Selected country: ${controller.selectedCountry.value}');
+                              }
+                            },
+                          )),
+                      SizedBox(height: 30),
+                      Obx(() => DropDownField(
+                            name: 'city',
+                            labelText: 'City',
+                            hintText: 'Select your city',
+                            value: controller.selectedCity.value.isEmpty ? null : controller.selectedCity.value,
+                            items: ['Cairo', 'Alexandria'],
+                            validator: FormBuilderValidators.required(errorText: 'City is required'),
+                            onChanged: (value) {
+                              if (value != null) {
+                                controller.selectedCity.value = value.toString();
+                                print('Selected city: ${controller.selectedCity.value}');
+                              }
+                            },
+                          )),
                     ],
                   ),
                 ),
                 SizedBox(height: 20),
                 MainButton(
-                  onPressed: () async {
-                    await controller.signUp();
+                  onPressed: () {
+                    print("Button pressed"); // Debug print
+                    controller.signUp();
                   },
-                  title: 'Sign Up',
+                  title: controller.isLoading.value ? 'Loading...' : 'Sign Up',
                   fullWidth: true,
                 ),
                 SizedBox(height: 15),

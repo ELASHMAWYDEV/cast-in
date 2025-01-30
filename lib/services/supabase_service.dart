@@ -6,7 +6,6 @@ import 'package:cast_in/models/user_model.dart';
 import 'package:cast_in/models/post_model.dart';
 import 'package:cast_in/models/message_model.dart';
 import 'package:cast_in/models/notification_model.dart';
-import 'package:cast_in/models/follower_model.dart';
 
 class SupabaseService extends GetxService {
   SupabaseService(this._client);

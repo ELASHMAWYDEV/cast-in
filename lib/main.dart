@@ -10,14 +10,14 @@ import 'package:get/get.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await initServices();
-  runApp(const MyApp());
-}
 
-Future<void> initServices() async {
+  // Initialize services
+  final supabaseService = await SupabaseService.init();
   await Get.putAsync(() => StorageService.init(), permanent: true);
   Get.put(LocalizationService.init(), permanent: true);
-  await Get.putAsync(() => SupabaseService.init(), permanent: true);
+  Get.put(supabaseService, permanent: true);
+
+  runApp(const MyApp());
 }
 
 class MyApp extends StatefulWidget {
