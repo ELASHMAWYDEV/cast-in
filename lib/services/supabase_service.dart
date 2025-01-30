@@ -60,6 +60,7 @@ class SupabaseService extends GetxService {
   Future<void> signUp({
     required String fullName,
     required String username,
+    required String email,
     required String password,
     required String phoneNumber,
     required String country,
@@ -67,37 +68,55 @@ class SupabaseService extends GetxService {
     required UserType userType,
   }) async {
     try {
-      await _client.auth.signUp(
-        phone: phoneNumber,
-        password: password,
-      );
+      await _client.auth
+          .signUp(email: email, password: password, data: {"display_name": fullName, "phone": phoneNumber});
 
+      final userId = _client.auth.currentUser!.id;
+
+      print(userId);
       switch (userType) {
         case UserType.client:
+          // Check if client already exists
+          final existingClient = await _client.from('clients').select().eq('id', userId).maybeSingle();
+          if (existingClient != null) {
+            throw 'Client profile already exists for this user';
+          }
+
           await _client.from('clients').insert({
-            'id': _client.auth.currentUser!.id,
+            'id': userId,
             'full_name': fullName,
-            'user_name': username,
+            'username': username,
+            'phone_number': phoneNumber,
             'country': country,
             'city': city,
-            'user_type': userType.toString(),
           });
           break;
         case UserType.model:
+          // Check if model already exists
+          final existingModel = await _client.from('models').select().eq('id', userId).maybeSingle();
+          print(existingModel);
+          if (existingModel != null) {
+            throw 'Model profile already exists for this user';
+          }
+
           await _client.from('models').insert({
-            'id': _client.auth.currentUser!.id,
+            'id': userId,
             'full_name': fullName,
-            'user_name': username,
+            'username': username,
+            'phone_number': phoneNumber,
             'country': country,
             'city': city,
-            'user_type': userType.toString(),
           });
           break;
         default:
           break;
       }
     } catch (e) {
-      Helpers.appDebugger('Error signing up', error: e);
+      if (e is AuthException) {
+        Helpers.appDebugger('Error signing up: ${e.message}');
+        throw e.message;
+      }
+      Helpers.appDebugger('Error signing up: $e');
       rethrow;
     }
   }
@@ -152,6 +171,7 @@ class SupabaseService extends GetxService {
     try {
       final response =
           await _client.from('posts').select().order('created_at', ascending: false).range(offset, offset + limit - 1);
+      Helpers.appDebugger('Posts: $response');
       return (response as List).map((post) => PostModel.fromMap(post)).toList();
     } catch (e) {
       Helpers.appDebugger('Error getting posts', error: e);

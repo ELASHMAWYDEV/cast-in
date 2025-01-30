@@ -8,7 +8,7 @@ import 'package:cast_in/ui/components/form/input_field.dart';
 import 'package:cast_in/ui/components/main_button.dart';
 import 'package:cast_in/ui/screens/auth/signup/signup_controller.dart';
 import 'package:cast_in/utils/helpers.dart';
-import 'package:cast_in/utils/style.dart';
+import 'package:cast_in/utils/app_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
@@ -63,6 +63,15 @@ class SignupScreen extends StatelessWidget {
                       ),
                       SizedBox(height: 15),
                       InputField(
+                        name: 'email',
+                        labelText: "Email",
+                        hintText: 'test@gmail.com',
+                        validator: FormBuilderValidators.required(
+                          errorText: "Email is required",
+                        ),
+                      ),
+                      SizedBox(height: 15),
+                      InputField(
                         name: 'password',
                         labelText: "Password",
                         hintText: '********',
@@ -84,43 +93,29 @@ class SignupScreen extends StatelessWidget {
                         ]),
                       ),
                       SizedBox(height: 30),
-                      Obx(() => DropDownField(
-                            name: 'country',
-                            labelText: 'Country',
-                            hintText: 'Select your country',
-                            value: controller.selectedCountry.value.isEmpty ? null : controller.selectedCountry.value,
-                            items: ['USA', 'UK', 'Canada', 'Dubai', 'India', 'Indonesia'],
-                            validator: FormBuilderValidators.required(errorText: 'Country is required'),
-                            onChanged: (value) {
-                              if (value != null) {
-                                controller.selectedCountry.value = value.toString();
-                                print('Selected country: ${controller.selectedCountry.value}');
-                              }
-                            },
-                          )),
+                      DropDownField(
+                        name: 'country',
+                        labelText: 'Country',
+                        hintText: 'Select your country',
+                        items: ['Egypt'],
+                        validator: FormBuilderValidators.required(errorText: 'Country is required'),
+                      ),
                       SizedBox(height: 30),
-                      Obx(() => DropDownField(
-                            name: 'city',
-                            labelText: 'City',
-                            hintText: 'Select your city',
-                            value: controller.selectedCity.value.isEmpty ? null : controller.selectedCity.value,
-                            items: ['Cairo', 'Alexandria'],
-                            validator: FormBuilderValidators.required(errorText: 'City is required'),
-                            onChanged: (value) {
-                              if (value != null) {
-                                controller.selectedCity.value = value.toString();
-                                print('Selected city: ${controller.selectedCity.value}');
-                              }
-                            },
-                          )),
+                      DropDownField(
+                        name: 'city',
+                        labelText: 'City',
+                        hintText: 'Select your city',
+                        items: ['Cairo', 'Alexandria'],
+                        validator: FormBuilderValidators.required(errorText: 'City is required'),
+                      )
                     ],
                   ),
                 ),
                 SizedBox(height: 20),
                 MainButton(
-                  onPressed: () {
+                  onPressed: () async {
                     print("Button pressed"); // Debug print
-                    controller.signUp();
+                    await controller.signUp();
                   },
                   title: controller.isLoading.value ? 'Loading...' : 'Sign Up',
                   fullWidth: true,

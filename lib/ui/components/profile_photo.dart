@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:cast_in/ui/common/app_snackbar.dart';
-import 'package:cast_in/utils/style.dart';
+import 'package:cast_in/utils/app_style.dart';
 import 'package:flutter/material.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:image_picker/image_picker.dart';

@@ -1,6 +1,6 @@
 import 'package:cast_in/ui/common/custom_appbar.dart';
 import 'package:cast_in/ui/screens/admin/components/admin_drawer.dart';
-import 'package:cast_in/utils/style.dart';
+import 'package:cast_in/utils/app_style.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

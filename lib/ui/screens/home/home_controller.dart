@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 class HomeController extends GetxController {
   final _supabaseService = Get.find<SupabaseService>();
   bool isLoading = false;
-  RxList<PostModel> posts = <PostModel>[].obs;
+  List<PostModel> posts = <PostModel>[];
 
   @override
   void onInit() {
@@ -18,19 +18,8 @@ class HomeController extends GetxController {
       isLoading = true;
       update();
 
-      final response = await _supabaseService.client.from('posts').select('''
-            *,
-            profiles:user_id (
-              full_name,
-              user_name,
-              avatar_url
-            )
-          ''').order('created_at', ascending: false);
-
-      // Use the fromMap factory constructor
-      posts.value = (response as List<dynamic>).map((post) => PostModel.fromMap(post)).toList();
+      posts = await _supabaseService.getPosts();
     } catch (e) {
-      print('Error fetching posts: $e');
       Get.snackbar(
         'Error',
         'Failed to load posts',

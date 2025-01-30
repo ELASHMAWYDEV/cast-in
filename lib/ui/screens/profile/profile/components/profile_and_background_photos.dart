@@ -1,6 +1,6 @@
 import 'package:cast_in/ui/screens/main/main_controller.dart';
 import 'package:cast_in/utils/app_assets.dart';
-import 'package:cast_in/utils/style.dart';
+import 'package:cast_in/utils/app_style.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

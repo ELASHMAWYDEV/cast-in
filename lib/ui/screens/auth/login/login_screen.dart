@@ -3,8 +3,9 @@ import 'package:cast_in/ui/components/form/input_field.dart';
 import 'package:cast_in/ui/components/main_button.dart';
 import 'package:cast_in/ui/screens/auth/login/login_controller.dart';
 import 'package:cast_in/utils/app_assets.dart';
+import 'package:cast_in/utils/app_enums.dart';
 import 'package:cast_in/utils/app_router.dart';
-import 'package:cast_in/utils/style.dart';
+import 'package:cast_in/utils/app_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
@@ -132,7 +133,7 @@ class LoginScreen extends StatelessWidget {
                                     MainButton(
                                       onPressed: () => Get
                                         ..back()
-                                        ..toNamed(AppRouter.SIGNUP),
+                                        ..toNamed(AppRouter.SIGNUP, arguments: UserType.model),
                                       title: "Model",
                                       fullWidth: true,
                                       buttonType: ButtonType.outline,
@@ -143,7 +144,7 @@ class LoginScreen extends StatelessWidget {
                                     MainButton(
                                       onPressed: () => Get
                                         ..back()
-                                        ..toNamed(AppRouter.SIGNUP),
+                                        ..toNamed(AppRouter.SIGNUP, arguments: UserType.client),
                                       title: "Client",
                                       fullWidth: true,
                                     )

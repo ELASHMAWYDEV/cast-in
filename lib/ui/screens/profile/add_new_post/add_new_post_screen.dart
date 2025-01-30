@@ -1,6 +1,6 @@
 import 'package:cast_in/ui/components/main_button.dart';
 import 'package:cast_in/ui/screens/profile/add_new_post/add_new_post_controller.dart';
-import 'package:cast_in/utils/style.dart';
+import 'package:cast_in/utils/app_style.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

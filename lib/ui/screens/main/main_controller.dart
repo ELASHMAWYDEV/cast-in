@@ -15,7 +15,7 @@ import 'package:cast_in/ui/screens/profile/add_new_post/add_new_post_screen.dart
 import 'package:cast_in/ui/screens/settings/settings_screen.dart';
 import 'package:cast_in/ui/screens/profile/update_bio/update_bio_screen.dart';
 import 'package:cast_in/utils/app_assets.dart';
-import 'package:cast_in/utils/style.dart';
+import 'package:cast_in/utils/app_style.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

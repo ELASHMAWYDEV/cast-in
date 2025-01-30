@@ -2,7 +2,7 @@ import 'package:cast_in/ui/common/custom_appbar.dart';
 import 'package:cast_in/ui/components/form/input_field.dart';
 import 'package:cast_in/ui/components/main_button.dart';
 import 'package:cast_in/ui/screens/auth/forgot_password/forgot_password_controller.dart';
-import 'package:cast_in/utils/style.dart';
+import 'package:cast_in/utils/app_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';

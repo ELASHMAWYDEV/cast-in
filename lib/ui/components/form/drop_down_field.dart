@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:cast_in/utils/style.dart';
+import 'package:cast_in/utils/app_style.dart';
 
-class DropDownField<T> extends StatelessWidget {
+class DropDownField<T> extends StatefulWidget {
   const DropDownField({
     super.key,
     required this.name,
@@ -23,22 +23,31 @@ class DropDownField<T> extends StatelessWidget {
   final T? value;
 
   @override
+  State<DropDownField<T>> createState() => _DropDownFieldState<T>();
+}
+
+class _DropDownFieldState<T> extends State<DropDownField<T>> {
+  T? value;
+
+  @override
   Widget build(BuildContext context) {
+    value = widget.value;
     return FormBuilderField<T?>(
-      name: name,
-      validator: validator,
+      name: widget.name,
+      validator: widget.validator,
+      initialValue: value,
       builder: (FormFieldState<T?> field) {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            if (labelText != null)
+            if (widget.labelText != null)
               Text(
-                labelText!,
+                widget.labelText!,
                 style: AppStyle.headingTextStyle3,
               ),
             InputDecorator(
               decoration: InputDecoration(
-                hintText: hintText,
+                hintText: widget.hintText,
                 errorText: field.errorText,
                 hintStyle: AppStyle.bodyTextStyle3.copyWith(color: AppStyle.secondaryTextColor),
                 contentPadding: const EdgeInsets.symmetric(vertical: 0),
@@ -60,10 +69,10 @@ class DropDownField<T> extends StatelessWidget {
                   isExpanded: true,
                   borderRadius: BorderRadius.circular(10),
                   hint: Text(
-                    hintText ?? '',
+                    widget.hintText ?? '',
                     style: AppStyle.bodyTextStyle3.copyWith(color: AppStyle.grey),
                   ),
-                  selectedItemBuilder: (_) => items
+                  selectedItemBuilder: (_) => widget.items
                       .map(
                         (item) => Padding(
                           padding: const EdgeInsets.only(
@@ -76,7 +85,7 @@ class DropDownField<T> extends StatelessWidget {
                         ),
                       )
                       .toList(),
-                  items: items
+                  items: widget.items
                       .map(
                         (item) => DropdownMenuItem<T>(
                           value: item,
@@ -89,7 +98,9 @@ class DropDownField<T> extends StatelessWidget {
                       .toList(),
                   onChanged: (val) {
                     field.didChange(val);
-                    if (onChanged != null) onChanged!(val);
+                    value = val;
+                    if (widget.onChanged != null) widget.onChanged!(val);
+                    setState(() {});
                   },
                   icon: Icon(Icons.keyboard_arrow_down_rounded, color: AppStyle.primaryTextColor),
                 ),

@@ -1,6 +1,8 @@
 import 'package:cast_in/services/supabase_service.dart';
+import 'package:cast_in/ui/common/app_snackbar.dart';
 import 'package:cast_in/utils/app_enums.dart';
 import 'package:cast_in/utils/app_router.dart';
+import 'package:cast_in/utils/helpers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:get/get.dart';
@@ -11,8 +13,6 @@ class SignupController extends GetxController {
 
   late final SupabaseService _supabaseService;
   final isLoading = false.obs;
-  final selectedCountry = ''.obs;
-  final selectedCity = ''.obs;
 
   @override
   void onInit() {
@@ -36,14 +36,10 @@ class SignupController extends GetxController {
       _formKey.currentState!.save();
       final formData = _formKey.currentState!.value;
 
-      if (_supabaseService == null) {
-        print('SupabaseService is null!');
-        throw Exception('SupabaseService not initialized');
-      }
-
       await _supabaseService.signUp(
         fullName: formData['full_name'],
         username: formData['user_name'],
+        email: formData['email'],
         password: formData['password'],
         phoneNumber: formData['phone_number'],
         country: formData['country'],
@@ -51,19 +47,12 @@ class SignupController extends GetxController {
         userType: UserType.model,
       );
 
-      print('Signup successful, navigating to OTP screen');
       Get.toNamed(AppRouter.OTP);
-    } catch (e, stackTrace) {
-      print('Error during signup: $e');
-      print('Stack trace: $stackTrace');
-      Get.snackbar(
-        'Error',
-        'Failed to sign up: ${e.toString()}',
-        snackPosition: SnackPosition.BOTTOM,
-      );
+    } catch (e) {
+      AppSnackbar.showError(message: e.toString());
+      Helpers.appDebugger(e);
     } finally {
       isLoading.value = false;
-      print('Signup process completed');
     }
   }
 }

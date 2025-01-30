@@ -1,4 +1,4 @@
-import 'package:cast_in/utils/style.dart';
+import 'package:cast_in/utils/app_style.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -31,8 +31,7 @@ abstract class AppDialog {
               SizedBox(
                 width: double.infinity,
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 15.0, vertical: 30),
+                  padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 30),
                   child: content,
                 ),
               ),
