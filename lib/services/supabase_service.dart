@@ -6,6 +6,7 @@ import 'package:cast_in/models/user_model.dart';
 import 'package:cast_in/models/post_model.dart';
 import 'package:cast_in/models/message_model.dart';
 import 'package:cast_in/models/notification_model.dart';
+import 'dart:io';
 
 class SupabaseService extends GetxService {
   SupabaseService(this._client);
@@ -57,7 +58,7 @@ class SupabaseService extends GetxService {
   }
 
   // Auth Methods
-  Future<void> signUp({
+  Future<UserModel> signUp({
     required String fullName,
     required String username,
     required String email,
@@ -65,15 +66,25 @@ class SupabaseService extends GetxService {
     required String phoneNumber,
     required String country,
     required String city,
+    required String profileImagePath,
     required UserType userType,
   }) async {
     try {
-      await _client.auth
+      // Logout first --> in case registerd another user without verifying
+      await signOut();
+
+      final AuthResponse authResponse = await _client.auth
           .signUp(email: email, password: password, data: {"display_name": fullName, "phone": phoneNumber});
 
-      final userId = _client.auth.currentUser!.id;
+      if (authResponse.user == null) {
+        throw 'Failed to create user account';
+      }
 
-      print(userId);
+      final String userId = authResponse.user!.id;
+      Helpers.appDebugger("userId $userId");
+
+      late UserModel user;
+
       switch (userType) {
         case UserType.client:
           // Check if client already exists
@@ -82,41 +93,81 @@ class SupabaseService extends GetxService {
             throw 'Client profile already exists for this user';
           }
 
-          await _client.from('clients').insert({
-            'id': userId,
-            'full_name': fullName,
-            'username': username,
-            'phone_number': phoneNumber,
-            'country': country,
-            'city': city,
-          });
+          final clientData = await _client
+              .from('clients')
+              .insert({
+                'id': userId,
+                'full_name': fullName,
+                'username': username,
+                'phone_number': phoneNumber,
+                'country': country,
+                'city': city,
+              })
+              .select()
+              .single();
+
+          user = UserModel.fromMap(clientData);
           break;
         case UserType.model:
           // Check if model already exists
           final existingModel = await _client.from('models').select().eq('id', userId).maybeSingle();
-          print(existingModel);
+          Helpers.appDebugger(existingModel);
           if (existingModel != null) {
             throw 'Model profile already exists for this user';
           }
 
-          await _client.from('models').insert({
-            'id': userId,
-            'full_name': fullName,
-            'username': username,
-            'phone_number': phoneNumber,
-            'country': country,
-            'city': city,
-          });
+          final modelData = await _client
+              .from('models')
+              .insert({
+                'id': userId,
+                'full_name': fullName,
+                'username': username,
+                'phone_number': phoneNumber,
+                'country': country,
+                'city': city,
+              })
+              .select()
+              .single();
+
+          user = UserModel.fromMap(modelData);
           break;
         default:
-          break;
+          throw 'Invalid user type';
       }
+
+      // Upload the profile photo
+      final profileImage = await uploadProfileImage(profileImagePath, user);
+
+      user = user.copyWith(
+        email: authResponse.user?.email,
+        id: userId,
+        userType: userType,
+        profileImageUrl: profileImage,
+      );
+      return user;
     } catch (e) {
       if (e is AuthException) {
-        Helpers.appDebugger('Error signing up: ${e.message}');
+        Helpers.appDebugger('Error signing up: $e');
         throw e.message;
       }
       Helpers.appDebugger('Error signing up: $e');
+      rethrow;
+    }
+  }
+
+  Future<void> verifyOtp({
+    required String email,
+    required String token,
+    required String type,
+  }) async {
+    try {
+      await _client.auth.verifyOTP(
+        email: email,
+        token: token,
+        type: type == 'signup' ? OtpType.signup : OtpType.recovery,
+      );
+    } catch (e) {
+      Helpers.appDebugger('Error verifying OTP', error: e);
       rethrow;
     }
   }
@@ -149,7 +200,8 @@ class SupabaseService extends GetxService {
   // User Methods
   Future<UserModel?> getUserProfile(String userId) async {
     try {
-      final response = await _client.from('clients').select().eq('id', userId).single();
+      final response = await _client.from('clients').select().eq('id', userId).maybeSingle() ??
+          await _client.from('models').select().eq('id', userId).maybeSingle();
       return response != null ? UserModel.fromMap(response) : null;
     } catch (e) {
       Helpers.appDebugger('Error getting user profile', error: e);
@@ -159,7 +211,11 @@ class SupabaseService extends GetxService {
 
   Future<void> updateUserProfile(UserModel user) async {
     try {
-      await _client.from('clients').update(user.toMap()).eq('id', user.id);
+      if (user.userType == UserType.client) {
+        await _client.from('clients').update(user.toMap()).eq('id', user.id!);
+      } else {
+        await _client.from('models').update(user.toMap()).eq('id', user.id!);
+      }
     } catch (e) {
       Helpers.appDebugger('Error updating user profile', error: e);
       rethrow;
@@ -343,7 +399,7 @@ class SupabaseService extends GetxService {
 
   Future<void> updateModelProfile(UserModel model) async {
     try {
-      await _client.from('models').update(model.toMap()).eq('id', model.id);
+      await _client.from('models').update(model.toMap()).eq('id', model.id!);
     } catch (e) {
       Helpers.appDebugger('Error updating model profile', error: e);
       rethrow;
@@ -355,6 +411,78 @@ class SupabaseService extends GetxService {
       await _client.auth.resetPasswordForEmail(email);
     } catch (e) {
       Helpers.appDebugger('Error resetting password', error: e);
+      rethrow;
+    }
+  }
+
+  // Storage Methods
+  Future<String> uploadProfileImage(String filePath, UserModel user) async {
+    try {
+      final fileExt = filePath.split('.').last;
+      final fileName = '${user.id}.$fileExt';
+
+      await _client.storage
+          .from('profile_images')
+          .upload(fileName, File(filePath), fileOptions: const FileOptions(cacheControl: '3600', upsert: true));
+
+      // Update the user profile with the new profile image
+      if (user.userType == UserType.client) {
+        await _client.from('clients').update({'profile_image': fileName}).eq('id', user.id!);
+      } else {
+        await _client.from('models').update({'profile_image': fileName}).eq('id', user.id!);
+      }
+
+      return getPublicUrl('profile_images', fileName);
+    } catch (e) {
+      Helpers.appDebugger('Error uploading profile image', error: e);
+      rethrow;
+    }
+  }
+
+  Future<List<String>> uploadPostImages(List<String> filePaths, String postId) async {
+    try {
+      final List<String> imageUrls = [];
+      for (var i = 0; i < filePaths.length; i++) {
+        final fileExt = filePaths[i].split('.').last;
+        final fileName = '${postId}_$i.$fileExt';
+
+        await _client.storage
+            .from('post_images')
+            .upload(fileName, File(filePaths[i]), fileOptions: const FileOptions(cacheControl: '3600', upsert: true));
+
+        imageUrls.add(getPublicUrl('post_images', fileName));
+      }
+      return imageUrls;
+    } catch (e) {
+      Helpers.appDebugger('Error uploading post images', error: e);
+      rethrow;
+    }
+  }
+
+  Future<void> deleteProfileImage(String userId) async {
+    try {
+      await _client.storage.from('profile_images').remove([userId]);
+    } catch (e) {
+      Helpers.appDebugger('Error deleting profile image', error: e);
+      rethrow;
+    }
+  }
+
+  Future<void> deletePostImages(List<String> imageUrls) async {
+    try {
+      final imagePaths = imageUrls.map((url) => url.split('/').last).toList();
+      await _client.storage.from('post_images').remove(imagePaths);
+    } catch (e) {
+      Helpers.appDebugger('Error deleting post images', error: e);
+      rethrow;
+    }
+  }
+
+  String getPublicUrl(String bucketName, String path) {
+    try {
+      return _client.storage.from(bucketName).getPublicUrl(path);
+    } catch (e) {
+      Helpers.appDebugger('Error getting public URL', error: e);
       rethrow;
     }
   }

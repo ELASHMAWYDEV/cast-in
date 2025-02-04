@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:cast_in/utils/app_style.dart';
@@ -30,13 +31,37 @@ class _DropDownFieldState<T> extends State<DropDownField<T>> {
   T? value;
 
   @override
-  Widget build(BuildContext context) {
+  void initState() {
+    super.initState();
     value = widget.value;
+  }
+
+  @override
+  void didUpdateWidget(DropDownField<T> oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (!listEquals(oldWidget.items, widget.items)) {
+      value = null;
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return FormBuilderField<T?>(
       name: widget.name,
       validator: widget.validator,
       initialValue: value,
       builder: (FormFieldState<T?> field) {
+        // Update value from field if different
+        if (field.value != value) {
+          value = field.value;
+        }
+
+        // If value is not in items, update field value to null
+        if (value != null && !widget.items.contains(value)) {
+          value = null;
+          Future.microtask(() => field.didChange(null));
+        }
+
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -53,21 +78,22 @@ class _DropDownFieldState<T> extends State<DropDownField<T>> {
                 contentPadding: const EdgeInsets.symmetric(vertical: 0),
                 enabledBorder: UnderlineInputBorder(
                   borderSide: BorderSide(
-                    color: Colors.grey.withValues(alpha: 0.5),
+                    color: Colors.grey.withAlpha(128),
                   ),
                 ),
-                focusedBorder: UnderlineInputBorder(
+                focusedBorder: const UnderlineInputBorder(
                   borderSide: BorderSide(color: Colors.blue, width: 2.0),
                 ),
-                errorBorder: UnderlineInputBorder(
+                errorBorder: const UnderlineInputBorder(
                   borderSide: BorderSide(color: Colors.red),
                 ),
               ),
               child: DropdownButtonHideUnderline(
-                child: DropdownButton(
+                child: DropdownButton<T>(
                   value: value,
                   isExpanded: true,
                   borderRadius: BorderRadius.circular(10),
+                  style: AppStyle.bodyTextStyle3,
                   hint: Text(
                     widget.hintText ?? '',
                     style: AppStyle.bodyTextStyle3.copyWith(color: AppStyle.grey),
@@ -97,10 +123,13 @@ class _DropDownFieldState<T> extends State<DropDownField<T>> {
                       )
                       .toList(),
                   onChanged: (val) {
+                    setState(() {
+                      value = val;
+                    });
                     field.didChange(val);
-                    value = val;
-                    if (widget.onChanged != null) widget.onChanged!(val);
-                    setState(() {});
+                    if (widget.onChanged != null) {
+                      widget.onChanged!(val);
+                    }
                   },
                   icon: Icon(Icons.keyboard_arrow_down_rounded, color: AppStyle.primaryTextColor),
                 ),

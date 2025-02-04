@@ -6,7 +6,19 @@ import 'package:get/get.dart';
 
 class ProfileAndBackgroundPhotos extends StatelessWidget {
   final bool editScreen;
-  const ProfileAndBackgroundPhotos({super.key, required this.editScreen});
+  final String? profileImageUrl;
+  final String? coverImageUrl;
+  final VoidCallback? onEditProfileTap;
+  final VoidCallback? onEditCoverTap;
+
+  const ProfileAndBackgroundPhotos({
+    super.key,
+    required this.editScreen,
+    this.profileImageUrl,
+    this.coverImageUrl,
+    this.onEditProfileTap,
+    this.onEditCoverTap,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +30,9 @@ class ProfileAndBackgroundPhotos extends StatelessWidget {
           width: double.infinity,
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: AssetImage(AppAssets.backgroundImage),
+              image: coverImageUrl != null
+                  ? NetworkImage(coverImageUrl!) as ImageProvider
+                  : AssetImage(AppAssets.backgroundImage),
               fit: BoxFit.cover,
             ),
           ),
@@ -26,14 +40,19 @@ class ProfileAndBackgroundPhotos extends StatelessWidget {
         Positioned(
           bottom: -40,
           left: 20,
-          child: Container(
-            decoration: BoxDecoration(
-              border: Border.all(color: Colors.white, width: 4),
-              borderRadius: BorderRadius.circular(100),
-            ),
-            child: CircleAvatar(
-              radius: 40,
-              backgroundImage: AssetImage(AppAssets.myProfileImage),
+          child: GestureDetector(
+            onTap: editScreen ? onEditProfileTap : null,
+            child: Container(
+              decoration: BoxDecoration(
+                border: Border.all(color: Colors.white, width: 4),
+                borderRadius: BorderRadius.circular(100),
+              ),
+              child: CircleAvatar(
+                radius: 40,
+                backgroundImage: profileImageUrl != null
+                    ? NetworkImage(profileImageUrl!) as ImageProvider
+                    : AssetImage(AppAssets.myProfileImage),
+              ),
             ),
           ),
         ),
@@ -58,13 +77,16 @@ class ProfileAndBackgroundPhotos extends StatelessWidget {
           Positioned(
             right: 20,
             top: 10,
-            child: Container(
-              padding: const EdgeInsets.all(5),
-              decoration: const BoxDecoration(
-                color: Colors.white,
-                shape: BoxShape.circle,
+            child: GestureDetector(
+              onTap: onEditCoverTap,
+              child: Container(
+                padding: const EdgeInsets.all(5),
+                decoration: const BoxDecoration(
+                  color: Colors.white,
+                  shape: BoxShape.circle,
+                ),
+                child: Image.asset(AppAssets.editIcon),
               ),
-              child: Image.asset(AppAssets.editIcon),
             ),
           ),
       ],

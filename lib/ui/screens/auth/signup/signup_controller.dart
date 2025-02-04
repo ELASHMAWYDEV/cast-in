@@ -1,3 +1,4 @@
+import 'package:cast_in/models/user_model.dart';
 import 'package:cast_in/services/supabase_service.dart';
 import 'package:cast_in/ui/common/app_snackbar.dart';
 import 'package:cast_in/utils/app_enums.dart';
@@ -11,19 +12,8 @@ class SignupController extends GetxController {
   final GlobalKey<FormBuilderState> _formKey = GlobalKey<FormBuilderState>();
   get formKey => _formKey;
 
-  late final SupabaseService _supabaseService;
-  final isLoading = false.obs;
-
-  @override
-  void onInit() {
-    super.onInit();
-    try {
-      _supabaseService = Get.find<SupabaseService>();
-      print('SupabaseService initialized successfully');
-    } catch (e) {
-      print('Error initializing SupabaseService: $e');
-    }
-  }
+  final SupabaseService _supabaseService = Get.find<SupabaseService>();
+  final UserType userType = Get.arguments;
 
   Future signUp() async {
     if (!_formKey.currentState!.validate()) {
@@ -31,28 +21,26 @@ class SignupController extends GetxController {
     }
 
     try {
-      isLoading.value = true;
-
       _formKey.currentState!.save();
       final formData = _formKey.currentState!.value;
 
-      await _supabaseService.signUp(
+      Helpers.appDebugger(formData);
+
+      final UserModel user = await _supabaseService.signUp(
         fullName: formData['full_name'],
-        username: formData['user_name'],
+        username: formData['username'],
         email: formData['email'],
         password: formData['password'],
         phoneNumber: formData['phone_number'],
         country: formData['country'],
         city: formData['city'],
-        userType: UserType.model,
+        profileImagePath: formData['profile_image']?.path,
+        userType: userType,
       );
 
-      Get.toNamed(AppRouter.OTP);
+      Get.toNamed(AppRouter.OTP, arguments: user);
     } catch (e) {
       AppSnackbar.showError(message: e.toString());
-      Helpers.appDebugger(e);
-    } finally {
-      isLoading.value = false;
     }
   }
 }

@@ -3,9 +3,11 @@ import 'package:cast_in/ui/components/post/post_card.dart';
 import 'package:cast_in/ui/screens/main/main_controller.dart';
 import 'package:cast_in/ui/screens/profile/profile/components/profile_and_background_photos.dart';
 import 'package:cast_in/utils/app_style.dart';
+import 'package:cast_in/utils/app_enums.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:skeletonizer/skeletonizer.dart';
+import 'package:cast_in/models/user_model.dart';
 
 import 'profile_controller.dart';
 
@@ -54,10 +56,20 @@ class ProfileScreen extends StatelessWidget {
   }
 
   Widget _buildProfilePhotos() {
-    return ProfileAndBackgroundPhotos(editScreen: false);
+    return ProfileAndBackgroundPhotos(
+      editScreen: false,
+      profileImageUrl: controller.userProfile?.profileImageUrl,
+      coverImageUrl: controller.userProfile?.coverImageUrl,
+    );
   }
 
   Widget _buildUserInfo() {
+    final UserModel? user = controller.userProfile;
+    final String displayName =
+        user != null ? "${user.fullName}${user.age != null ? ', ${user.age}' : ''}" : "Loading...";
+    final String profession = user?.profession ?? "No profession set";
+    final bool isModel = user?.userType == UserType.model;
+
     return Row(
       children: [
         Expanded(
@@ -66,17 +78,17 @@ class ProfileScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "Peter Parker, 24",
+                displayName,
                 softWrap: false,
                 style: AppStyle.headingTextStyle1.copyWith(fontWeight: FontWeight.bold),
               ),
-              Text("Photographer"),
+              if (isModel) Text(profession),
             ],
           ),
         ),
-        _buildStatItem("834", "Followers"),
+        _buildStatItem(controller.followersCount.toString(), "Followers"),
         const SizedBox(width: 20),
-        _buildStatItem("162", "Following"),
+        _buildStatItem(controller.followingCount.toString(), "Following"),
       ],
     );
   }
@@ -103,12 +115,15 @@ class ProfileScreen extends StatelessWidget {
   }
 
   Widget _buildLocation() {
+    final UserModel? user = controller.userProfile;
+    final String location = user != null ? "${user.city}, ${user.country}" : "Location not set";
+
     return Row(
       children: [
         const Icon(Icons.location_on_outlined),
         const SizedBox(width: 5),
         Text(
-          "United states of america",
+          location,
           style: AppStyle.bodyTextStyle3,
         ),
       ],
@@ -116,34 +131,40 @@ class ProfileScreen extends StatelessWidget {
   }
 
   Widget _buildBio() {
+    final UserModel? user = controller.userProfile;
+    final String bio = user?.bio ?? "Hey, I'm using Cast In App!";
+    final bool isModel = user?.userType == UserType.model;
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 5),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            "Hey, I'm using Cast In App!",
+            bio,
             style: AppStyle.bodyTextStyle3.copyWith(color: AppStyle.grey),
           ),
           const SizedBox(height: 15),
-          MainButton(
-            onPressed: () {
-              Get.find<MainController>().goToScreen(MainRouter.UPDATE_BIO);
-            },
-            title: 'Update Bio',
-            fullWidth: true,
-            buttonType: ButtonType.outline,
-          ),
+          if (isModel)
+            MainButton(
+              onPressed: () {
+                Get.find<MainController>().goToScreen(MainRouter.UPDATE_BIO);
+              },
+              title: 'Update Bio',
+              fullWidth: true,
+              buttonType: ButtonType.outline,
+            ),
         ],
       ),
     );
   }
 
   Widget _buildPostsHeader() {
+    final bool isModel = controller.userProfile?.userType == UserType.model;
     return Row(
       children: [
         Text(
-          "Adds",
+          isModel ? "Portfolio" : "Adds",
           style: AppStyle.subTitleStyle1.copyWith(fontSize: 20),
         ),
         Spacer(),
@@ -152,7 +173,7 @@ class ProfileScreen extends StatelessWidget {
             Get.find<MainController>().goToScreen(MainRouter.ADDNEWPOST);
           },
           child: Text(
-            "Add Post",
+            isModel ? "Add to Portfolio" : "Add Post",
             style: AppStyle.textButtonTextStyle.copyWith(fontSize: 20),
           ),
         ),

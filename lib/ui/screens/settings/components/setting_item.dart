@@ -1,4 +1,4 @@
-import 'package:cast_in/utils/style.dart';
+import 'package:cast_in/utils/app_style.dart';
 import 'package:flutter/material.dart';
 
 class SettingItem extends StatelessWidget {

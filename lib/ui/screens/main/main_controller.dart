@@ -89,7 +89,7 @@ class MainController extends GetxController {
         screenIndex: MainRouter.PROFILE,
         screen: ProfileScreen(),
         isBackBtnEnabled: false,
-        onRefresh: () async => await Get.find<ProfileController>().fetchProfileData(),
+        onRefresh: () async => await Get.find<ProfileController>().loadUserProfile(),
         trailing: [
           IconButton(
             onPressed: () => Get.find<MainController>().goToScreen(MainRouter.SETTINGS),

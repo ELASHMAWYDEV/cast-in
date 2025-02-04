@@ -4,7 +4,7 @@ import 'package:cast_in/ui/components/main_button.dart';
 import 'package:cast_in/ui/screens/auth/verification/otp_controller.dart';
 import 'package:cast_in/utils/app_router.dart';
 
-import 'package:cast_in/utils/style.dart';
+import 'package:cast_in/utils/app_style.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -33,15 +33,15 @@ class OtpScreen extends StatelessWidget {
                   children: [
                     const SizedBox(height: 20),
                     CustomTitleAndSuptitle(
-                        title: 'Verification', suptitle: 'Please enter 4 digit code sent to your number'),
+                        title: 'Verification', suptitle: 'Please enter 6 digit code sent to your email'),
                     const SizedBox(height: 40),
                     Center(
                       child: Pinput(
-                        length: 4,
+                        length: 6,
                         controller: controller.pinController,
                         autofocus: true,
                         onTapOutside: (_) => FocusScope.of(context).unfocus(),
-                        onCompleted: (value) {},
+                        onCompleted: (value) => controller.submitCode(),
                         onSubmitted: (value) {},
                         inputFormatters: [],
                         validator: (value) {
@@ -55,7 +55,7 @@ class OtpScreen extends StatelessWidget {
                             color: AppStyle.primaryTextColor,
                             fontSize: 18,
                           ),
-                          margin: const EdgeInsets.symmetric(horizontal: 8),
+                          margin: const EdgeInsets.symmetric(horizontal: 2),
                           decoration: BoxDecoration(
                             color: AppStyle.secondaryBgColor,
                             borderRadius: BorderRadius.circular(12),
@@ -86,9 +86,7 @@ class OtpScreen extends StatelessWidget {
                 ),
               ),
               MainButton(
-                onPressed: () {
-                  Get.toNamed(AppRouter.PROFESSION);
-                },
+                onPressed: controller.submitCode,
                 title: 'Submit',
                 fullWidth: true,
               ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:cast_in/utils/app_style.dart';
 
@@ -10,7 +11,8 @@ class InputField extends StatelessWidget {
       this.hintText,
       this.validator,
       this.obscureText = false,
-      this.keyboardType = TextInputType.text});
+      this.keyboardType = TextInputType.text,
+      this.inputFormatters});
 
   final String name;
   final String? labelText;
@@ -18,6 +20,7 @@ class InputField extends StatelessWidget {
   final String? Function(String?)? validator;
   final bool obscureText;
   final TextInputType keyboardType;
+  final List<TextInputFormatter>? inputFormatters;
 
   @override
   Widget build(BuildContext context) {
@@ -29,6 +32,7 @@ class InputField extends StatelessWidget {
         onChanged: field.didChange,
         style: AppStyle.bodyTextStyle3.copyWith(fontWeight: FontWeight.w500),
         keyboardType: keyboardType,
+        inputFormatters: inputFormatters,
         decoration: InputDecoration(
             enabledBorder: UnderlineInputBorder(
               borderSide: BorderSide(color: Colors.grey.withValues(alpha: 0.5)),

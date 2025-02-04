@@ -64,7 +64,7 @@ class ProfessionScreen extends StatelessWidget {
                 ),
               ),
               MainButton(
-                onPressed: () {},
+                onPressed: controller.submitProfession,
                 title: 'Submit',
                 fullWidth: true,
               ),

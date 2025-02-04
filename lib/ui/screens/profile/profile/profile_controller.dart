@@ -1,82 +1,56 @@
 import 'package:cast_in/models/post_model.dart';
-import 'package:cast_in/utils/app_assets.dart';
-import 'package:cast_in/utils/app_enums.dart';
+import 'package:cast_in/models/user_model.dart';
+import 'package:cast_in/services/supabase_service.dart';
+import 'package:cast_in/utils/helpers.dart';
 import 'package:get/get.dart';
 
 class ProfileController extends GetxController {
-  bool isLoading = true;
+  final SupabaseService _supabaseService = Get.find<SupabaseService>();
 
-  List<PostModel> posts = [
-    PostModel(
-      id: '1',
-      name: 'Jackie',
-      username: 'Jackie',
-      content:
-          'Today, we are looking for the perfect model to represent our brand in an upcoming perfume advertisement.',
-      avatarUrl: AppAssets.testProfileImage,
-      likes: 24,
-      comments: 15,
-      contentType: PostContentType.text,
-    ),
-    PostModel(
-      id: '2',
-      name: 'Jackie',
-      username: 'Jackie',
-      content:
-          'Today, we are looking for the perfect model to represent our brand in an upcoming perfume advertisement.',
-      avatarUrl: AppAssets.testProfileImage,
-      likes: 24,
-      comments: 15,
-      contentType: PostContentType.text,
-    ),
-    PostModel(
-      id: '3',
-      name: 'Peter',
-      username: 'PeterParker',
-      content:
-          'Looking for talented photographers to collaborate on an upcoming fashion magazine shoot. Must have experience with studio lighting.',
-      avatarUrl: AppAssets.testProfileImage,
-      likes: 45,
-      comments: 28,
-      contentType: PostContentType.text,
-    ),
-    PostModel(
-      id: '4',
-      name: 'Sarah',
-      username: 'SarahModel',
-      content: 'Just wrapped up an amazing photoshoot for summer collection. Can\'t wait to share the results!',
-      avatarUrl: AppAssets.testProfileImage,
-      likes: 156,
-      comments: 42,
-      contentType: PostContentType.text,
-    ),
-    PostModel(
-      id: '5',
-      name: 'Mike',
-      username: 'MikeDirector',
-      content: 'Casting call for upcoming TV commercial. Looking for diverse faces, all ages welcome. Send portfolios.',
-      avatarUrl: AppAssets.testProfileImage,
-      likes: 89,
-      comments: 67,
-      contentType: PostContentType.text,
-    ),
-  ];
+  UserModel? userProfile;
+  List<PostModel> posts = [];
+  bool isLoading = true;
+  int followersCount = 0;
+  int followingCount = 0;
 
   @override
   void onInit() {
     super.onInit();
-    fetchProfileData();
+    loadUserProfile();
   }
 
-  Future<void> fetchProfileData() async {
-    isLoading = true;
-    update();
+  Future<void> loadUserProfile() async {
+    try {
+      isLoading = true;
+      update();
 
-    // Simulate API call delay
-    await Future.delayed(Duration(seconds: 2));
+      final currentUserId = _supabaseService.user?.id;
+      if (currentUserId == null) return;
 
-    // TODO: Replace with actual API call
-    isLoading = false;
-    update();
+      // Load user profile
+      userProfile = await _supabaseService.getUserProfile(currentUserId);
+      if (userProfile?.profileImageUrl != null) {
+        userProfile = userProfile?.copyWith(
+            profileImageUrl: _supabaseService.getPublicUrl('profile_images', userProfile!.profileImageUrl!));
+      }
+
+      // Load followers and following counts
+      final followers = await _supabaseService.getFollowers(currentUserId);
+      final following = await _supabaseService.getFollowing(currentUserId);
+
+      followersCount = followers.length;
+      followingCount = following.length;
+
+      // Load user posts
+      posts = await _supabaseService.getPosts();
+
+      isLoading = false;
+      update();
+    } catch (e) {
+      isLoading = false;
+      update();
+      // Handle error appropriately
+      Helpers.appDebugger('Error loading profile: $e');
+    }
   }
 }

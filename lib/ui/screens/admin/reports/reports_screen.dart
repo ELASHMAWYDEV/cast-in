@@ -1,3 +1,4 @@
+import 'package:cast_in/models/reported_post_model.dart';
 import 'package:cast_in/ui/common/custom_appbar.dart';
 import 'package:cast_in/ui/screens/admin/components/admin_drawer.dart';
 import 'package:cast_in/utils/app_style.dart';
