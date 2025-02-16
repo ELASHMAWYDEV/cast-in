@@ -1,4 +1,5 @@
 import 'package:cast_in/utils/app_enums.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:cast_in/utils/helpers.dart';
@@ -23,7 +24,11 @@ class SupabaseService extends GetxService {
       url: 'https://bwolquhldszmuhqasacn.supabase.co',
       anonKey:
           'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ3b2xxdWhsZHN6bXVocWFzYWNuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzUzMTEwMjYsImV4cCI6MjA1MDg4NzAyNn0.BHJhYFfj5NS9exdjdkz_cWx-KquNXb-wRMxUvQ09Uk8',
+      authOptions: FlutterAuthClientOptions(
+        localStorage: MySecureStorage(),
+      ),
     );
+
     return SupabaseService(Supabase.instance.client);
   }
 
@@ -211,6 +216,7 @@ class SupabaseService extends GetxService {
 
   Future<void> updateUserProfile(UserModel user) async {
     try {
+      Helpers.appDebugger('Updating user profile: ${user.toMap()}');
       if (user.userType == UserType.client) {
         await _client.from('clients').update(user.toMap()).eq('id', user.id!);
       } else {
@@ -485,5 +491,33 @@ class SupabaseService extends GetxService {
       Helpers.appDebugger('Error getting public URL', error: e);
       rethrow;
     }
+  }
+}
+
+// Custom Secure Storage
+class MySecureStorage extends LocalStorage {
+  final storage = FlutterSecureStorage();
+
+  @override
+  Future<void> initialize() async {}
+
+  @override
+  Future<String?> accessToken() async {
+    return storage.read(key: supabasePersistSessionKey);
+  }
+
+  @override
+  Future<bool> hasAccessToken() async {
+    return storage.containsKey(key: supabasePersistSessionKey);
+  }
+
+  @override
+  Future<void> persistSession(String persistSessionString) async {
+    return storage.write(key: supabasePersistSessionKey, value: persistSessionString);
+  }
+
+  @override
+  Future<void> removePersistedSession() async {
+    return storage.delete(key: supabasePersistSessionKey);
   }
 }

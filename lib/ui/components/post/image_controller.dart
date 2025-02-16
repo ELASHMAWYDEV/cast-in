@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -12,15 +13,31 @@ class ImageController extends GetxController {
       matchingRatio.value = _getMatchingRatio(size);
     } catch (e) {
       print("Error loading image: $e");
+      // Set a default ratio if image loading fails
+      matchingRatio.value = const Size(1, 1);
     }
   }
 
   Future<Size> _getImageSize(String imagePath) async {
-    final image = AssetImage(imagePath);
-    final config = await image.obtainKey(ImageConfiguration.empty);
-    final info = await config.bundle.load(config.name);
-    final imageFile = await decodeImageFromList(info.buffer.asUint8List());
-    return Size(imageFile.width.toDouble(), imageFile.height.toDouble());
+    final completer = Completer<Size>();
+    final image = NetworkImage(imagePath);
+
+    final listener = ImageStreamListener(
+      (ImageInfo info, bool _) {
+        completer.complete(Size(
+          info.image.width.toDouble(),
+          info.image.height.toDouble(),
+        ));
+      },
+      onError: (dynamic exception, StackTrace? stackTrace) {
+        completer.completeError(exception);
+      },
+    );
+
+    final stream = image.resolve(ImageConfiguration.empty);
+    stream.addListener(listener);
+
+    return completer.future;
   }
 
   Size _getMatchingRatio(Size originalSize) {

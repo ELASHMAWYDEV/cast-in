@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 import 'package:cast_in/models/user_model.dart';
+import 'package:cast_in/utils/app_router.dart';
 
 import 'profile_controller.dart';
 
@@ -40,13 +41,20 @@ class ProfileScreen extends StatelessWidget {
                       _buildBio(),
                       const SizedBox(height: 30),
                       _buildPostsHeader(),
-                      const SizedBox(height: 20),
-                      _buildPostsList(),
-                      const SizedBox(height: 20),
-                      _buildEditProfileButton(),
                     ],
                   ),
                 ),
+                Column(
+                  children: [
+                    const SizedBox(height: 20),
+                    _buildPostsList(context),
+                    const SizedBox(height: 20),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                      child: _buildEditProfileButton(),
+                    ),
+                  ],
+                )
               ],
             ),
           ),
@@ -181,15 +189,43 @@ class ProfileScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildPostsList() {
-    return ListView.separated(
-      shrinkWrap: true,
-      physics: NeverScrollableScrollPhysics(),
-      itemCount: controller.posts.length,
-      separatorBuilder: (context, index) => SizedBox(height: 30),
-      itemBuilder: (context, index) => PostCard(
-        isOpenModalEnabled: false,
-        post: controller.posts[index],
+  Widget _buildPostsList(BuildContext context) {
+    return Container(
+      width: MediaQuery.of(context).size.width,
+      padding: const EdgeInsets.symmetric(horizontal: 6),
+      child: GridView.builder(
+        shrinkWrap: true,
+        physics: const NeverScrollableScrollPhysics(),
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 3,
+          crossAxisSpacing: 12,
+          mainAxisSpacing: 12,
+          childAspectRatio: 1,
+        ),
+        itemCount: controller.posts.length,
+        itemBuilder: (context, index) {
+          final post = controller.posts[index];
+          return GestureDetector(
+            onTap: () {
+              Get.toNamed(
+                AppRouter.POST_DETAILS,
+                arguments: post,
+              );
+            },
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(12),
+                child: Image.network(
+                  post.imageUrl![0],
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
+          );
+        },
       ),
     );
   }

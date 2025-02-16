@@ -197,68 +197,11 @@ class _ExploreScreenState extends State<ExploreScreen> with SingleTickerProvider
                 child: ListView.builder(
                   shrinkWrap: true,
                   physics: NeverScrollableScrollPhysics(),
-                  itemCount: 5,
+                  itemCount: controller.textPosts.length,
                   itemBuilder: (context, index) {
-                    final posts = [
-                      PostModel(
-                        id: '1',
-                        name: 'Jackie Chan',
-                        username: 'jackiechan',
-                        content:
-                            'Looking for a charismatic male model aged 25-35 for our upcoming martial arts equipment campaign. Must have experience in action poses and martial arts.',
-                        likes: 245,
-                        comments: 89,
-                        avatarUrl: AppAssets.testProfileImage,
-                        contentType: PostContentType.text,
-                      ),
-                      PostModel(
-                        id: '2',
-                        name: 'Victoria Secret',
-                        username: 'victoriasecret',
-                        content:
-                            'Casting call for our Spring 2024 runway show! Seeking female models 5\'9" and above. Previous runway experience required.',
-                        likes: 1893,
-                        comments: 432,
-                        avatarUrl: AppAssets.testModelImage1,
-                        contentType: PostContentType.text,
-                      ),
-                      PostModel(
-                        id: '3',
-                        name: 'Nike Sports',
-                        username: 'nikesports',
-                        content:
-                            'Athletes wanted! Seeking fitness models for our new performance wear line. Must be able to demonstrate dynamic movements.',
-                        likes: 892,
-                        comments: 156,
-                        avatarUrl: AppAssets.testModelImage2,
-                        contentType: PostContentType.text,
-                      ),
-                      PostModel(
-                        id: '4',
-                        name: 'Vogue Italia',
-                        username: 'vogueitalia',
-                        content:
-                            'Editorial models needed for our September issue. Unique and striking features preferred. Send your portfolio today!',
-                        likes: 2341,
-                        comments: 567,
-                        avatarUrl: AppAssets.testModelImage3,
-                        contentType: PostContentType.text,
-                      ),
-                      PostModel(
-                        id: '5',
-                        name: 'L\'Oreal Paris',
-                        username: 'lorealparis',
-                        content:
-                            'Seeking diverse models of all ages for our new skincare campaign. Natural beauty and confidence are key!',
-                        likes: 1567,
-                        comments: 298,
-                        avatarUrl: AppAssets.testModelImage4,
-                        contentType: PostContentType.text,
-                      ),
-                    ];
                     return Column(
                       children: [
-                        PostCard(post: posts[index]),
+                        PostCard(post: controller.textPosts[index]),
                         const SizedBox(height: 30),
                       ],
                     );
@@ -287,21 +230,13 @@ class _ExploreScreenState extends State<ExploreScreen> with SingleTickerProvider
         ),
         itemCount: 6,
         itemBuilder: (context, index) {
-          final images = [
-            AppAssets.testModelImage1,
-            AppAssets.testModelImage2,
-            AppAssets.testModelImage3,
-            AppAssets.testModelImage4,
-            AppAssets.testModelImage5,
-            AppAssets.testModelImage6,
-          ];
           return GestureDetector(
             onTap: () {
               // Stop animation when navigating
               _animationController.stop();
               Get.toNamed(
                 AppRouter.VIEW_PROFILE,
-                arguments: {'userId': 'user_$index'}, // Replace with actual user IDs
+                arguments: {'userId': 'user_$index'},
               );
             },
             child: Container(
@@ -310,8 +245,8 @@ class _ExploreScreenState extends State<ExploreScreen> with SingleTickerProvider
               ),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(12),
-                child: Image.asset(
-                  images[index],
+                child: Image.network(
+                  controller.gridImages[index],
                   fit: BoxFit.cover,
                 ),
               ),

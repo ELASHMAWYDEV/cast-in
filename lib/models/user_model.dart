@@ -60,22 +60,22 @@ class UserModel {
   }
 
   Map<String, dynamic> toMap() {
-    return {
-      'id': id,
-      'full_name': fullName,
-      'username': username,
-      'email': email,
-      'phone_number': phoneNumber,
-      'country': country,
-      'city': city,
-      'bio': bio,
-      'profession': profession,
-      'age': age,
-      'profile_image_url': profileImageUrl,
-      'cover_image_url': coverImageUrl,
-      'created_at': createdAt?.toIso8601String(),
-      'user_type': userType?.toString().split('.').last,
-    };
+    final map = <String, dynamic>{};
+    if (id != null) map['id'] = id;
+    if (fullName != null) map['full_name'] = fullName;
+    if (username != null) map['username'] = username;
+    if (email != null) map['email'] = email;
+    if (phoneNumber != null) map['phone_number'] = phoneNumber;
+    if (country != null) map['country'] = country;
+    if (city != null) map['city'] = city;
+    if (bio != null) map['bio'] = bio;
+    if (profession != null) map['profession'] = profession;
+    if (age != null) map['age'] = age;
+    if (profileImageUrl != null) map['profile_image_url'] = profileImageUrl;
+    if (coverImageUrl != null) map['cover_image_url'] = coverImageUrl;
+    if (createdAt != null) map['created_at'] = createdAt!.toIso8601String();
+    if (userType != null) map['user_type'] = userType!.toString().split('.').last;
+    return map;
   }
 
   UserModel copyWith({

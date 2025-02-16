@@ -2,6 +2,7 @@ import 'package:cast_in/ui/common/custom_appbar.dart';
 import 'package:cast_in/ui/screens/auth/components/custom_title_and_suptitle.dart';
 import 'package:cast_in/ui/components/main_button.dart';
 import 'package:cast_in/ui/screens/auth/profession/profession_controller.dart';
+import 'package:cast_in/utils/app_router.dart';
 import 'package:cast_in/utils/app_style.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -16,7 +17,16 @@ class ProfessionScreen extends StatelessWidget {
     return Scaffold(
       appBar: CustomAppBar(
         title: 'Cast In',
-        isBackBtnEnabled: true,
+        isBackBtnEnabled: false,
+        trailing: [
+          IconButton(
+            onPressed: () {
+              Get.toNamed(AppRouter.MAINLAYOUT);
+            },
+            icon: const Icon(Icons.close),
+            style: ButtonStyle(backgroundColor: WidgetStatePropertyAll(AppStyle.secondaryBgColor)),
+          ),
+        ],
       ),
       body: SafeArea(
         child: Padding(

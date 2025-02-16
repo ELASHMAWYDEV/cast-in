@@ -36,7 +36,7 @@ class PostCard extends StatelessWidget {
         child: Stack(
           children: [
             PhotoView(
-              imageProvider: AssetImage(imageUrl),
+              imageProvider: NetworkImage(imageUrl),
               minScale: PhotoViewComputedScale.contained,
               maxScale: PhotoViewComputedScale.covered * 2,
               backgroundDecoration: const BoxDecoration(color: Colors.transparent),
@@ -103,7 +103,7 @@ class PostCard extends StatelessWidget {
               children: [
                 ClipRRect(
                   borderRadius: BorderRadius.circular(post.contentType == PostContentType.text ? 8 : 50),
-                  child: Image.asset(
+                  child: Image.network(
                     post.avatarUrl,
                     width: 40,
                     height: 40,
@@ -214,7 +214,7 @@ class PostCard extends StatelessWidget {
                                 }
                               },
                               disableGestures: isOpenModalEnabled,
-                              child: Image.asset(
+                              child: Image.network(
                                 post.imageUrl![0],
                                 width: double.infinity,
                                 fit: BoxFit.cover,

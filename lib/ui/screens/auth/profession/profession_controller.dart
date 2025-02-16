@@ -31,7 +31,8 @@ class ProfessionController extends GetxController {
     if (selectedProfession != null) {
       try {
         Helpers.appDebugger("userFromSignup on profession screen $userFromSignup");
-        await _supabaseService.updateUserProfile(userFromSignup.copyWith(profession: selectedProfession!));
+        await _supabaseService.updateUserProfile(
+            UserModel(id: userFromSignup.id, profession: selectedProfession!, userType: userFromSignup.userType));
         Get.offAllNamed(AppRouter.MAINLAYOUT);
       } catch (e) {
         AppSnackbar.showError(message: e.toString());
